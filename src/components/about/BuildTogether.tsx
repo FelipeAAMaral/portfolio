@@ -9,7 +9,9 @@ const BuildTogether = () => {
     <section className="mt-12 bg-card border p-8 rounded-xl">
       <div className="text-center max-w-3xl mx-auto">
         <div className="flex justify-center mb-4">
-          <HeartHandshake className="h-10 w-10 text-indigo-500" />
+          <div className="bg-indigo-500/10 p-3 rounded-full">
+            <HeartHandshake className="h-8 w-8 text-indigo-600" strokeWidth={1.5} />
+          </div>
         </div>
         <h2 className="text-2xl font-bold mb-6">
           {language === 'en' ? 'Let\'s Build Together' : 'Vamos Construir Juntos'}

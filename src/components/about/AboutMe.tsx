@@ -1,6 +1,6 @@
 
 import { useLanguage } from "@/context/LanguageContext";
-import { GraduationCap, Code, Trophy, Users as UsersIcon } from "lucide-react";
+import { GraduationCap, Code, Trophy, Users } from "lucide-react";
 
 const AboutMe = () => {
   const { language } = useLanguage();
@@ -28,12 +28,24 @@ const AboutMe = () => {
             <div className="md:w-1/2">
               <ul className="space-y-3">
                 {[
-                  { icon: <GraduationCap className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I publish reflections on product leadership on Medium" : "Publico reflexões sobre liderança de produto no Medium" },
-                  { icon: <Code className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I built my portfolio website using Astro and Netlify, with bilingual content" : "Construí meu site de portfólio usando Astro e Netlify, com conteúdo bilíngue" },
-                  { icon: <Trophy className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I'm a passionate Palmeiras supporter - it's more than just green colors, it's about being part of a community that shares values, history, and passion" : "Sou um torcedor apaixonado do Palmeiras - é mais do que apenas cores verdes, é sobre fazer parte de uma comunidade que compartilha valores, história e paixão" },
-                  { icon: <UsersIcon className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I believe the best products start with a genuine interest in helping people" : "Acredito que os melhores produtos começam com um interesse genuíno em ajudar as pessoas" }
+                  { 
+                    icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><GraduationCap className="h-4 w-4 text-indigo-400" /></div>, 
+                    text: language === 'en' ? "I publish reflections on product leadership on Medium" : "Publico reflexões sobre liderança de produto no Medium" 
+                  },
+                  { 
+                    icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Code className="h-4 w-4 text-indigo-400" /></div>, 
+                    text: language === 'en' ? "I built my portfolio website using Astro and Netlify, with bilingual content" : "Construí meu site de portfólio usando Astro e Netlify, com conteúdo bilíngue" 
+                  },
+                  { 
+                    icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Trophy className="h-4 w-4 text-indigo-400" /></div>, 
+                    text: language === 'en' ? "I'm a passionate Palmeiras supporter - it's more than just green colors, it's about being part of a community that shares values, history, and passion" : "Sou um torcedor apaixonado do Palmeiras - é mais do que apenas cores verdes, é sobre fazer parte de uma comunidade que compartilha valores, história e paixão" 
+                  },
+                  { 
+                    icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Users className="h-4 w-4 text-indigo-400" /></div>, 
+                    text: language === 'en' ? "I believe the best products start with a genuine interest in helping people" : "Acredito que os melhores produtos começam com um interesse genuíno em ajudar as pessoas" 
+                  }
                 ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg border border-white/10 hover:border-primary/50 transition-all">
+                  <li key={index} className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg border border-white/10 hover:border-indigo-500/50 transition-all">
                     {item.icon}
                     <p className="text-slate-200">{item.text}</p>
                   </li>

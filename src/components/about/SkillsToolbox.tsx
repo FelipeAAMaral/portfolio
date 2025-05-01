@@ -1,7 +1,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Briefcase, Code, Users, GraduationCap } from "lucide-react";
+import { Code, GraduationCap, Briefcase, Users } from "lucide-react";
 
 const SkillsToolbox = () => {
   const { language } = useLanguage();
@@ -22,7 +22,9 @@ const SkillsToolbox = () => {
             <Card className="backdrop-blur-sm border border-indigo-500/10">
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Code className="h-5 w-5 text-indigo-500" />
+                  <div className="bg-indigo-500/10 p-2 rounded-md">
+                    <Code className="h-5 w-5 text-indigo-600" strokeWidth={2.5} />
+                  </div>
                   {language === 'en' ? 'Languages & Tech' : 'Linguagens & Tech'}
                 </h3>
                 <p className="text-muted-foreground">Python, FastAPI, HTMX, Keycloak, Docker</p>
@@ -33,7 +35,9 @@ const SkillsToolbox = () => {
             <Card className="backdrop-blur-sm border border-indigo-500/10">
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <GraduationCap className="h-5 w-5 text-indigo-500" />
+                  <div className="bg-indigo-500/10 p-2 rounded-md">
+                    <GraduationCap className="h-5 w-5 text-indigo-600" strokeWidth={2.5} />
+                  </div>
                   {language === 'en' ? 'Analytics & Ops' : 'Analytics & Operações'}
                 </h3>
                 <p className="text-muted-foreground">PostHog, Google Data Studio, Notion, Miro</p>
@@ -44,7 +48,9 @@ const SkillsToolbox = () => {
             <Card className="backdrop-blur-sm border border-indigo-500/10">
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Briefcase className="h-5 w-5 text-indigo-500" />
+                  <div className="bg-indigo-500/10 p-2 rounded-md">
+                    <Briefcase className="h-5 w-5 text-indigo-600" strokeWidth={2.5} />
+                  </div>
                   {language === 'en' ? 'Product' : 'Produto'}
                 </h3>
                 <p className="text-muted-foreground">Strategy, discovery, OKRs, UX, growth loops</p>
@@ -55,7 +61,9 @@ const SkillsToolbox = () => {
             <Card className="backdrop-blur-sm border border-indigo-500/10">
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Users className="h-5 w-5 text-indigo-500" />
+                  <div className="bg-indigo-500/10 p-2 rounded-md">
+                    <Users className="h-5 w-5 text-indigo-600" strokeWidth={2.5} />
+                  </div>
                   {language === 'en' ? 'Leadership' : 'Liderança'}
                 </h3>
                 <p className="text-muted-foreground">Coaching, cross-functional alignment, hiring, storytelling</p>
