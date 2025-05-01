@@ -23,4 +23,9 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     exclude: ['tinacms'],
   },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  },
 }));
