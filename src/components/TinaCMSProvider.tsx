@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { TinaProvider, TinaEdit } from "tinacms";
+import { TinaProvider } from "tinacms";
+import type { TinaEditProps } from 'tinacms';
 
 interface TinaCMSProviderProps {
   children: React.ReactNode;
@@ -14,20 +15,21 @@ const TinaCMSProvider: React.FC<TinaCMSProviderProps> = ({ children }) => {
   }
   
   return (
-    <TinaProvider
-      // Configure Tina's connection to your content repo
-      branch="main"
+    <TinaProvider 
+      enabled={!isEditing}
       clientId="21bc9557-e3ae-427a-bdac-a740447ab551"
-      isLocalClient={false}
+      branch="main"
+      tinaioConfig={{
+        frontendUrlOverride: window.location.origin,
+      }}
+      onLogin={() => {
+        window.location.href = "/admin";
+      }}
+      onLogout={() => {
+        window.location.reload();
+      }}
     >
-      <TinaEdit
-        editMode={false}
-        enterEditMode={() => {
-          window.location.href = "/admin";
-        }}
-      >
-        {children}
-      </TinaEdit>
+      {children}
     </TinaProvider>
   );
 };
