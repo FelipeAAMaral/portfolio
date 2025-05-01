@@ -41,6 +41,7 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@tanstack/react-query": "^5.56.2",
+    "@tinacms/cli": "^1.9.5",
     "astro": "^5.7.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

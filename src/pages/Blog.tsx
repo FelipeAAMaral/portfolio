@@ -1,44 +1,60 @@
 
 import { useLanguage } from "@/context/LanguageContext";
+import { useEffect, useState } from "react";
+
+// Define the blog post interface
+interface BlogPost {
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  image: string;
+  url: string;
+}
 
 const Blog = () => {
   const { t } = useLanguage();
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
-  // Sample blog posts
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Responsive Web Design Patterns",
-      excerpt: "An exploration of modern responsive design techniques and best practices for web applications.",
-      date: "2025-04-15",
-      image: "https://source.unsplash.com/random/800x600/?webdesign",
-      url: "/blog/responsive-web-design"
-    },
-    {
-      id: 2,
-      title: "Building Accessible Web Applications",
-      excerpt: "How to ensure your web applications are accessible to all users, including those with disabilities.",
-      date: "2025-04-01",
-      image: "https://source.unsplash.com/random/800x600/?accessibility",
-      url: "/blog/accessibility"
-    },
-    {
-      id: 3,
-      title: "The Future of Web Development",
-      excerpt: "Exploring emerging trends and technologies that are shaping the future of web development.",
-      date: "2025-03-20",
-      image: "https://source.unsplash.com/random/800x600/?future",
-      url: "/blog/future-web-development"
-    },
-    {
-      id: 4,
-      title: "Optimizing Performance in React Applications",
-      excerpt: "Techniques and best practices for improving the performance of your React applications.",
-      date: "2025-03-05",
-      image: "https://source.unsplash.com/random/800x600/?performance",
-      url: "/blog/react-performance"
-    }
-  ];
+  useEffect(() => {
+    // Sample blog posts - in a real implementation, this would fetch from TinaCMS
+    const posts = [
+      {
+        id: 1,
+        title: "Responsive Web Design Patterns",
+        excerpt: "An exploration of modern responsive design techniques and best practices for web applications.",
+        date: "2025-04-15",
+        image: "https://source.unsplash.com/random/800x600/?webdesign",
+        url: "/blog/responsive-web-design"
+      },
+      {
+        id: 2,
+        title: "Building Accessible Web Applications",
+        excerpt: "How to ensure your web applications are accessible to all users, including those with disabilities.",
+        date: "2025-04-01",
+        image: "https://source.unsplash.com/random/800x600/?accessibility",
+        url: "/blog/accessibility"
+      },
+      {
+        id: 3,
+        title: "The Future of Web Development",
+        excerpt: "Exploring emerging trends and technologies that are shaping the future of web development.",
+        date: "2025-03-20",
+        image: "https://source.unsplash.com/random/800x600/?future",
+        url: "/blog/future-web-development"
+      },
+      {
+        id: 4,
+        title: "Optimizing Performance in React Applications",
+        excerpt: "Techniques and best practices for improving the performance of your React applications.",
+        date: "2025-03-05",
+        image: "https://source.unsplash.com/random/800x600/?performance",
+        url: "/blog/react-performance"
+      }
+    ];
+
+    setBlogPosts(posts);
+  }, []);
 
   return (
     <div className="container py-16 animate-fade-in">
