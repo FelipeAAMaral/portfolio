@@ -6,12 +6,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
+import emailjs from "emailjs-com";
 
 interface ContactFormValues {
   name: string;
   email: string;
   message: string;
 }
+
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = "service_portfolio"; // You'll need to replace this with your actual Service ID
+const EMAILJS_TEMPLATE_ID = "template_contact"; // You'll need to replace this with your actual Template ID
+const EMAILJS_USER_ID = "your_emailjs_user_id"; // You'll need to replace this with your actual User ID
 
 const ContactForm = () => {
   const { t } = useLanguage();
@@ -22,13 +28,33 @@ const ContactForm = () => {
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Form submitted:', data);
-    toast.success(t('contact.success'));
-    reset();
-    setIsSubmitting(false);
+    try {
+      // Prepare template parameters for the email
+      const templateParams = {
+        name: data.name,
+        email: data.email,
+        message: data.message,
+        subject: "[Contato Portfolio]",
+        to_email: "amaral.felipeaugusto@gmail.com"
+      };
+      
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_USER_ID
+      );
+      
+      console.log('Email sent successfully:', data);
+      toast.success(t('contact.success'));
+      reset();
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast.error(t('contact.error') || 'Failed to send your message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
