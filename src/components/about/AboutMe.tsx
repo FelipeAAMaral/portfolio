@@ -10,7 +10,7 @@ const AboutMe = () => {
       <div className="flex flex-col md:flex-row items-start gap-8 md:gap-16">
         <div className="md:w-1/3">
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient-primary">
-            {t('about.moreAboutMe')}
+            {t('about.more')}
           </h2>
         </div>
         <div className="md:w-2/3 space-y-6">
@@ -19,7 +19,7 @@ const AboutMe = () => {
               <div className="relative rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
                 <img 
                   src="/lovable-uploads/4de6514c-8f1c-4ad4-8571-d7cc0c2c6fe1.png" 
-                  alt={t('about.profileImageAlt')} 
+                  alt={t('about.profileImageAlt') || "Profile"} 
                   className="w-full h-auto"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -30,19 +30,19 @@ const AboutMe = () => {
                 {[
                   { 
                     icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><GraduationCap className="h-4 w-4 text-indigo-400" /></div>, 
-                    text: t('about.mediumPublishing')
+                    text: t('about.mediumPublishing') || "I publish articles on Medium regularly"
                   },
                   { 
                     icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Code className="h-4 w-4 text-indigo-400" /></div>, 
-                    text: t('about.portfolioBuilt')
+                    text: t('about.portfolioBuilt') || "I built this portfolio using React & Tailwind"
                   },
                   { 
                     icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Trophy className="h-4 w-4 text-indigo-400" /></div>, 
-                    text: t('about.palmeirasFan')
+                    text: t('about.palmeirasFan') || "Huge Palmeiras fan (best soccer team in Brazil!)"
                   },
                   { 
                     icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Users className="h-4 w-4 text-indigo-400" /></div>, 
-                    text: t('about.productBelief')
+                    text: t('about.productBelief') || "I believe great products are built by diverse teams"
                   }
                 ].map((item, index) => (
                   <li key={index} className="group">

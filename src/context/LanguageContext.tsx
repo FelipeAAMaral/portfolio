@@ -11,7 +11,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
   setLanguage: () => {},
-  t: () => '',
+  t: (key: string) => key,
 });
 
 interface LanguageProviderProps {
