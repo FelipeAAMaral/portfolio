@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -16,7 +17,7 @@ interface ContactFormValues {
 // EmailJS configuration
 const EMAILJS_SERVICE_ID = "service_portfolio"; // Your service ID from EmailJS dashboard
 const EMAILJS_TEMPLATE_ID = "template_contact"; // Your template ID from EmailJS dashboard
-const EMAILJS_USER_ID = import.meta.env.VITE_EMAILJS_USER_ID || "your_emailjs_public_key"; // Your EmailJS Public Key
+const EMAILJS_USER_ID = "Hkhs6qHNTrlFPNUjX"; // Your EmailJS Public Key
 
 const ContactForm = () => {
   const { t } = useLanguage();
