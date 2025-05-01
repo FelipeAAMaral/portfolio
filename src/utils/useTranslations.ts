@@ -21,7 +21,7 @@ const getNestedValue = (obj: any, path: string): string => {
 // Create a translation function for React components
 export function useTranslations(language: LanguageType = 'en') {
   // Get language from localStorage if available, otherwise use passed language
-  const [currentLanguage, setCurrentLanguage] = useState(language);
+  const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(language);
   
   useEffect(() => {
     const storedLanguage = localStorage.getItem('language');
@@ -31,7 +31,7 @@ export function useTranslations(language: LanguageType = 'en') {
   }, []);
   
   // Return a function that gets translations based on key
-  return (key: string): string => {
+  const translate = (key: string): string => {
     const translation = getNestedValue(translations[currentLanguage], key);
     if (!translation || translation === key) {
       if (process.env.NODE_ENV !== 'production') {
@@ -40,6 +40,15 @@ export function useTranslations(language: LanguageType = 'en') {
       return key; // Return key as fallback
     }
     return translation;
+  };
+
+  return {
+    t: translate,
+    language: currentLanguage,
+    setLanguage: (newLang: LanguageType) => {
+      localStorage.setItem('language', newLang);
+      setCurrentLanguage(newLang);
+    }
   };
 }
 
