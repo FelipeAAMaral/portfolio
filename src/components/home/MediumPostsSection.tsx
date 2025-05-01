@@ -5,7 +5,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import FeatureCard from "@/components/FeatureCard";
 
 const MediumPostsSection = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   // Fetch Medium posts
   const fetchMediumPosts = async () => {
@@ -48,11 +48,11 @@ const MediumPostsSection = () => {
       <div className="container">
         <div className="flex justify-between items-end mb-10">
           <h2 className="text-2xl md:text-3xl font-bold">
-            {language === 'en' ? 'My Latest Medium Posts' : 'Meus Posts Recentes no Medium'}
+            {t('medium.latestPosts')}
           </h2>
           <Button variant="ghost" asChild size="sm">
             <a href="https://medium.com/@amaral.felipeaugusto" target="_blank" rel="noopener noreferrer">
-              {language === 'en' ? 'View All' : 'Ver Todos'}
+              {t('work.viewAll')}
             </a>
           </Button>
         </div>
@@ -60,19 +60,17 @@ const MediumPostsSection = () => {
         {isLoading ? (
           <div className="text-center py-12">
             <p>
-              {language === 'en' ? 'Loading latest posts...' : 'Carregando posts recentes...'}
+              {t('medium.loading')}
             </p>
           </div>
         ) : error ? (
           <div className="text-center py-12">
             <p>
-              {language === 'en' ? 
-                'Could not load Medium posts at this time. Please check back later.' : 
-                'Não foi possível carregar os posts do Medium no momento. Por favor, volte mais tarde.'}
+              {t('medium.error')}
             </p>
             <Button className="mt-4" variant="outline" asChild>
               <a href="https://medium.com/@amaral.felipeaugusto" target="_blank" rel="noopener noreferrer">
-                {language === 'en' ? 'Visit Medium Profile' : 'Visitar Perfil no Medium'}
+                {t('medium.visitProfile')}
               </a>
             </Button>
           </div>
@@ -92,11 +90,11 @@ const MediumPostsSection = () => {
         ) : (
           <div className="text-center py-12">
             <p>
-              {language === 'en' ? 'No posts found.' : 'Nenhum post encontrado.'}
+              {t('medium.noPostsFound')}
             </p>
             <Button className="mt-4" variant="outline" asChild>
               <a href="https://medium.com/@amaral.felipeaugusto" target="_blank" rel="noopener noreferrer">
-                {language === 'en' ? 'Visit Medium Profile' : 'Visitar Perfil no Medium'}
+                {t('medium.visitProfile')}
               </a>
             </Button>
           </div>

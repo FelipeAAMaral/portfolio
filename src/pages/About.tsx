@@ -10,12 +10,12 @@ import AboutMe from "@/components/about/AboutMe";
 import BuildTogether from "@/components/about/BuildTogether";
 
 const About = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
   
   return (
     <div className="container py-16 animate-fade-in">
       <h1 className="text-4xl font-bold mb-8 text-gradient-primary">
-        {language === 'en' ? 'About Me' : 'Sobre Mim'}
+        {t('about.title')}
       </h1>
 
       {/* Professional Overview Section */}

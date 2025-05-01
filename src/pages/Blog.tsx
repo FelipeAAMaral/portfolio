@@ -45,9 +45,7 @@ const Blog = () => {
       <h1 className="text-4xl font-bold mb-8">Blog</h1>
       
       <p className="text-lg mb-12">
-        {t('language') === 'en' 
-          ? "Welcome to my blog where I share thoughts and insights on web development, design, and career growth."
-          : "Bem-vindo ao meu blog onde compartilho pensamentos e insights sobre desenvolvimento web, design e crescimento profissional."}
+        {t('blog.languageIntro')}
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -80,9 +78,7 @@ const Blog = () => {
       
       <div className="mt-12 text-center">
         <p className="text-muted-foreground mb-8">
-          {t('language') === 'en'
-            ? "More articles coming soon! Stay tuned for updates."
-            : "Mais artigos em breve! Fique atento para atualizações."}
+          {t('blog.moreArticles')}
         </p>
         
         <div className="flex justify-center">
@@ -92,9 +88,7 @@ const Blog = () => {
             rel="noopener noreferrer" 
             className="bg-secondary hover:bg-secondary/80 text-foreground px-6 py-3 rounded-lg transition"
           >
-            {t('language') === 'en'
-              ? "Check my Medium articles"
-              : "Confira meus artigos no Medium"}
+            {t('blog.checkMedium')}
           </a>
         </div>
       </div>

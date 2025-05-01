@@ -14,7 +14,7 @@ interface ContactFormValues {
 }
 
 const ContactForm = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormValues>();
@@ -35,19 +35,17 @@ const ContactForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="mb-4">
         <h3 className="text-lg font-medium mb-2">
-          {language === 'en' ? 'Reach Out for Mentorship & Networking' : 'Entre em Contato para Mentoria e Networking'}
+          {t('contact.reachOut')}
         </h3>
         <p className="text-muted-foreground text-sm mb-4">
-          {language === 'en' 
-            ? 'Share your interests, questions, or ideas for collaboration. I\'m open to connecting with product professionals, tech enthusiasts, and anyone interested in the HRTech space.'
-            : 'Compartilhe seus interesses, perguntas ou ideias para colaboração. Estou aberto a me conectar com profissionais de produto, entusiastas de tecnologia e qualquer pessoa interessada no espaço de HRTech.'}
+          {t('contact.shareInterests')}
         </p>
       </div>
       
       <div className="space-y-2">
         <Input
-          placeholder={language === 'en' ? "Your Name" : "Seu Nome"}
-          {...register('name', { required: language === 'en' ? 'Name is required' : 'Nome é obrigatório' })}
+          placeholder={t('contact.name')}
+          {...register('name', { required: t('contact.nameRequired') })}
           aria-invalid={errors.name ? 'true' : 'false'}
         />
         {errors.name && <p className="text-destructive text-sm">{errors.name.message}</p>}
@@ -56,12 +54,12 @@ const ContactForm = () => {
       <div className="space-y-2">
         <Input
           type="email"
-          placeholder={language === 'en' ? "Your Email" : "Seu Email"}
+          placeholder={t('contact.email')}
           {...register('email', { 
-            required: language === 'en' ? 'Email is required' : 'Email é obrigatório',
+            required: t('contact.emailRequired'),
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: language === 'en' ? 'Invalid email address' : 'Endereço de email inválido'
+              message: t('contact.emailInvalid')
             }
           })}
           aria-invalid={errors.email ? 'true' : 'false'}
@@ -71,12 +69,10 @@ const ContactForm = () => {
       
       <div className="space-y-2">
         <Textarea
-          placeholder={language === 'en' 
-            ? "How can I help? (Mentorship, networking, speaking opportunity, etc.)" 
-            : "Como posso ajudar? (Mentoria, networking, oportunidade de palestra, etc.)"}
+          placeholder={t('contact.howHelp')}
           rows={5}
           {...register('message', { 
-            required: language === 'en' ? 'Message is required' : 'Mensagem é obrigatória' 
+            required: t('contact.messageRequired')
           })}
           aria-invalid={errors.message ? 'true' : 'false'}
         />
@@ -88,9 +84,7 @@ const ContactForm = () => {
         className="w-full" 
         disabled={isSubmitting}
       >
-        {isSubmitting 
-          ? (language === 'en' ? 'Sending...' : 'Enviando...') 
-          : (language === 'en' ? 'Send Message' : 'Enviar Mensagem')}
+        {isSubmitting ? t('contact.sending') : t('contact.send')}
       </Button>
     </form>
   );

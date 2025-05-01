@@ -70,7 +70,7 @@ const Speaking = () => {
       
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8 border-b pb-4">
-          {language === 'en' ? "Upcoming & Past Events" : "Eventos Futuros & Passados"}
+          {t('speaking.events')}
         </h2>
         
         <div className="space-y-10">
@@ -92,15 +92,13 @@ const Speaking = () => {
       
       <section>
         <h2 className="text-2xl font-bold mb-8">
-          {language === 'en' ? "Interested in having me speak at your event?" : "Interessado em me ter como palestrante no seu evento?"}
+          {t('speaking.interested')}
         </h2>
         
         <div className="flex flex-col md:flex-row gap-10">
           <div className="md:w-1/3">
             <p className="text-muted-foreground mb-6">
-              {language === 'en'
-                ? "I'm available for speaking engagements on topics related to web development, design, accessibility, and career growth. Feel free to reach out with details about your event."
-                : "Estou disponível para palestras sobre tópicos relacionados a desenvolvimento web, design, acessibilidade e crescimento de carreira. Sinta-se à vontade para entrar em contato com detalhes sobre seu evento."}
+              {t('speaking.available')}
             </p>
           </div>
           <div className="md:w-2/3">

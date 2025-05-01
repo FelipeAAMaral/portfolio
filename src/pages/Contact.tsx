@@ -4,24 +4,22 @@ import ContactForm from "@/components/ContactForm";
 import { Instagram, Linkedin, Globe } from "lucide-react";
 
 const Contact = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="container py-16 animate-fade-in">
       <h1 className="text-4xl font-bold mb-12">
-        {language === 'en' ? "Contact Me" : "Entre em Contato"}
+        {t('contact.title')}
       </h1>
       
       <div className="flex flex-col md:flex-row gap-12 md:gap-20">
         <div className="md:w-1/3">
           <h2 className="text-xl font-semibold mb-4">
-            {language === 'en' ? "Let's Connect" : "Vamos Conectar"}
+            {t('contact.letsConnect')}
           </h2>
           
           <p className="mb-6">
-            {language === 'en'
-              ? "Interested in mentorship, networking, or discussing product strategies? I'm always open to connecting with fellow product enthusiasts and sharing insights from my experience."
-              : "Interessado em mentoria, networking ou discussão de estratégias de produto? Estou sempre aberto a me conectar com outros entusiastas de produto e compartilhar insights da minha experiência."}
+            {t('contact.interested')}
           </p>
           
           <div className="space-y-4 mb-8">
@@ -69,9 +67,7 @@ const Contact = () => {
           </div>
           
           <p className="text-sm text-muted-foreground">
-            {language === 'en' 
-              ? "I typically respond to messages within 24-48 hours. Looking forward to connecting!"
-              : "Normalmente respondo mensagens em 24-48 horas. Ansioso para nos conectarmos!"}
+            {t('contact.response')}
           </p>
         </div>
         

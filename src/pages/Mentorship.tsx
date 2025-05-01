@@ -3,7 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import ContactForm from "@/components/ContactForm";
 
 const Mentorship = () => {
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
 
   const careerPath = [
     {
@@ -48,25 +48,19 @@ const Mentorship = () => {
     <div className="container py-16 animate-fade-in">
       <section className="mb-16">
         <h1 className="text-4xl font-bold mb-6">
-          {language === 'en' ? "Mentorship" : "Mentoria"}
+          {t('mentorship.title')}
         </h1>
         
         <div className="flex flex-col md:flex-row gap-10 md:gap-16 mb-12">
           <div className="md:w-1/2">
             <p className="text-lg mb-6">
-              {language === 'en' 
-                ? "I'm passionate about helping others grow in their tech careers through personalized mentorship that focuses on both technical skills and career development."
-                : "Sou apaixonado por ajudar outros a crescerem em suas carreiras tech através de mentoria personalizada focada tanto em habilidades técnicas quanto em desenvolvimento de carreira."}
+              {t('mentorship.passion')}
             </p>
             <p className="mb-6">
-              {language === 'en'
-                ? "With years of experience in the industry, I provide guidance on navigating the tech landscape, developing in-demand skills, and finding your unique path to success."
-                : "Com anos de experiência na indústria, forneço orientação sobre como navegar no panorama tecnológico, desenvolver habilidades em demanda e encontrar seu caminho único para o sucesso."}
+              {t('mentorship.experience')}
             </p>
             <p>
-              {language === 'en'
-                ? "My mentorship approach is tailored to your individual goals, whether you're just starting out, looking to advance in your current role, or considering a career pivot within tech."
-                : "Minha abordagem de mentoria é adaptada aos seus objetivos individuais, seja você apenas começando, procurando avançar em sua função atual ou considerando uma mudança de carreira dentro da tecnologia."}
+              {t('mentorship.approach')}
             </p>
           </div>
           <div className="md:w-1/2">
@@ -83,7 +77,7 @@ const Mentorship = () => {
       
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8 inline-block border-b-2 border-primary pb-2">
-          {language === 'en' ? "My Professional Journey" : "Minha Jornada Profissional"}
+          {t('mentorship.journey')}
         </h2>
         
         <div className="space-y-12">
@@ -114,39 +108,31 @@ const Mentorship = () => {
       
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-6">
-          {language === 'en' ? "For Those Looking to Grow" : "Para Aqueles Que Buscam Crescer"}
+          {t('mentorship.growing')}
         </h2>
         
         <div className="bg-muted/30 rounded-xl p-8 mb-10">
           <p className="mb-6">
-            {language === 'en'
-              ? "If you're looking to grow in your tech career, I believe the most important qualities are curiosity, persistence, and a willingness to continuously learn. The tech industry is always evolving, and those who succeed are those who adapt and grow with it."
-              : "Se você busca crescer em sua carreira tech, acredito que as qualidades mais importantes são curiosidade, persistência e disposição para aprender continuamente. A indústria tech está sempre evoluindo, e aqueles que têm sucesso são os que se adaptam e crescem com ela."}
+            {t('mentorship.advice1')}
           </p>
           <p>
-            {language === 'en'
-              ? "My advice is to focus not just on technical skills, but also on communication, collaboration, and understanding the business context of your work. This holistic approach will set you apart and open more doors as your career progresses."
-              : "Meu conselho é focar não apenas em habilidades técnicas, mas também em comunicação, colaboração e compreensão do contexto de negócios do seu trabalho. Essa abordagem holística irá destacá-lo e abrir mais portas conforme sua carreira avança."}
+            {t('mentorship.advice2')}
           </p>
         </div>
       </section>
       
       <section>
         <h2 className="text-2xl font-bold mb-8">
-          {language === 'en' ? "Interested in Mentorship?" : "Interessado em Mentoria?"}
+          {t('mentorship.interested')}
         </h2>
         
         <div className="flex flex-col md:flex-row gap-10 md:gap-16">
           <div className="md:w-1/3">
             <p className="mb-4">
-              {language === 'en'
-                ? "I offer personalized mentorship based on your specific goals and needs. Whether you're looking for guidance on technical skills, career decisions, or professional development, I'm here to help."
-                : "Ofereço mentoria personalizada com base em seus objetivos e necessidades específicos. Seja você procurando orientação sobre habilidades técnicas, decisões de carreira ou desenvolvimento profissional, estou aqui para ajudar."}
+              {t('mentorship.offer')}
             </p>
             <p className="text-muted-foreground">
-              {language === 'en'
-                ? "Fill out the form with some details about what you're looking for, and I'll get back to you to discuss how we might work together."
-                : "Preencha o formulário com alguns detalhes sobre o que você está procurando, e entrarei em contato para discutir como podemos trabalhar juntos."}
+              {t('mentorship.fillForm')}
             </p>
           </div>
           <div className="md:w-2/3">

@@ -6,7 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const NotFound = () => {
   const location = useLocation();
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   useEffect(() => {
     console.error(
@@ -17,20 +17,16 @@ const NotFound = () => {
 
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center py-16">
-      <h1 className="text-6xl font-bold text-primary mb-6">404</h1>
+      <h1 className="text-6xl font-bold text-primary mb-6">{t('notFound.title')}</h1>
       <p className="text-xl text-muted-foreground mb-8">
-        {language === 'en' 
-          ? "Oops! Page not found" 
-          : "Oops! Página não encontrada"}
+        {t('notFound.message')}
       </p>
       <p className="text-center max-w-md mb-10">
-        {language === 'en' 
-          ? "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable." 
-          : "A página que você está procurando pode ter sido removida, teve seu nome alterado ou está temporariamente indisponível."}
+        {t('notFound.description')}
       </p>
       <Button asChild>
         <Link to="/">
-          {language === 'en' ? "Return to Home" : "Voltar para o Início"}
+          {t('notFound.returnHome')}
         </Link>
       </Button>
     </div>
