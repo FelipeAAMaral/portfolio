@@ -39,12 +39,12 @@ const Header = () => {
           <a href="/blog" className="animated-link">
             {t('nav.blog')}
           </a>
-          <a href="/speaking" className="animated-link">
+          {/* <a href="/speaking" className="animated-link">
             {t('nav.speaking')}
           </a>
           <a href="/mentorship" className="animated-link">
             {t('nav.mentorship')}
-          </a>
+          </a> */}
           <a href="/contact" className="animated-link">
             {t('nav.contact')}
           </a>

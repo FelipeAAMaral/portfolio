@@ -25,7 +25,7 @@ const About = () => {
       <CareerJourney />
 
       {/* What I've Built Section */}
-      <ProjectsBuilt />
+      {/* <ProjectsBuilt /> */}
 
       {/* Product Philosophy */}
       <ProductPhilosophy />
@@ -34,7 +34,7 @@ const About = () => {
       <SkillsToolbox />
 
       {/* CPO Path Section */}
-      <CpoPath />
+      {/* <CpoPath /> */}
 
       {/* More About Me Section */}
       <AboutMe />

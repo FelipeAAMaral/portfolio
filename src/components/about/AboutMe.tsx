@@ -1,6 +1,6 @@
 
 import { useLanguage } from "@/context/LanguageContext";
-import { GraduationCap, Code, Trophy, Users } from "lucide-react";
+import { GraduationCap, Code, Trophy, Users, PlaneTakeoff } from "lucide-react";
 
 const AboutMe = () => {
   const { t } = useLanguage();
@@ -33,12 +33,12 @@ const AboutMe = () => {
                     text: t('about.mediumPublishing') || "I publish articles on Medium regularly"
                   },
                   { 
-                    icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Code className="h-4 w-4 text-indigo-400" /></div>, 
-                    text: t('about.portfolioBuilt') || "I built this portfolio using React & Tailwind"
+                    icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><PlaneTakeoff className="h-4 w-4 text-indigo-400" /></div>, 
+                    text: t('about.portfolioBuilt') || "Viajar é o que eu gosto de fazer!"
                   },
                   { 
                     icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Trophy className="h-4 w-4 text-indigo-400" /></div>, 
-                    text: t('about.palmeirasFan') || "Huge Palmeiras fan (best soccer team in Brazil!)"
+                    text: t('about.palmeirasFan') || "Huge Palmeiras fan (best soccer team in the World!)"
                   },
                   { 
                     icon: <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/30 ring-4 ring-indigo-500/10"><Users className="h-4 w-4 text-indigo-400" /></div>, 
