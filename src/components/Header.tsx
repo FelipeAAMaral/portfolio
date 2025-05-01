@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Flag } from "lucide-react";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -39,7 +38,7 @@ const Header = () => {
             {t('nav.home')}
           </Link>
           <Link to="/blog" className="animated-link">
-            Blog
+            {t('nav.blog')}
           </Link>
           <Link to="/speaking" className="animated-link">
             {t('nav.speaking')}
@@ -50,30 +49,57 @@ const Header = () => {
           <Link to="/contact" className="animated-link">
             {t('nav.contact')}
           </Link>
+          <Link to="/about" className="animated-link">
+            {t('nav.aboutMe')}
+          </Link>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="flex items-center gap-1.5">
                 {language === 'en' ? (
                   <span className="flex items-center">
-                    <Flag className="h-4 w-4" fill="#B31942" stroke="#0A3161" />
-                    <span className="ml-1.5">EN</span>
+                    <img 
+                      src="https://flagcdn.com/w20/us.png" 
+                      width="20" 
+                      height="15" 
+                      alt="US Flag"
+                      className="rounded-sm mr-1.5"
+                    />
+                    <span className="sr-only">English</span>
                   </span>
                 ) : (
                   <span className="flex items-center">
-                    <Flag className="h-4 w-4" fill="#009c3b" stroke="#ffdf00" />
-                    <span className="ml-1.5">PT</span>
+                    <img 
+                      src="https://flagcdn.com/w20/br.png" 
+                      width="20" 
+                      height="15" 
+                      alt="Brazilian Flag"
+                      className="rounded-sm mr-1.5"
+                    />
+                    <span className="sr-only">Português</span>
                   </span>
                 )}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => setLanguage('en')} className="flex items-center gap-2">
-                <Flag className="h-3.5 w-3.5" fill="#B31942" stroke="#0A3161" />
+                <img 
+                  src="https://flagcdn.com/w20/us.png" 
+                  width="20" 
+                  height="15" 
+                  alt="US Flag"
+                  className="rounded-sm"
+                />
                 <span>English</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setLanguage('pt')} className="flex items-center gap-2">
-                <Flag className="h-3.5 w-3.5" fill="#009c3b" stroke="#ffdf00" />
+                <img 
+                  src="https://flagcdn.com/w20/br.png" 
+                  width="20" 
+                  height="15" 
+                  alt="Brazilian Flag"
+                  className="rounded-sm"
+                />
                 <span>Português</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -88,7 +114,7 @@ const Header = () => {
                 {t('nav.home')}
               </Link>
               <Link to="/blog" className="py-2" onClick={toggleMenu}>
-                Blog
+                {t('nav.blog')}
               </Link>
               <Link to="/speaking" className="py-2" onClick={toggleMenu}>
                 {t('nav.speaking')}
@@ -99,6 +125,9 @@ const Header = () => {
               <Link to="/contact" className="py-2" onClick={toggleMenu}>
                 {t('nav.contact')}
               </Link>
+              <Link to="/about" className="py-2" onClick={toggleMenu}>
+                {t('nav.aboutMe')}
+              </Link>
               
               <div className="flex items-center gap-3 pt-2">
                 <Button 
@@ -107,7 +136,13 @@ const Header = () => {
                   onClick={() => { setLanguage('en'); toggleMenu(); }}
                   className={`flex items-center gap-2 ${language === 'en' ? 'border-primary text-primary' : ''}`}
                 >
-                  <Flag className="h-3.5 w-3.5" fill="#B31942" stroke="#0A3161" />
+                  <img 
+                    src="https://flagcdn.com/w20/us.png" 
+                    width="20" 
+                    height="15" 
+                    alt="US Flag"
+                    className="rounded-sm"
+                  />
                   <span>English</span>
                 </Button>
                 <Button 
@@ -116,7 +151,13 @@ const Header = () => {
                   onClick={() => { setLanguage('pt'); toggleMenu(); }}
                   className={`flex items-center gap-2 ${language === 'pt' ? 'border-primary text-primary' : ''}`}
                 >
-                  <Flag className="h-3.5 w-3.5" fill="#009c3b" stroke="#ffdf00" />
+                  <img 
+                    src="https://flagcdn.com/w20/br.png" 
+                    width="20" 
+                    height="15" 
+                    alt="Brazilian Flag"
+                    className="rounded-sm"
+                  />
                   <span>Português</span>
                 </Button>
               </div>

@@ -1,5 +1,5 @@
 
-import { Instagram, Linkedin, Globe, Flag } from "lucide-react";
+import { Instagram, Linkedin, Globe } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { 
   DropdownMenu,
@@ -56,19 +56,43 @@ const Footer = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
                   {language === 'en' ? (
-                    <Flag className="h-4 w-4" fill="#B31942" stroke="#0A3161" />
+                    <img 
+                      src="https://flagcdn.com/w20/us.png" 
+                      width="20" 
+                      height="15" 
+                      alt="US Flag"
+                      className="rounded-sm"
+                    />
                   ) : (
-                    <Flag className="h-4 w-4" fill="#009c3b" stroke="#ffdf00" />
+                    <img 
+                      src="https://flagcdn.com/w20/br.png" 
+                      width="20" 
+                      height="15" 
+                      alt="Brazilian Flag"
+                      className="rounded-sm"
+                    />
                   )}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setLanguage('en')} className="flex items-center gap-2">
-                  <Flag className="h-3.5 w-3.5" fill="#B31942" stroke="#0A3161" />
+                  <img 
+                    src="https://flagcdn.com/w20/us.png" 
+                    width="20" 
+                    height="15" 
+                    alt="US Flag"
+                    className="rounded-sm"
+                  />
                   <span>English</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setLanguage('pt')} className="flex items-center gap-2">
-                  <Flag className="h-3.5 w-3.5" fill="#009c3b" stroke="#ffdf00" />
+                  <img 
+                    src="https://flagcdn.com/w20/br.png" 
+                    width="20" 
+                    height="15" 
+                    alt="Brazilian Flag"
+                    className="rounded-sm"
+                  />
                   <span>Português</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
