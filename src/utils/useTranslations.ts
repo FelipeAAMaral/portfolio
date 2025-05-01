@@ -7,12 +7,12 @@ export type LanguageType = 'en' | 'pt';
 // Function to get nested object properties by dot notation
 const getNestedValue = (obj: any, path: string): string => {
   const keys = path.split('.');
-  let result = keys.reduce((o, key) => (o && o[key] !== undefined ? o[key] : ''), obj);
+  let result = keys.reduce((o, key) => (o && o[key] !== undefined ? o[key] : undefined), obj);
   
   // If result is not a string (e.g., undefined, null, or an object), return empty string
   if (typeof result !== 'string') {
     console.warn(`Translation for "${path}" is not a string or is missing`);
-    return String(path);
+    return path; // Return key as fallback
   }
   
   return result;
@@ -32,6 +32,7 @@ export function useTranslations(initialLanguage: LanguageType = 'en') {
   
   // Define the translation function
   const translate = (key: string): string => {
+    console.log(`Translating key: ${key} in language: ${currentLanguage}`);
     // First, check if the current language translations exist
     if (!translations[currentLanguage]) {
       console.error(`Translations for language "${currentLanguage}" not found`);
@@ -39,12 +40,17 @@ export function useTranslations(initialLanguage: LanguageType = 'en') {
     }
 
     try {
+      // Log the translations object for debugging
+      console.log(`Translation object:`, translations[currentLanguage]);
+      
       const translation = getNestedValue(translations[currentLanguage], key);
-      if (!translation || translation === '') {
+      console.log(`Found translation for ${key}: ${translation}`);
+      
+      if (translation === key || !translation) {
         // If translation is empty or not found, try to fallback to English
         if (currentLanguage !== 'en') {
           const enTranslation = getNestedValue(translations['en'], key);
-          if (enTranslation && enTranslation !== '') {
+          if (enTranslation && enTranslation !== key) {
             return enTranslation;
           }
         }

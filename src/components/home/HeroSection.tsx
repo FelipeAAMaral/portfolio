@@ -6,6 +6,16 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  
+  console.log('HeroSection rendered with translation function:', t);
+  
+  // Test the translation function
+  const greeting = t('hero.greeting');
+  const intro = t('hero.intro');
+  const contactTitle = t('contact.title');
+  const aboutMe = t('nav.aboutMe');
+  
+  console.log('Translations in HeroSection:', { greeting, intro, contactTitle, aboutMe });
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-slate-800">
@@ -13,18 +23,18 @@ const HeroSection = () => {
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
           <div className="md:w-1/2 space-y-6">
             <div className="inline-block bg-indigo-400/20 text-indigo-400 px-4 py-1 rounded-full text-sm font-medium mb-2 animate-pulse">
-              {t('hero.greeting')}
+              {greeting}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
               Felipe Amaral
             </h1>
             <p className="text-xl md:text-2xl text-slate-300">
-              {t('hero.intro')}
+              {intro}
             </p>
             <div className="flex flex-wrap gap-4">
               <Button className="bg-indigo-600 hover:bg-indigo-700 text-white" asChild>
                 <Link to="/contact">
-                  {t('contact.title')}
+                  {contactTitle}
                 </Link>
               </Button>
               <Button 
@@ -34,7 +44,7 @@ const HeroSection = () => {
               >
                 <Link to="/about" className="flex items-center gap-2">
                   <UserRound size={18} />
-                  {t('nav.aboutMe')}
+                  {aboutMe}
                 </Link>
               </Button>
             </div>
