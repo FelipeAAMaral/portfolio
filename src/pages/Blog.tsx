@@ -1,24 +1,8 @@
 
 import { useLanguage } from "@/context/LanguageContext";
-import { useState, useEffect } from "react";
 
 const Blog = () => {
   const { t } = useLanguage();
-  const [iframeHeight, setIframeHeight] = useState(800);
-
-  useEffect(() => {
-    const handleResize = () => {
-      // Adjust iframe height based on window size
-      setIframeHeight(window.innerWidth < 768 ? 1200 : 800);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Set initial height
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   // Sample blog posts
   const blogPosts = [
@@ -106,20 +90,6 @@ const Blog = () => {
           >
             {t('blog.checkMedium')}
           </a>
-        </div>
-      </div>
-
-      {/* Astro Blog Posts Section */}
-      <div className="mt-16 border-t pt-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Astro Blog Posts</h2>
-        <div className="w-full rounded-lg overflow-hidden shadow-lg">
-          <iframe 
-            src="/blog/" 
-            title="Astro Blog Posts" 
-            width="100%" 
-            height={iframeHeight} 
-            className="border-0"
-          />
         </div>
       </div>
     </div>
