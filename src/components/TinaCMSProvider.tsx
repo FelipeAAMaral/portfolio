@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { TinaProvider } from "tinacms";
-import type { TinaEditProps } from 'tinacms';
+import type { TinaProps } from 'tinacms';
 
 interface TinaCMSProviderProps {
   children: React.ReactNode;
@@ -16,9 +16,8 @@ const TinaCMSProvider: React.FC<TinaCMSProviderProps> = ({ children }) => {
   
   return (
     <TinaProvider 
-      enabled={!isEditing}
-      clientId="21bc9557-e3ae-427a-bdac-a740447ab551"
       branch="main"
+      clientId="21bc9557-e3ae-427a-bdac-a740447ab551"
       tinaioConfig={{
         frontendUrlOverride: window.location.origin,
       }}
