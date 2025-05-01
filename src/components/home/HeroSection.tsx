@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 
 const HeroSection = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-slate-800">
@@ -27,10 +27,14 @@ const HeroSection = () => {
                   {t('contact.title')}
                 </Link>
               </Button>
-              <Button variant="outline" className="border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30" asChild>
+              <Button 
+                variant="outline" 
+                className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30" 
+                asChild
+              >
                 <Link to="/about" className="flex items-center gap-2">
                   <UserRound size={18} />
-                  {language === 'en' ? 'About me' : 'Sobre mim'}
+                  {t('nav.aboutMe')}
                 </Link>
               </Button>
             </div>

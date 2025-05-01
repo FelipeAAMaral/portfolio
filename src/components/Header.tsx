@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Globe } from "lucide-react";
+import { Flag } from "lucide-react";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,7 @@ import {
 import { useLanguage } from "@/context/LanguageContext";
 
 const Header = () => {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -36,34 +36,45 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           <Link to="/" className="animated-link">
-            {language === 'en' ? 'Home' : 'Início'}
+            {t('nav.home')}
           </Link>
           <Link to="/blog" className="animated-link">
             Blog
           </Link>
           <Link to="/speaking" className="animated-link">
-            {language === 'en' ? 'Speaking' : 'Palestras'}
+            {t('nav.speaking')}
           </Link>
           <Link to="/mentorship" className="animated-link">
-            {language === 'en' ? 'Mentorship' : 'Mentoria'}
+            {t('nav.mentorship')}
           </Link>
           <Link to="/contact" className="animated-link">
-            {language === 'en' ? 'Contact' : 'Contato'}
+            {t('nav.contact')}
           </Link>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Globe className="h-4 w-4" />
-                <span className="ml-2">{language === 'en' ? 'EN' : 'PT'}</span>
+              <Button variant="ghost" size="icon" className="flex items-center gap-1.5">
+                {language === 'en' ? (
+                  <span className="flex items-center">
+                    <Flag className="h-4 w-4" fill="#B31942" stroke="#0A3161" />
+                    <span className="ml-1.5">EN</span>
+                  </span>
+                ) : (
+                  <span className="flex items-center">
+                    <Flag className="h-4 w-4" fill="#009c3b" stroke="#ffdf00" />
+                    <span className="ml-1.5">PT</span>
+                  </span>
+                )}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setLanguage('en')}>
-                English
+              <DropdownMenuItem onClick={() => setLanguage('en')} className="flex items-center gap-2">
+                <Flag className="h-3.5 w-3.5" fill="#B31942" stroke="#0A3161" />
+                <span>English</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setLanguage('pt')}>
-                Português
+              <DropdownMenuItem onClick={() => setLanguage('pt')} className="flex items-center gap-2">
+                <Flag className="h-3.5 w-3.5" fill="#009c3b" stroke="#ffdf00" />
+                <span>Português</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -74,37 +85,39 @@ const Header = () => {
           <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border py-4 z-50 animate-fade-in">
             <nav className="container flex flex-col space-y-4">
               <Link to="/" className="py-2" onClick={toggleMenu}>
-                {language === 'en' ? 'Home' : 'Início'}
+                {t('nav.home')}
               </Link>
               <Link to="/blog" className="py-2" onClick={toggleMenu}>
                 Blog
               </Link>
               <Link to="/speaking" className="py-2" onClick={toggleMenu}>
-                {language === 'en' ? 'Speaking' : 'Palestras'}
+                {t('nav.speaking')}
               </Link>
               <Link to="/mentorship" className="py-2" onClick={toggleMenu}>
-                {language === 'en' ? 'Mentorship' : 'Mentoria'}
+                {t('nav.mentorship')}
               </Link>
               <Link to="/contact" className="py-2" onClick={toggleMenu}>
-                {language === 'en' ? 'Contact' : 'Contato'}
+                {t('nav.contact')}
               </Link>
               
-              <div className="flex items-center space-x-2 pt-2">
+              <div className="flex items-center gap-3 pt-2">
                 <Button 
                   variant="outline" 
                   size="sm" 
                   onClick={() => { setLanguage('en'); toggleMenu(); }}
-                  className={language === 'en' ? 'border-primary text-primary' : ''}
+                  className={`flex items-center gap-2 ${language === 'en' ? 'border-primary text-primary' : ''}`}
                 >
-                  English
+                  <Flag className="h-3.5 w-3.5" fill="#B31942" stroke="#0A3161" />
+                  <span>English</span>
                 </Button>
                 <Button 
                   variant="outline" 
                   size="sm" 
                   onClick={() => { setLanguage('pt'); toggleMenu(); }}
-                  className={language === 'pt' ? 'border-primary text-primary' : ''}
+                  className={`flex items-center gap-2 ${language === 'pt' ? 'border-primary text-primary' : ''}`}
                 >
-                  Português
+                  <Flag className="h-3.5 w-3.5" fill="#009c3b" stroke="#ffdf00" />
+                  <span>Português</span>
                 </Button>
               </div>
             </nav>

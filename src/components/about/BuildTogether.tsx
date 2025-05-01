@@ -3,7 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ArrowRight, HeartHandshake } from "lucide-react";
 
 const BuildTogether = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
   
   return (
     <section className="mt-12 bg-card border p-8 rounded-xl">
@@ -14,16 +14,13 @@ const BuildTogether = () => {
           </div>
         </div>
         <h2 className="text-2xl font-bold mb-6">
-          {language === 'en' ? 'Let\'s Build Together' : 'Vamos Construir Juntos'}
+          {t('about.buildTogether')}
         </h2>
         <p className="text-lg mb-8">
-          {language === 'en' ? 
-            "Thanks for reading my story. Whether you're building a product, scaling a team, or navigating your own journey, I'm always open to exchange ideas and collaborate." 
-            : 
-            "Obrigado por ler minha história. Se você está construindo um produto, escalando uma equipe ou navegando em sua própria jornada, estou sempre aberto para trocar ideias e colaborar."}
+          {t('about.buildTogether.description')}
         </p>
         <a href="/contact" className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition-colors">
-          {language === 'en' ? 'Get in Touch' : 'Entre em Contato'}
+          {t('about.buildTogether.cta')}
           <ArrowRight className="h-4 w-4" />
         </a>
       </div>
