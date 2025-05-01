@@ -1,8 +1,8 @@
 
-import type { MiddlewareResponseHandler } from 'astro';
+import type { MiddlewareHandler } from 'astro';
 import type { LanguageType } from './utils/useTranslations';
 
-export const onRequest: MiddlewareResponseHandler = async ({ request, cookies, redirect }, next) => {
+export const onRequest: MiddlewareHandler = async ({ request, cookies, redirect }, next) => {
   // Check URL for language parameter
   const url = new URL(request.url);
   const langParam = url.searchParams.get('lang') as LanguageType | null;
