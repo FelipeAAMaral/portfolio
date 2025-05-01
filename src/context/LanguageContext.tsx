@@ -1,5 +1,5 @@
 
-import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 import { translations } from '../i18n';
 
 export type LanguageType = 'en' | 'pt';
@@ -13,7 +13,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
   setLanguage: () => {},
-  t: () => '',
+  t: (key: string) => key,
 });
 
 interface LanguageProviderProps {
@@ -21,26 +21,65 @@ interface LanguageProviderProps {
   initialLanguage?: LanguageType;
 }
 
+// Function to get nested object properties by dot notation
+const getNestedValue = (obj: any, path: string): string => {
+  const keys = path.split('.');
+  let result = keys.reduce((o, key) => (o && o[key] !== undefined ? o[key] : undefined), obj);
+  
+  if (typeof result !== 'string') {
+    console.warn(`Translation for "${path}" is not a string or is missing`);
+    return path;
+  }
+  
+  return result;
+};
+
 export const LanguageProvider = ({ children, initialLanguage = 'en' }: LanguageProviderProps) => {
   const [language, setLanguage] = useState<LanguageType>(initialLanguage);
+  
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage && (storedLanguage === 'en' || storedLanguage === 'pt')) {
+      setLanguage(storedLanguage as LanguageType);
+    }
+  }, []);
 
-  // Helper function to get nested properties using dot notation
-  const getNestedValue = (obj: any, path: string): string => {
-    const keys = path.split('.');
-    return keys.reduce((o, key) => (o && o[key] !== undefined ? o[key] : ''), obj);
+  const handleLanguageChange = (newLang: LanguageType) => {
+    localStorage.setItem('language', newLang);
+    setLanguage(newLang);
+    console.log(`Language changed to ${newLang}`);
   };
 
-  // Translation function
-  const t = (key: string): string => {
-    const translation = getNestedValue(translations[language], key);
-    if (!translation && process.env.NODE_ENV !== 'production') {
-      console.warn(`Translation key "${key}" not found in ${language}`);
+  // Define translation function directly in the context
+  const translate = (key: string): string => {
+    if (!translations[language]) {
+      console.error(`Translations for language "${language}" not found`);
+      return key;
     }
-    return translation || key;
+
+    try {
+      const translation = getNestedValue(translations[language], key);
+      
+      if (translation === key || !translation) {
+        // Fallback to English
+        if (language !== 'en') {
+          const enTranslation = getNestedValue(translations['en'], key);
+          if (enTranslation && enTranslation !== key) {
+            return enTranslation;
+          }
+        }
+        console.warn(`Translation key "${key}" not found in ${language}`);
+        return key;
+      }
+      return translation;
+    } catch (error) {
+      console.error(`Error getting translation for key "${key}":`, error);
+      return key;
+    }
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleLanguageChange, t: translate }}>
       {children}
     </LanguageContext.Provider>
   );

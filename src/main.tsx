@@ -1,12 +1,17 @@
 
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { LanguageProvider } from './context/LanguageContext';
 import './index.css';
 
-// Use React 18's createRoot API
-createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
