@@ -15,12 +15,10 @@ const TinaCMSProvider: React.FC<TinaCMSProviderProps> = ({ children }) => {
   
   return (
     <TinaProvider 
-      // TinaProvider doesn't accept editMode prop directly
-      content={{
-        enabled: false,
-        onEditClick: () => {
-          window.location.href = "/admin";
-        }
+      enabled={false}
+      clientId="21bc9557-e3ae-427a-bdac-a740447ab551"
+      onEdit={() => {
+        window.location.href = "/admin";
       }}
     >
       {children}
