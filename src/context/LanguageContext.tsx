@@ -1,5 +1,5 @@
 
-import { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { translations } from '../i18n';
 
 export type LanguageType = 'en' | 'pt';
