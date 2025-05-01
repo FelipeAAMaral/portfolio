@@ -36,19 +36,19 @@ const Header = () => {
           <a href="/" className="animated-link">
             {t('nav.home')}
           </a>
-          <a href="/blog/" className="animated-link">
+          <a href="/blog" className="animated-link">
             {t('nav.blog')}
           </a>
-          <a href="/speaking/" className="animated-link">
+          <a href="/speaking" className="animated-link">
             {t('nav.speaking')}
           </a>
-          <a href="/mentorship/" className="animated-link">
+          <a href="/mentorship" className="animated-link">
             {t('nav.mentorship')}
           </a>
-          <a href="/contact/" className="animated-link">
+          <a href="/contact" className="animated-link">
             {t('nav.contact')}
           </a>
-          <a href="/about/" className="animated-link">
+          <a href="/about" className="animated-link">
             {t('nav.aboutMe')}
           </a>
 
@@ -112,19 +112,19 @@ const Header = () => {
               <a href="/" className="py-2" onClick={toggleMenu}>
                 {t('nav.home')}
               </a>
-              <a href="/blog/" className="py-2" onClick={toggleMenu}>
+              <a href="/blog" className="py-2" onClick={toggleMenu}>
                 {t('nav.blog')}
               </a>
-              <a href="/speaking/" className="py-2" onClick={toggleMenu}>
+              <a href="/speaking" className="py-2" onClick={toggleMenu}>
                 {t('nav.speaking')}
               </a>
-              <a href="/mentorship/" className="py-2" onClick={toggleMenu}>
+              <a href="/mentorship" className="py-2" onClick={toggleMenu}>
                 {t('nav.mentorship')}
               </a>
-              <a href="/contact/" className="py-2" onClick={toggleMenu}>
+              <a href="/contact" className="py-2" onClick={toggleMenu}>
                 {t('nav.contact')}
               </a>
-              <a href="/about/" className="py-2" onClick={toggleMenu}>
+              <a href="/about" className="py-2" onClick={toggleMenu}>
                 {t('nav.aboutMe')}
               </a>
               

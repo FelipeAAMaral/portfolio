@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
 import Index from "./pages/Index";
+import Blog from "./pages/Blog";
 import Speaking from "./pages/Speaking";
 import Mentorship from "./pages/Mentorship";
 import Contact from "./pages/Contact";
@@ -25,7 +26,7 @@ const App = () => (
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
-              {/* Removed Blog route to allow Astro to handle /blog/ */}
+              <Route path="/blog" element={<Blog />} />
               <Route path="/speaking" element={<Speaking />} />
               <Route path="/mentorship" element={<Mentorship />} />
               <Route path="/contact" element={<Contact />} />
