@@ -1,0 +1,22 @@
+
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import HeroSection from '../components/home/HeroSection';
+import IntroSection from '../components/home/IntroSection';
+import FeaturedWorkSection from '../components/home/FeaturedWorkSection';
+import MediumPostsSection from '../components/home/MediumPostsSection';
+---
+
+<MainLayout>
+  <!-- Hero Section -->
+  <HeroSection client:load />
+
+  <!-- Brief Introduction -->
+  <IntroSection client:load />
+
+  <!-- Featured Work Section -->
+  <FeaturedWorkSection client:load />
+
+  <!-- Medium Blog Posts -->
+  <MediumPostsSection client:load />
+</MainLayout>

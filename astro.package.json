@@ -1,0 +1,10 @@
+
+{
+  "name": "felipe-amaral-portfolio",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview"
+  }
+}

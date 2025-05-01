@@ -1,0 +1,12 @@
+
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import ContactForm from '../components/ContactForm';
+---
+
+<MainLayout title="Contact | Felipe Amaral">
+  <div class="container py-16 animate-fade-in">
+    <h1 class="text-4xl font-bold mb-8">Contact</h1>
+    <ContactForm client:load />
+  </div>
+</MainLayout>

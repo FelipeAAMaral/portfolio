@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   DropdownMenu,
@@ -19,7 +18,7 @@ const Header = () => {
   return (
     <header className="py-4 border-b border-border">
       <div className="container flex justify-between items-center">
-        <Link to="/" className="text-xl font-semibold">Felipe Amaral</Link>
+        <a href="/" className="text-xl font-semibold">Felipe Amaral</a>
 
         {/* Mobile menu button */}
         <button 
@@ -34,24 +33,24 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="animated-link">
+          <a href="/" className="animated-link">
             {t('nav.home')}
-          </Link>
-          <Link to="/blog" className="animated-link">
+          </a>
+          <a href="/blog" className="animated-link">
             {t('nav.blog')}
-          </Link>
-          <Link to="/speaking" className="animated-link">
+          </a>
+          <a href="/speaking" className="animated-link">
             {t('nav.speaking')}
-          </Link>
-          <Link to="/mentorship" className="animated-link">
+          </a>
+          <a href="/mentorship" className="animated-link">
             {t('nav.mentorship')}
-          </Link>
-          <Link to="/contact" className="animated-link">
+          </a>
+          <a href="/contact" className="animated-link">
             {t('nav.contact')}
-          </Link>
-          <Link to="/about" className="animated-link">
+          </a>
+          <a href="/about" className="animated-link">
             {t('nav.aboutMe')}
-          </Link>
+          </a>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -110,24 +109,24 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border py-4 z-50 animate-fade-in">
             <nav className="container flex flex-col space-y-4">
-              <Link to="/" className="py-2" onClick={toggleMenu}>
+              <a href="/" className="py-2" onClick={toggleMenu}>
                 {t('nav.home')}
-              </Link>
-              <Link to="/blog" className="py-2" onClick={toggleMenu}>
+              </a>
+              <a href="/blog" className="py-2" onClick={toggleMenu}>
                 {t('nav.blog')}
-              </Link>
-              <Link to="/speaking" className="py-2" onClick={toggleMenu}>
+              </a>
+              <a href="/speaking" className="py-2" onClick={toggleMenu}>
                 {t('nav.speaking')}
-              </Link>
-              <Link to="/mentorship" className="py-2" onClick={toggleMenu}>
+              </a>
+              <a href="/mentorship" className="py-2" onClick={toggleMenu}>
                 {t('nav.mentorship')}
-              </Link>
-              <Link to="/contact" className="py-2" onClick={toggleMenu}>
+              </a>
+              <a href="/contact" className="py-2" onClick={toggleMenu}>
                 {t('nav.contact')}
-              </Link>
-              <Link to="/about" className="py-2" onClick={toggleMenu}>
+              </a>
+              <a href="/about" className="py-2" onClick={toggleMenu}>
                 {t('nav.aboutMe')}
-              </Link>
+              </a>
               
               <div className="flex items-center gap-3 pt-2">
                 <Button 

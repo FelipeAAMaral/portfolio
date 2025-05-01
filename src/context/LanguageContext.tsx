@@ -1,6 +1,8 @@
 
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { LanguageType, translations } from '../i18n';
+import { createContext, useState, useContext, ReactNode } from 'react';
+import { translations } from '../i18n';
+
+export type LanguageType = 'en' | 'pt';
 
 interface LanguageContextType {
   language: LanguageType;
@@ -8,17 +10,33 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-export const LanguageContext = createContext<LanguageContextType>({
+const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
   setLanguage: () => {},
   t: () => '',
 });
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<LanguageType>('en');
+interface LanguageProviderProps {
+  children: ReactNode;
+  initialLanguage?: LanguageType;
+}
 
-  const t = (key: string) => {
-    return translations[language][key as keyof typeof translations['en']] || key;
+export const LanguageProvider = ({ children, initialLanguage = 'en' }: LanguageProviderProps) => {
+  const [language, setLanguage] = useState<LanguageType>(initialLanguage);
+
+  // Helper function to get nested properties using dot notation
+  const getNestedValue = (obj: any, path: string): string => {
+    const keys = path.split('.');
+    return keys.reduce((o, key) => (o && o[key] !== undefined ? o[key] : ''), obj);
+  };
+
+  // Translation function
+  const t = (key: string): string => {
+    const translation = getNestedValue(translations[language], key);
+    if (!translation && process.env.NODE_ENV !== 'production') {
+      console.warn(`Translation key "${key}" not found in ${language}`);
+    }
+    return translation || key;
   };
 
   return (
