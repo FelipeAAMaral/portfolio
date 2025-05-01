@@ -18,7 +18,7 @@ const AboutMe = () => {
             <div className="md:w-1/2">
               <div className="relative rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
                 <img 
-                  src="/lovable-uploads/4de6514c-8f1c-4ad4-8571-d7cc0c2c6fe1.png" 
+                  src="/assets-img/4de6514c-8f1c-4ad4-8571-d7cc0c2c6fe1.png" 
                   alt={t('about.profileImageAlt')} 
                   className="w-full h-auto"
                 />
