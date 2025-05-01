@@ -20,8 +20,8 @@ const Contact = () => {
           
           <p className="mb-6">
             {language === 'en'
-              ? "Have a question, project idea, or just want to say hello? I'd love to hear from you. Fill out the form or reach out through any of the channels below."
-              : "Tem uma pergunta, ideia de projeto ou só quer dizer olá? Gostaria muito de receber sua mensagem. Preencha o formulário ou entre em contato através de qualquer um dos canais abaixo."}
+              ? "Interested in mentorship, networking, or discussing product strategies? I'm always open to connecting with fellow product enthusiasts and sharing insights from my experience."
+              : "Interessado em mentoria, networking ou discussão de estratégias de produto? Estou sempre aberto a me conectar com outros entusiastas de produto e compartilhar insights da minha experiência."}
           </p>
           
           <div className="space-y-4 mb-8">
@@ -58,20 +58,20 @@ const Contact = () => {
                 <Globe size={18} />
               </div>
               <a 
-                href="https://medium.com" 
+                href="https://medium.com/@amaral.felipeaugusto" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"
               >
-                medium.com/@portfolio
+                medium.com/@amaral.felipeaugusto
               </a>
             </div>
           </div>
           
           <p className="text-sm text-muted-foreground">
             {language === 'en' 
-              ? "I typically respond to messages within 24-48 hours."
-              : "Normalmente respondo mensagens em 24-48 horas."}
+              ? "I typically respond to messages within 24-48 hours. Looking forward to connecting!"
+              : "Normalmente respondo mensagens em 24-48 horas. Ansioso para nos conectarmos!"}
           </p>
         </div>
         
