@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <header className="py-4 border-b border-border">
       <div className="container flex justify-between items-center">
-        <Link to="/" className="text-xl font-semibold">Portfolio</Link>
+        <Link to="/" className="text-xl font-semibold">Felipe Amaral</Link>
 
         {/* Mobile menu button */}
         <button 

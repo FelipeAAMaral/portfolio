@@ -52,8 +52,8 @@ const Footer = () => {
         <div className="mt-8 pt-6 border-t border-border text-center text-sm text-muted-foreground">
           <p>
             {language === 'en' 
-              ? '© 2025 Portfolio. All rights reserved.' 
-              : '© 2025 Portfolio. Todos os direitos reservados.'}
+              ? '© 2025 Felipe Amaral. All rights reserved.' 
+              : '© 2025 Felipe Amaral. Todos os direitos reservados.'}
           </p>
         </div>
       </div>
