@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { TinaEditProvider } from "tinacms";
+import { TinaProvider } from "tinacms";
 
 interface TinaCMSProviderProps {
   children: React.ReactNode;
@@ -13,15 +13,16 @@ const TinaCMSProvider: React.FC<TinaCMSProviderProps> = ({ children }) => {
     return <>{children}</>;
   }
   
+  // Using TinaProvider instead of TinaEditProvider which is not available
   return (
-    <TinaEditProvider 
+    <TinaProvider 
       editMode={false}
-      enterEditMode={() => {
+      onEditChange={() => {
         window.location.href = "/admin";
       }}
     >
       {children}
-    </TinaEditProvider>
+    </TinaProvider>
   );
 };
 
