@@ -1,5 +1,6 @@
 
 import { translations } from '../i18n';
+import { useState, useEffect } from 'react';
 
 export type LanguageType = 'en' | 'pt';
 
@@ -17,14 +18,24 @@ const getNestedValue = (obj: any, path: string): string => {
   return result;
 };
 
-// Create a translation function that works in Astro context
+// Create a translation function for React components
 export function useTranslations(language: LanguageType = 'en') {
+  // Get language from localStorage if available, otherwise use passed language
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+  
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage && (storedLanguage === 'en' || storedLanguage === 'pt')) {
+      setCurrentLanguage(storedLanguage as LanguageType);
+    }
+  }, []);
+  
   // Return a function that gets translations based on key
   return (key: string): string => {
-    const translation = getNestedValue(translations[language], key);
+    const translation = getNestedValue(translations[currentLanguage], key);
     if (!translation || translation === key) {
       if (process.env.NODE_ENV !== 'production') {
-        console.warn(`Translation key "${key}" not found in ${language}`);
+        console.warn(`Translation key "${key}" not found in ${currentLanguage}`);
       }
       return key; // Return key as fallback
     }
@@ -32,7 +43,7 @@ export function useTranslations(language: LanguageType = 'en') {
   };
 }
 
-// For client components, we need a wrapper to access the current language
+// For client components that need direct access to translations
 export function getClientTranslations() {
   return (key: string, language: LanguageType = 'en'): string => {
     const translation = getNestedValue(translations[language], key);

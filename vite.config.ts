@@ -22,12 +22,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  optimizeDeps: {
-    exclude: ['tinacms'],
-  },
-  build: {
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
-  },
 }));
