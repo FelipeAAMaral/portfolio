@@ -9,7 +9,7 @@ const CpoPath = () => {
       <div className="flex flex-col md:flex-row items-start gap-8 md:gap-16">
         <div className="md:w-1/3">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            {language === 'en' ? '🎯 On the Path to CPO' : '🎯 No Caminho para CPO'}
+            {language === 'en' ? 'On the Path to CPO' : 'No Caminho para CPO'}
           </h2>
         </div>
         <div className="md:w-2/3 space-y-4">

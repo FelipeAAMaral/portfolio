@@ -9,7 +9,7 @@ const ProjectsBuilt = () => {
       <div className="flex flex-col md:flex-row items-start gap-8 md:gap-16">
         <div className="md:w-1/3">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            {language === 'en' ? '🏗️ What I\'ve Built and Led' : '🏗️ O Que Construí e Liderei'}
+            {language === 'en' ? 'What I\'ve Built and Led' : 'O Que Construí e Liderei'}
           </h2>
         </div>
         <div className="md:w-2/3">
