@@ -1,6 +1,6 @@
 
 import { useLanguage } from "@/context/LanguageContext";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, HeartHandshake } from "lucide-react";
 
 const BuildTogether = () => {
   const { language } = useLanguage();
@@ -8,8 +8,11 @@ const BuildTogether = () => {
   return (
     <section className="mt-12 bg-card border p-8 rounded-xl">
       <div className="text-center max-w-3xl mx-auto">
+        <div className="flex justify-center mb-4">
+          <HeartHandshake className="h-10 w-10 text-indigo-500" />
+        </div>
         <h2 className="text-2xl font-bold mb-6">
-          {language === 'en' ? '🤝 Let\'s Build Together' : '🤝 Vamos Construir Juntos'}
+          {language === 'en' ? 'Let\'s Build Together' : 'Vamos Construir Juntos'}
         </h2>
         <p className="text-lg mb-8">
           {language === 'en' ? 

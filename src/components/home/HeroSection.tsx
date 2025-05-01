@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
+import { ArrowRight, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -27,8 +27,9 @@ const HeroSection = () => {
                   {t('contact.title')}
                 </Link>
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white/10" asChild>
-                <Link to="/about">
+              <Button variant="outline" className="border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30" asChild>
+                <Link to="/about" className="flex items-center gap-2">
+                  <UserRound size={18} />
                   {language === 'en' ? 'About me' : 'Sobre mim'}
                 </Link>
               </Button>
@@ -48,7 +49,7 @@ const HeroSection = () => {
             <div className="mt-4 text-center">
               <Button variant="ghost" size="sm" className="flex items-center gap-2 text-white">
                 <span>Scroll for more</span>
-                <ArrowDown className="h-4 w-4 animate-bounce" />
+                <ArrowRight className="h-4 w-4 animate-bounce" />
               </Button>
             </div>
           </div>
