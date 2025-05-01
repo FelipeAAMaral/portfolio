@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <h3 className="font-semibold text-xl mb-2">Portfolio</h3>
+            <h3 className="font-semibold text-xl mb-2">Felipe Amaral</h3>
             <p className="text-muted-foreground">
               {t('footer.tagline')}
             </p>
@@ -25,7 +25,7 @@ const Footer = () => {
           
           <div className="flex items-center space-x-6">
             <a 
-              href="https://instagram.com" 
+              href="https://www.instagram.com/felipe.chamaral" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
@@ -34,7 +34,7 @@ const Footer = () => {
               <Instagram size={20} />
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/felipeaamaral/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
@@ -43,7 +43,7 @@ const Footer = () => {
               <Linkedin size={20} />
             </a>
             <a 
-              href="https://medium.com" 
+              href="https://medium.com/@amaral.felipeaugusto" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
