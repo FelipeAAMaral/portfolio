@@ -54,7 +54,7 @@ const HeroSection = () => {
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-indigo-500/30 to-indigo-600/40 blur"></div>
               <div className="relative aspect-square overflow-hidden rounded-lg border-2 border-white/20 bg-card transform hover:scale-[1.01] transition-transform duration-300">
                 <img 
-                  src="/lovable-uploads/9b58c456-6538-4179-9b48-28e9ca475eaf.png" 
+                  src="/assets-img/9b58c456-6538-4179-9b48-28e9ca475eaf.png" 
                   alt="Felipe Amaral" 
                   className="h-full w-full object-cover"
                 />

@@ -18,8 +18,8 @@ const AboutMe = () => {
             <div className="md:w-1/2">
               <div className="relative rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
                 <img 
-                  src="/lovable-uploads/4de6514c-8f1c-4ad4-8571-d7cc0c2c6fe1.png" 
-                  alt={t('about.profileImageAlt') || "Profile"} 
+                  src="/assets-img/4de6514c-8f1c-4ad4-8571-d7cc0c2c6fe1.png" 
+                  alt={t('about.profileImageAlt') || "Profile"}
                   className="w-full h-auto"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

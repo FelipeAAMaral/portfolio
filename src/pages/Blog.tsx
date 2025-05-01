@@ -99,7 +99,7 @@ const Blog = () => {
         
         <div className="flex justify-center">
           <a 
-            href="https://medium.com" 
+            href="https://medium.com/@amaral.felipeaugusto" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="bg-secondary hover:bg-secondary/80 text-foreground px-6 py-3 rounded-lg transition"

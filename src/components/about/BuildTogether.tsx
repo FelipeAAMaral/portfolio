@@ -14,7 +14,7 @@ const BuildTogether = () => {
           </div>
         </div>
         <h2 className="text-2xl font-bold mb-6">
-          {t('about.buildTogether')}
+          {t('about.buildTogether.title')}
         </h2>
         <p className="text-lg mb-8">
           {t('about.buildTogether.description')}
