@@ -1,11 +1,16 @@
-
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import { useTranslations } from '../utils/useTranslations';
 import { getCollection } from 'astro:content';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '../components/ui/pagination';
 
 // Get all blog posts
 const blogPosts = await getCollection('blog');
+// Sort by date (most recent first)
+const sortedPosts = blogPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
 const t = useTranslations('en'); // Default to English, client components will handle language switching
 ---
 
@@ -17,6 +22,7 @@ const t = useTranslations('en'); // Default to English, client components will h
       {t('blog.languageIntro')}
     </p>
     
+    <!-- React Blog Posts Section (Keep the existing section) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {blogPosts.map((post) => (
         <article class="border rounded-lg overflow-hidden hover:shadow-md transition-shadow">
@@ -43,6 +49,16 @@ const t = useTranslations('en'); // Default to English, client components will h
           </div>
         </article>
       ))}
+    </div>
+    
+    <div class="mt-16 mb-16">
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationLink href="#" isActive>1</PaginationLink>
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
     
     <div class="mt-12 text-center">
