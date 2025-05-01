@@ -5,9 +5,14 @@ import HeroSection from '../components/home/HeroSection';
 import IntroSection from '../components/home/IntroSection';
 import FeaturedWorkSection from '../components/home/FeaturedWorkSection';
 import MediumPostsSection from '../components/home/MediumPostsSection';
+import { useTranslations } from '../utils/useTranslations';
+
+// Get the appropriate translation function
+const lang = Astro.cookies.get('language')?.value || 'en';
+const t = useTranslations(lang as 'en' | 'pt');
 ---
 
-<MainLayout>
+<MainLayout title={`Felipe Amaral | ${t('hero.intro')}`}>
   <!-- Hero Section -->
   <HeroSection client:load />
 
