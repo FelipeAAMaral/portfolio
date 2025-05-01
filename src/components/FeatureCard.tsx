@@ -16,7 +16,7 @@ const FeatureCard = ({ title, description, image, category, link }: FeatureCardP
   const { t } = useLanguage();
   
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-md">
+    <Card className="overflow-hidden transition-all hover:shadow-lg border border-muted/60">
       <div className="aspect-[16/9] overflow-hidden">
         <img 
           src={image} 
@@ -25,12 +25,12 @@ const FeatureCard = ({ title, description, image, category, link }: FeatureCardP
         />
       </div>
       <CardHeader>
-        <div className="text-sm uppercase text-muted-foreground mb-1">{category}</div>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription className="line-clamp-2">{description}</CardDescription>
+        <div className="text-sm uppercase text-primary font-medium mb-1">{category}</div>
+        <CardTitle className="text-xl">{title}</CardTitle>
+        <CardDescription className="line-clamp-2 text-muted-foreground">{description}</CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button asChild variant="outline" size="sm">
+        <Button asChild variant="outline" size="sm" className="hover:bg-muted/20">
           <Link to={link}>{t('blog.readMore')}</Link>
         </Button>
       </CardFooter>
