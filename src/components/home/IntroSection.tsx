@@ -8,11 +8,11 @@ const IntroSection = () => {
   const { language } = useLanguage();
 
   return (
-    <section className="py-16 bg-background">
+    <section className="py-16 bg-gradient-to-br from-slate-100 to-white dark:from-slate-900 dark:to-slate-800">
       <div className="container">
         <div className="flex flex-col md:flex-row items-start gap-8 md:gap-16">
           <div className="md:w-1/3">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">🌟 {language === 'en' ? 'Quick Intro' : 'Breve Introdução'}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient-primary">🌟 {language === 'en' ? 'Quick Intro' : 'Breve Introdução'}</h2>
           </div>
           <div className="md:w-2/3 space-y-4">
             <p className="text-lg">
@@ -28,7 +28,7 @@ const IntroSection = () => {
                 "Minha jornada me levou da codificação à liderança de equipes multifuncionais e à moldagem do futuro das soluções de HRTech na América Latina."}
             </p>
             <div className="pt-4">
-              <Button variant="default" asChild>
+              <Button variant="default" className="bg-primary hover:bg-primary/90 transform hover:translate-x-1 transition-all" asChild>
                 <Link to="/about">
                   {language === 'en' ? 'Learn more about me' : 'Saiba mais sobre mim'}
                   <ArrowRight className="ml-2 h-4 w-4" />

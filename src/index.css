@@ -104,3 +104,19 @@
 .animated-link {
   @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
 }
+
+.text-gradient-primary {
+  @apply bg-gradient-to-br from-palmeiras-green via-primary to-palmeiras-green/80 bg-clip-text text-transparent;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+}
+
+.glass-effect {
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg;
+}
+
+.dark .glass-effect {
+  @apply bg-black/20 border-white/10;
+}

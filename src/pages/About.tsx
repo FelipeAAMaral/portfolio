@@ -14,7 +14,7 @@ const About = () => {
   
   return (
     <div className="container py-16 animate-fade-in">
-      <h1 className="text-4xl font-bold mb-8">
+      <h1 className="text-4xl font-bold mb-8 text-gradient-primary">
         {language === 'en' ? 'About Me' : 'Sobre Mim'}
       </h1>
 

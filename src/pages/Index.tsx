@@ -6,7 +6,7 @@ import MediumPostsSection from "@/components/home/MediumPostsSection";
 
 const Index = () => {
   return (
-    <div>
+    <div className="animate-fade-in">
       {/* Hero Section */}
       <HeroSection />
 

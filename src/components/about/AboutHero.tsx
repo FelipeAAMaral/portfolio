@@ -8,14 +8,14 @@ const AboutHero = () => {
     <section className="mb-16">
       <div className="flex flex-col md:flex-row items-start gap-8 md:gap-16">
         <div className="md:w-1/3">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">🌟 {language === 'en' ? 'Professional Overview' : 'Visão Profissional'}</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient-primary">🌟 {language === 'en' ? 'Professional Overview' : 'Visão Profissional'}</h2>
         </div>
         <div className="md:w-2/3 space-y-4">
           <div className="relative">
-            <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-palmeiras-green/20 to-primary/30 blur"></div>
-            <div className="relative aspect-square md:aspect-video overflow-hidden rounded-lg border bg-card">
+            <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-primary/20 to-palmeiras-green/30 blur"></div>
+            <div className="relative aspect-video overflow-hidden rounded-lg border bg-card shadow-xl">
               <img 
-                src="https://source.unsplash.com/random/800x800/?professional" 
+                src="/lovable-uploads/8ede0abb-b698-448b-893b-02fd8f515592.png" 
                 alt="Felipe Amaral" 
                 className="h-full w-full object-cover"
               />
