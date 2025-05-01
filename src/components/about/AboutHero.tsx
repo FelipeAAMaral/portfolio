@@ -8,7 +8,7 @@ const AboutHero = () => {
     <section className="mb-16">
       <div className="flex flex-col md:flex-row items-start gap-8 md:gap-16">
         <div className="md:w-1/3">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient-primary">🌟 {language === 'en' ? 'Professional Overview' : 'Visão Profissional'}</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient-primary">{language === 'en' ? 'Professional Overview' : 'Visão Profissional'}</h2>
         </div>
         <div className="md:w-2/3 space-y-4">
           <div className="relative">
