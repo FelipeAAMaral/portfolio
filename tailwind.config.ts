@@ -63,10 +63,16 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Palmeiras-inspired colors
-				palmeiras: {
-					green: '#006437',
-					light: '#F2FCE2',
+				// Updated color palette - removed palmeiras-green in favor of a sleeker professional palette
+				slate: {
+					900: '#0F172A',
+					800: '#1E293B',
+					700: '#334155',
+				},
+				indigo: {
+					600: '#4F46E5',
+					500: '#6366F1',
+					400: '#818CF8',
 				}
 			},
 			fontFamily: {

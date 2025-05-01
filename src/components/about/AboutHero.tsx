@@ -12,7 +12,7 @@ const AboutHero = () => {
         </div>
         <div className="md:w-2/3 space-y-4">
           <div className="relative">
-            <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-primary/20 to-palmeiras-green/30 blur"></div>
+            <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-indigo-500/20 to-indigo-600/30 blur"></div>
             <div className="relative aspect-video overflow-hidden rounded-lg border bg-card shadow-xl">
               <img 
                 src="/lovable-uploads/8ede0abb-b698-448b-893b-02fd8f515592.png" 

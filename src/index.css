@@ -16,16 +16,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 15%;
 
-    --primary: 150 95% 19%;
+    /* Changed from green to indigo for a more professional look */
+    --primary: 234 89% 59%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 150 30% 96%;
+    --secondary: 226 57% 97%;
     --secondary-foreground: 240 10% 15%;
 
     --muted: 0 0% 96%;
     --muted-foreground: 240 5% 45%;
 
-    --accent: 150 30% 96%;
+    --accent: 226 57% 97%;
     --accent-foreground: 240 10% 15%;
 
     --destructive: 0 84% 60%;
@@ -33,7 +34,7 @@
 
     --border: 240 5% 90%;
     --input: 240 5% 90%;
-    --ring: 150 95% 19%;
+    --ring: 234 89% 59%;
 
     --radius: 0.5rem;
 
@@ -44,7 +45,7 @@
     --sidebar-accent: 240 5% 96%;
     --sidebar-accent-foreground: 240 6% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 150 95% 19%;
+    --sidebar-ring: 234 89% 59%;
   }
 
   .dark {
@@ -57,7 +58,8 @@
     --popover: 240 10% 12%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 150 70% 45%;
+    /* Changed from green to indigo for a more professional look */
+    --primary: 234 89% 65%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 240 10% 15%;
@@ -74,16 +76,16 @@
 
     --border: 240 10% 20%;
     --input: 240 10% 20%;
-    --ring: 150 70% 45%;
+    --ring: 234 89% 65%;
     
     --sidebar-background: 240 6% 10%;
     --sidebar-foreground: 240 5% 96%;
-    --sidebar-primary: 150 70% 45%;
+    --sidebar-primary: 234 89% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 4% 16%;
     --sidebar-accent-foreground: 240 5% 96%;
     --sidebar-border: 240 4% 16%;
-    --sidebar-ring: 150 70% 45%;
+    --sidebar-ring: 234 89% 65%;
   }
 }
 
@@ -106,7 +108,7 @@
 }
 
 .text-gradient-primary {
-  @apply bg-gradient-to-br from-palmeiras-green via-primary to-palmeiras-green/80 bg-clip-text text-transparent;
+  @apply bg-gradient-to-br from-indigo-400 via-primary to-indigo-600 bg-clip-text text-transparent;
 }
 
 .card-hover {

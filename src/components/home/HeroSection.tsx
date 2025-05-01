@@ -12,7 +12,7 @@ const HeroSection = () => {
       <div className="container">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
           <div className="md:w-1/2 space-y-6">
-            <div className="inline-block bg-palmeiras-light text-primary px-4 py-1 rounded-full text-sm font-medium mb-2 animate-pulse">
+            <div className="inline-block bg-indigo-400/20 text-indigo-400 px-4 py-1 rounded-full text-sm font-medium mb-2 animate-pulse">
               {t('hero.greeting')}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
@@ -22,21 +22,21 @@ const HeroSection = () => {
               {t('hero.intro')}
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-primary hover:bg-primary/90 text-white" asChild>
+              <Button className="bg-indigo-600 hover:bg-indigo-700 text-white" asChild>
                 <Link to="/contact">
                   {t('contact.title')}
                 </Link>
               </Button>
               <Button variant="outline" className="border-white text-white hover:bg-white/10" asChild>
                 <Link to="/about">
-                  {t('about.title')}
+                  {language === 'en' ? 'About me' : 'Sobre mim'}
                 </Link>
               </Button>
             </div>
           </div>
           <div className="md:w-1/2 mt-8 md:mt-0">
             <div className="relative">
-              <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-primary/30 to-palmeiras-green/40 blur"></div>
+              <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-indigo-500/30 to-indigo-600/40 blur"></div>
               <div className="relative aspect-square overflow-hidden rounded-lg border-2 border-white/20 bg-card transform hover:scale-[1.01] transition-transform duration-300">
                 <img 
                   src="/lovable-uploads/9b58c456-6538-4179-9b48-28e9ca475eaf.png" 

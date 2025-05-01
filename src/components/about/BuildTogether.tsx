@@ -17,7 +17,7 @@ const BuildTogether = () => {
             : 
             "Obrigado por ler minha história. Se você está construindo um produto, escalando uma equipe ou navegando em sua própria jornada, estou sempre aberto para trocar ideias e colaborar."}
         </p>
-        <a href="/contact" className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg transition-colors">
+        <a href="/contact" className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition-colors">
           {language === 'en' ? 'Get in Touch' : 'Entre em Contato'}
           <ArrowRight className="h-4 w-4" />
         </a>

@@ -28,7 +28,7 @@ const IntroSection = () => {
                 "Minha jornada me levou da codificação à liderança de equipes multifuncionais e à moldagem do futuro das soluções de HRTech na América Latina."}
             </p>
             <div className="pt-4">
-              <Button variant="default" className="bg-primary hover:bg-primary/90 transform hover:translate-x-1 transition-all" asChild>
+              <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700 transform hover:translate-x-1 transition-all" asChild>
                 <Link to="/about">
                   {language === 'en' ? 'Learn more about me' : 'Saiba mais sobre mim'}
                   <ArrowRight className="ml-2 h-4 w-4" />
