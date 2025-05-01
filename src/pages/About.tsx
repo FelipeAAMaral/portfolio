@@ -1,7 +1,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Briefcase, Code, GraduationCap, Users, ArrowRight } from "lucide-react";
+import { Briefcase, Code, GraduationCap, Users, ArrowRight, Trophy, Users as UsersIcon } from "lucide-react";
 
 const About = () => {
   const { language } = useLanguage();
@@ -269,8 +269,8 @@ const About = () => {
               {[
                 { icon: <GraduationCap className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I publish reflections on product leadership on Medium" : "Publico reflexões sobre liderança de produto no Medium" },
                 { icon: <Code className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I built my portfolio website using Astro and Netlify, with bilingual content" : "Construí meu site de portfólio usando Astro e Netlify, com conteúdo bilíngue" },
-                { icon: <Briefcase className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I'm a big fan of Palmeiras and green color palettes 💚" : "Sou um grande fã do Palmeiras e paletas de cores verdes 💚" },
-                { icon: <Users className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I believe the best products start with a genuine interest in helping people" : "Acredito que os melhores produtos começam com um interesse genuíno em ajudar as pessoas" }
+                { icon: <Trophy className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I'm a passionate Palmeiras supporter - it's more than just green colors, it's about being part of a community that shares values, history, and passion" : "Sou um torcedor apaixonado do Palmeiras - é mais do que apenas cores verdes, é sobre fazer parte de uma comunidade que compartilha valores, história e paixão" },
+                { icon: <UsersIcon className="h-5 w-5 text-primary flex-shrink-0" />, text: language === 'en' ? "I believe the best products start with a genuine interest in helping people" : "Acredito que os melhores produtos começam com um interesse genuíno em ajudar as pessoas" }
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-3 bg-card p-4 rounded-lg border hover:shadow-sm transition-all">
                   {item.icon}
