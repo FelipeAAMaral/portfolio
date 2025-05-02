@@ -1,5 +1,49 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
+
+// tina/schema.ts
+import { defineSchema } from "tinacms";
+var schema_default = defineSchema({
+  collections: [
+    {
+      label: "Posts",
+      name: "post",
+      path: "content/posts",
+      format: "md",
+      ui: {
+        router: ({ document }) => `/blog/${document._sys.filename}`
+      },
+      fields: [
+        {
+          type: "string",
+          name: "title",
+          label: "T\xEDtulo",
+          isTitle: true,
+          required: true
+        },
+        {
+          type: "datetime",
+          name: "date",
+          label: "Data",
+          required: true
+        },
+        {
+          type: "string",
+          name: "author",
+          label: "Autor"
+        },
+        {
+          type: "rich-text",
+          name: "body",
+          label: "Conte\xFAdo",
+          isBody: true
+        }
+      ]
+    }
+  ]
+});
+
+// tina/config.ts
 import * as dotenv from "dotenv";
 dotenv.config();
 var config_default = defineConfig({
@@ -17,57 +61,7 @@ var config_default = defineConfig({
       static: true
     }
   },
-  schema: {
-    collections: [
-      {
-        name: "blog",
-        label: "Blog Posts",
-        path: "src/content/blog",
-        format: "md",
-        ui: {
-          router: ({ document }) => `/blog/${document._sys.filename}`
-        },
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true
-          },
-          {
-            type: "string",
-            name: "date",
-            label: "Date",
-            required: true
-          },
-          {
-            type: "string",
-            name: "excerpt",
-            label: "Excerpt",
-            required: true
-          },
-          {
-            type: "image",
-            name: "image",
-            label: "Featured Image"
-          },
-          {
-            type: "string",
-            name: "author",
-            label: "Author",
-            required: true
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true
-          }
-        ]
-      }
-    ]
-  }
+  schema: schema_default
 });
 export {
   config_default as default
