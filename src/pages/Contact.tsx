@@ -25,29 +25,15 @@ const Contact = () => {
           <div className="space-y-4 mb-8">
             <div className="flex items-center">
               <div className="bg-muted/50 h-10 w-10 rounded-full flex items-center justify-center mr-3">
-                <Instagram size={18} />
-              </div>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-              >
-                @portfolioaccount
-              </a>
-            </div>
-            
-            <div className="flex items-center">
-              <div className="bg-muted/50 h-10 w-10 rounded-full flex items-center justify-center mr-3">
                 <Linkedin size={18} />
               </div>
               <a 
-                href="https://linkedin.com" 
+                href="https://linkedin.com/in/felipeaamaral" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"
               >
-                linkedin.com/in/portfolio
+                linkedin.com/in/felipeaamaral
               </a>
             </div>
             
