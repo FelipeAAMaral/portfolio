@@ -1,3 +1,4 @@
+// tina/schema.ts
 import { defineSchema } from "tinacms";
 
 export default defineSchema({
@@ -5,7 +6,7 @@ export default defineSchema({
     {
       label: "Posts",
       name: "post",
-      path: "src/content/posts",
+      path: "src/content/posts", 
       format: "md",
       ui: {
         router: ({ document }) => `/blog/${document._sys.filename}`,
