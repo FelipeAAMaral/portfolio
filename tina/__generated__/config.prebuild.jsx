@@ -2,64 +2,62 @@
 import { defineConfig } from "tinacms";
 import * as dotenv from "dotenv";
 dotenv.config();
-var branch = process.env.HEAD || process.env.GIT_BRANCH || "main";
 var config_default = defineConfig({
-  branch,
   clientId: process.env.TINA_CLIENT_ID,
-  // Get this from tina.io
   token: process.env.TINA_TOKEN,
-  // Get this from tina.io
+  branch: process.env.GIT_BRANCH || "main",
   build: {
     outputFolder: "admin",
+    // pasta gerada com o build do admin
     publicFolder: "public"
+    // onde ficam imagens e assets públicos
   },
   media: {
     tina: {
-      mediaRoot: "uploads",
+      mediaRoot: "",
+      // usa a raiz da pasta `public/`
       publicFolder: "public"
     }
   },
   schema: {
     collections: [
       {
-        name: "blog",
-        label: "Blog Posts",
-        path: "src/content/blog",
+        label: "Posts",
+        name: "post",
+        path: "content/posts",
+        // conteúdo salvo em arquivos .md
+        format: "md",
+        ui: {
+          router: ({ document }) => `/blog/${document._sys.filename}`
+        },
         fields: [
           {
             type: "string",
             name: "title",
-            label: "Title",
+            label: "T\xEDtulo",
             isTitle: true,
             required: true
           },
           {
-            type: "string",
+            type: "datetime",
             name: "date",
-            label: "Date",
+            label: "Data",
             required: true
           },
           {
             type: "string",
             name: "excerpt",
-            label: "Excerpt",
-            required: true
+            label: "Resumo"
           },
           {
             type: "image",
             name: "image",
-            label: "Featured Image"
-          },
-          {
-            type: "string",
-            name: "author",
-            label: "Author",
-            required: true
+            label: "Imagem"
           },
           {
             type: "rich-text",
             name: "body",
-            label: "Body",
+            label: "Conte\xFAdo",
             isBody: true
           }
         ]
