@@ -1,8 +1,9 @@
-fragment PostParts on Post {
+fragment BlogParts on Blog {
   __typename
   title
   date
   excerpt
   image
+  author
   body
 }
