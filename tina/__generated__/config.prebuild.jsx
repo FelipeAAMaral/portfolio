@@ -1,12 +1,11 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
-var branch = process.env.GIT_BRANCH || "main";
+import * as dotenv from "dotenv";
+dotenv.config();
 var config_default = defineConfig({
-  branch,
-  clientId: process.env.TINA_CLIENT_ID,
-  // Get this from tina.io
-  token: process.env.TINA_TOKEN,
-  // Get this from tina.io
+  branch: process.env.GIT_BRANCH || "main",
+  clientId: process.env.TINA_CLIENT_ID || "21bc9557-e3ae-427a-bdac-a740447ab551",
+  token: process.env.TINA_TOKEN || "6b29b18fec8ac4cf20d60a32fee827fb29219306",
   build: {
     outputFolder: "admin",
     publicFolder: "public"
@@ -14,7 +13,8 @@ var config_default = defineConfig({
   media: {
     tina: {
       mediaRoot: "uploads",
-      publicFolder: "public"
+      publicFolder: "public",
+      static: true
     }
   },
   schema: {
@@ -23,6 +23,10 @@ var config_default = defineConfig({
         name: "blog",
         label: "Blog Posts",
         path: "src/content/blog",
+        format: "md",
+        ui: {
+          router: ({ document }) => `/blog/${document._sys.filename}`
+        },
         fields: [
           {
             type: "string",
