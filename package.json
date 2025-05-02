@@ -8,7 +8,8 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tina:dev": "tinacms dev"
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
