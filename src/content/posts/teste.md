@@ -1,99 +1,67 @@
-
 ---
-title: "Teste blog post"
-date: "2025-04-01"
-excerpt: "How to ensure your web applications are accessible to all users, including those with disabilities."
-image: "https://source.unsplash.com/random/800x600/?accessibility"
+title: "Iniciando com TinaCMS: Meu Primeiro Post"
+date: 2025-05-02T12:00:00Z
+author: "Felipe Amaral"
 ---
 
-# Testing Accessible Web Applications
+Este é o meu primeiro post criado com **TinaCMS**! 🎉 Neste post, vou mostrar como podemos usar o schema do Tina para modelar conteúdo simples em Markdown.
 
-Web accessibility ensures that websites and applications are designed and developed so that people with disabilities can use them effectively. Here's how to make your applications more accessible.
+## Por que escolher o TinaCMS?
 
-## Why Accessibility Matters
+O TinaCMS é um CMS **headless** e **inline editor** que se integra perfeitamente ao seu projeto React/Vite. Alguns benefícios:
 
-Beyond being the right thing to do, accessibility:
+- **Edição em tempo real** diretamente na página
+- **Configuração flexível** via schema (YAML/JSON)
+- Suporte nativo a **Markdown** e rich-text
 
-- Improves SEO and reaches more users
-- Helps meet legal requirements in many countries
-- Creates better experiences for everyone, not just those with disabilities
-- Forces cleaner, better structured code
+---
 
-## Key Accessibility Principles
+### Principais aspectos do nosso schema
 
-### 1. Keyboard Navigation
+- **Título** (`title`): campo string e principal do post  
+- **Data** (`date`): data e hora da publicação  
+- **Autor** (`author`): quem escreveu o post  
+- **Conteúdo** (`body`): rich-text (Markdown)  
 
-Not everyone can use a mouse. Ensure all interactive elements can be accessed and operated with a keyboard alone:
+---
 
-```jsx
-// Good practice
-<button onClick={handleClick}>Click me</button>
+## Exemplo de uso prático
 
-// Bad practice - not keyboard accessible
-<div onClick={handleClick}>Click me</div>
-```
+1. Clone o repositório e instale as dependências  
+2. Crie um arquivo `.md` em `content/posts/` com este frontmatter  
+3. Rode `npx tinacms dev` e navegue até `/admin`  
+4. Edite o post inline e veja as mudanças em tempo real!
 
-### 2. Semantic HTML
+---
 
-Use appropriate HTML elements for their intended purpose:
+**Pronto!** Agora você tem um post totalmente gerenciável pelo TinaCMS, usando Markdown e o seu schema personalizado.  
 
-```html
-<!-- Good practice -->
-<button>Submit</button>
-<nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-  </ul>
-</nav>
+---
 
-<!-- Bad practice -->
-<div class="button" onclick="submit()">Submit</div>
-<div class="nav">
-  <div><a href="/">Home</a></div>
-</div>
-```
-
-### 3. ARIA Attributes
-
-When HTML semantics aren't sufficient, use ARIA (Accessible Rich Internet Applications) attributes:
-
-```jsx
-<div 
-  role="button"
-  aria-pressed={isActive}
-  tabIndex={0}
-  onKeyDown={(e) => e.key === 'Enter' && handleClick()}
-  onClick={handleClick}
->
-  Toggle Feature
-</div>
-```
-
-### 4. Color and Contrast
-
-Ensure text has sufficient contrast against its background:
-
-- Normal text: minimum 4.5:1 contrast ratio
-- Large text: minimum 3:1 contrast ratio
-- Don't rely solely on color to convey information
-
-### 5. Alternative Text
-
-Provide alternative text for images:
-
-```jsx
-// Informative image
-<img src="chart.png" alt="Q1 sales increased by 25% compared to last year" />
-
-// Decorative image
-<img src="decoration.png" alt="" role="presentation" />
-```
-
-## Testing for Accessibility
-
-- Use automated tools like Lighthouse, axe, or WAVE
-- Test with screen readers like NVDA, VoiceOver, or JAWS
-- Conduct keyboard-only navigation tests
-- Review color contrast with tools like WebAIM's Contrast Checker
-
-By integrating these practices into your development workflow, you can create web applications that are truly accessible to all users.
+> **Preview renderizado**  
+>  
+> ### Iniciando com TinaCMS: Meu Primeiro Post  
+> *Publicado em 02/05/2025 por Felipe Amaral*  
+>  
+> Este é o meu primeiro post criado com **TinaCMS**! 🎉 Neste post, vou mostrar como podemos usar o schema do Tina para modelar conteúdo simples em Markdown.  
+>  
+> **Por que escolher o TinaCMS?**  
+>  
+> O TinaCMS é um CMS **headless** e **inline editor** que se integra perfeitamente ao seu projeto React/Vite. Alguns benefícios:  
+> - **Edição em tempo real** diretamente na página  
+> - **Configuração flexível** via schema (YAML/JSON)  
+> - Suporte nativo a **Markdown** e rich-text  
+>  
+> **Principais aspectos do nosso schema**  
+> - **Título**: campo string e principal do post  
+> - **Data**: data e hora da publicação  
+> - **Autor**: quem escreveu o post  
+> - **Conteúdo**: rich-text (Markdown)  
+>  
+> **Exemplo de uso prático**  
+> 1. Clone o repositório e instale as dependências  
+> 2. Crie um arquivo `.md` em `content/posts/` com este frontmatter  
+> 3. Rode `npx tinacms dev` e navegue até `/admin`  
+> 4. Edite o post inline e veja as mudanças em tempo real!  
+>  
+> — **Fim do post**  

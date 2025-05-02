@@ -8,7 +8,7 @@ var schema_default = defineSchema({
     {
       label: "Posts",
       name: "post",
-      path: "content/posts",
+      path: "src/content/posts",
       format: "md",
       ui: {
         router: ({ document }) => `/blog/${document._sys.filename}`
