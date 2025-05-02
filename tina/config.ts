@@ -1,13 +1,15 @@
-
+// tina/config.ts
 import { defineConfig } from "tinacms";
+import mySchema from "./schema";
+import * as dotenv from "dotenv";
 
-// Your hosting provider likely exposes this as an environment variable
-const branch = process.env.GIT_BRANCH || "main";
+// Carrega variáveis de .env, .env.local, etc.
+dotenv.config();
 
 export default defineConfig({
-  branch: branch,
-  clientId: process.env.TINA_CLIENT_ID!, // Get this from tina.io
-  token: process.env.TINA_TOKEN!, // Get this from tina.io
+  branch: process.env.GIT_BRANCH || "main",
+  clientId: process.env.TINA_CLIENT_ID || "",
+  token: process.env.TINA_TOKEN || "",
   build: {
     outputFolder: "admin",
     publicFolder: "public",
@@ -16,53 +18,8 @@ export default defineConfig({
     tina: {
       mediaRoot: "uploads",
       publicFolder: "public",
+      static: true,
     },
   },
-  schema: {
-    collections: [
-      {
-        name: "blog",
-        label: "Blog Posts",
-        path: "src/content/blog",
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "string",
-            name: "date",
-            label: "Date",
-            required: true,
-          },
-          {
-            type: "string",
-            name: "excerpt",
-            label: "Excerpt",
-            required: true,
-          },
-          {
-            type: "image",
-            name: "image",
-            label: "Featured Image",
-          },
-          {
-            type: "string",
-            name: "author",
-            label: "Author",
-            required: true,
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
-          },
-        ],
-      },
-    ],
-  },
+  schema: mySchema,
 });

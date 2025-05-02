@@ -54,12 +54,12 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  blog(relativePath: String): Blog!
-  blogConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BlogFilter): BlogConnection!
+  post(relativePath: String): Post!
+  postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
 }
 
 input DocumentFilter {
-  blog: BlogFilter
+  post: PostFilter
 }
 
 type DocumentConnectionEdges {
@@ -85,14 +85,12 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Blog | Folder
+union DocumentNode = Post | Folder
 
-type Blog implements Node & Document {
+type Post implements Node & Document {
   title: String!
   date: String!
-  excerpt: String!
-  image: String
-  author: String!
+  author: String
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -106,8 +104,9 @@ input StringFilter {
   in: [String]
 }
 
-input ImageFilter {
-  startsWith: String
+input DatetimeFilter {
+  after: String
+  before: String
   eq: String
   exists: Boolean
   in: [String]
@@ -119,24 +118,22 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input BlogFilter {
+input PostFilter {
   title: StringFilter
-  date: StringFilter
-  excerpt: StringFilter
-  image: ImageFilter
+  date: DatetimeFilter
   author: StringFilter
   body: RichTextFilter
 }
 
-type BlogConnectionEdges {
+type PostConnectionEdges {
   cursor: String!
-  node: Blog
+  node: Post
 }
 
-type BlogConnection implements Connection {
+type PostConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [BlogConnectionEdges]
+  edges: [PostConnectionEdges]
 }
 
 type Mutation {
@@ -145,24 +142,22 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
-  updateBlog(relativePath: String!, params: BlogMutation!): Blog!
-  createBlog(relativePath: String!, params: BlogMutation!): Blog!
+  updatePost(relativePath: String!, params: PostMutation!): Post!
+  createPost(relativePath: String!, params: PostMutation!): Post!
 }
 
 input DocumentUpdateMutation {
-  blog: BlogMutation
+  post: PostMutation
   relativePath: String
 }
 
 input DocumentMutation {
-  blog: BlogMutation
+  post: PostMutation
 }
 
-input BlogMutation {
+input PostMutation {
   title: String
   date: String
-  excerpt: String
-  image: String
   author: String
   body: JSON
 }
