@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,11 +15,12 @@ interface ContactFormValues {
 }
 
 // EmailJS configuration
-const EMAILJS_SERVICE_ID = "service_portfolio"; // Your service ID from EmailJS dashboard
-const EMAILJS_TEMPLATE_ID = "template_contact"; // Your template ID from EmailJS dashboard
-const EMAILJS_USER_ID = "Hkhs6qHNTrlFPNUjX"; // Your EmailJS Public Key
+const EMAILJS_SERVICE_ID = import.meta.env.EMAILJS_SERVICE_ID; 
+const EMAILJS_TEMPLATE_ID = import.meta.env.EMAILJS_TEMPLATE_ID; 
+const EMAILJS_PUBLIC_KEY = import.meta.env.EMAILJS_PUBLIC_KEY; 
 
 const ContactForm = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
@@ -39,11 +40,11 @@ const ContactForm = () => {
       };
       
       // Send email using EmailJS
-      await emailjs.send(
+      await emailjs.sendForm(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_USER_ID
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
       );
       
       console.log('Email sent successfully:', data);

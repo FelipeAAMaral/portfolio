@@ -25,15 +25,6 @@ const Footer = () => {
           
           <div className="flex items-center space-x-6">
             <a 
-              href="https://www.instagram.com/felipe.chamaral" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram size={20} />
-            </a>
-            <a 
               href="https://www.linkedin.com/in/felipeaamaral/" 
               target="_blank" 
               rel="noopener noreferrer"

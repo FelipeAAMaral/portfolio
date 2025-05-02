@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
-import TinaCMSProvider from "./components/TinaCMSProvider";
+import { TinaProvider, TinaCMS } from 'tinacms';
 import { useLanguage } from "./context/LanguageContext";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
@@ -14,11 +14,14 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
+import { useMemo } from 'react';
+
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const { t, language } = useLanguage();
+  const cms = useMemo(() => new TinaCMS(), []);
   console.log('App rendered with language:', language);
   console.log('Translation test:', t('hero.greeting'));
   
@@ -27,7 +30,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <TinaCMSProvider>
+        <TinaProvider cms={cms}>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
@@ -39,7 +42,7 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-        </TinaCMSProvider>
+        </TinaProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
