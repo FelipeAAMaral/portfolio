@@ -79,6 +79,7 @@
     "message": "Sua Mensagem",
     "send": "Enviar Mensagem",
     "success": "Mensagem enviada com sucesso!",
+    "error": "Falha ao enviar a mensagem. Por gentileze, tente novamente mais tarde",
     "letsConnect": "Vamos Conectar",
     "interested": "Interessado em mentoria, networking ou discussão de estratégias de produto? Estou sempre aberto a me conectar com outros entusiastas de produto e compartilhar insights da minha experiência.",
     "response": "Normalmente respondo mensagens em 24-48 horas. Ansioso para nos conectarmos!",

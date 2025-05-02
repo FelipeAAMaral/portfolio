@@ -7,6 +7,13 @@ import FeatureCard from "@/components/FeatureCard";
 const MediumPostsSection = () => {
   const { t } = useLanguage();
 
+  const extractImageSources = (htmlString) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    const images = doc.querySelectorAll('img');
+    return Array.from(images).map(img => img.getAttribute('src'));
+  };
+
   // Fetch Medium posts
   const fetchMediumPosts = async () => {
     try {
@@ -38,7 +45,7 @@ const MediumPostsSection = () => {
     id: post.guid,
     title: post.title,
     description: stripHtml(post.description).substring(0, 120) + '...',
-    image: post.thumbnail || "https://source.unsplash.com/random/800x600/?writing",
+    image: extractImageSources(post.content),
     category: "Medium",
     link: post.link
   }));
