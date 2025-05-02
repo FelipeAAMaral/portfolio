@@ -1,25 +1,23 @@
-
+// tina/config.ts
 import { defineConfig } from "tinacms";
 import * as dotenv from "dotenv";
-
 dotenv.config();
-
-// Your hosting provider likely exposes this as an environment variable
-const branch = process.env.HEAD || process.env.GIT_BRANCH || "main";
-
-export default defineConfig({
+var branch = process.env.HEAD || process.env.GIT_BRANCH || "main";
+var config_default = defineConfig({
   branch,
-  clientId: process.env.TINA_CLIENT_ID!, // Get this from tina.io
-  token: process.env.TINA_TOKEN!, // Get this from tina.io
+  clientId: process.env.TINA_CLIENT_ID,
+  // Get this from tina.io
+  token: process.env.TINA_TOKEN,
+  // Get this from tina.io
   build: {
     outputFolder: "admin",
-    publicFolder: "public",
+    publicFolder: "public"
   },
   media: {
     tina: {
       mediaRoot: "uploads",
-      publicFolder: "public",
-    },
+      publicFolder: "public"
+    }
   },
   schema: {
     collections: [
@@ -33,39 +31,42 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "date",
             label: "Date",
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "excerpt",
             label: "Excerpt",
-            required: true,
+            required: true
           },
           {
             type: "image",
             name: "image",
-            label: "Featured Image",
+            label: "Featured Image"
           },
           {
             type: "string",
             name: "author",
             label: "Author",
-            required: true,
+            required: true
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
-      },
-    ],
-  },
+            isBody: true
+          }
+        ]
+      }
+    ]
+  }
 });
+export {
+  config_default as default
+};
