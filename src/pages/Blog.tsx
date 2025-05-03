@@ -2,12 +2,10 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
-import { useLocalPosts, LocalPost } from '@/lib/useLocalPosts';
 import { useContentfulPosts, CFPost } from '@/lib/useContentfulPosts';
 import { useMediumPosts, MediumPost } from '@/lib/useMediumPosts';
 
 type BlogPost =
-  | (LocalPost & { source: 'local' })
   | (CFPost & { source: 'contentful' })
   | (MediumPost & { source: 'medium' });
 
@@ -15,17 +13,15 @@ const Blog: React.FC = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  const localPosts = useLocalPosts();
   const { posts: contentfulPosts, loading: loadingCF, error: errorCF } = useContentfulPosts();
   const { posts: mediumPosts, loading: loadingMD, error: errorMD } = useMediumPosts();
 
   const posts: BlogPost[] = useMemo(() => {
     return [
-      ...localPosts.map(p => ({ ...p, source: 'local' as const })),
-      ...contentfulPosts.map(p => ({ ...p, source: 'contentful' as const })),
-      ...mediumPosts.map(p => ({ ...p, source: 'medium' as const })),
+      ...contentfulPosts.map(p => ({ ...p, source: 'contentful' })),
+      ...mediumPosts.map(p => ({ ...p, source: 'medium' })),
     ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, [localPosts, contentfulPosts, mediumPosts]);
+  }, [contentfulPosts, mediumPosts]);
 
   if (loadingCF || loadingMD) {
     return (
@@ -53,8 +49,7 @@ const Blog: React.FC = () => {
             "public/assets-img/sincerely-media-qlcVpZqzcEc-unsplash.jpg";
 
           const goDetail = () => {
-            if (post.source === 'local') navigate(`/blog/${post.slug}`);
-            else if (post.source === 'contentful') navigate(`/blog/cf/${post.slug}`);
+            if (post.source === 'contentful') navigate(`/blog/cf/${post.slug}`);
           };
 
           return (

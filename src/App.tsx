@@ -6,7 +6,6 @@ import { Routes, Route } from "react-router-dom";
 import { useLanguage } from "./context/LanguageContext";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
-import PostDetailLocal from "./pages/PostDetailLocal";
 import PostDetailContentful from "./pages/PostDetailContentful";
 import Speaking from "./pages/Speaking";
 import Mentorship from "./pages/Mentorship";
@@ -28,7 +27,6 @@ const App = () => {
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
               <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<PostDetailLocal />} />
               <Route path="/blog/cf/:slug" element={<PostDetailContentful />} />
               <Route path="/speaking" element={<Speaking />} />
               <Route path="/mentorship" element={<Mentorship />} />
