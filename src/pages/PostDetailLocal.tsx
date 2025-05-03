@@ -1,4 +1,3 @@
-// src/pages/PostDetailLocal.tsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import matter from "gray-matter";
@@ -18,24 +17,18 @@ export default function PostDetailLocal() {
   useEffect(() => {
     if (!slug) return setNotFound(true);
 
-    // 1. Glob MD files (adjust "../" or "../../" based on your folder structure)
     const modules = import.meta.glob<string>(
       "../content/blog/*.md",
       { as: "raw" }
     );
     
-
-    // 2. Build the exact key
     const importPath = `../content/blog/${slug}.md`;
     const loader = (modules as Record<string, () => Promise<string>>)[importPath];
 
-    console.log("🔍 Available MD paths and import path:", Object.keys(modules), importPath);
-    
-    if (!loader) {
+      if (!loader) {
       return setNotFound(true);
     }
 
-    // 3. Load & parse
     loader()
       .then((raw) => {
         const { data, content } = matter(raw);

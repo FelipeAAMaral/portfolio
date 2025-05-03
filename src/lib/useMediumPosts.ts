@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { extractImgSrcs } from './utils';
 
 export interface MediumPost {
   id: number;
@@ -43,14 +44,14 @@ export function useMediumPosts(): {
           const rawExcerpt = item.description
             .replace(/<[^>]+>/g, '')
             .trim();
-
           return {
             id: index,
             slug,
             title: item.title,
+            author: item.author,
             excerpt: rawExcerpt.length > 200 ? rawExcerpt.slice(0, 200) + '...' : rawExcerpt,
             date: item.pubDate,
-            image: item.thumbnail || undefined,
+            image: extractImgSrcs(item.content)[0] || 'https://unsplash.com/pt-br/fotografias/ilustracao-da-cor-verde-e-amarela-qlcVpZqzcEc',
             url,
           };
         });

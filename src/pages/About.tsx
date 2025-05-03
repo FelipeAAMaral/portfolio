@@ -8,10 +8,15 @@ import SkillsToolbox from "@/components/about/SkillsToolbox";
 import CpoPath from "@/components/about/CpoPath";
 import AboutMe from "@/components/about/AboutMe";
 import BuildTogether from "@/components/about/BuildTogether";
-
+import { convertCFToMedium } from '@/lib/utils';    
+import type { MediumPost }       from '@/lib/useMediumPosts';
+import { useMediumPosts } from '@/lib/useMediumPosts';
+import type { CFPost } from '@/lib/useContentfulPosts';
+  
 const About = () => {
   const { t } = useLanguage();
-  
+  const mediumPosts = convertCFToMedium(useMediumPosts().posts as CFPost[]);
+
   return (
     <div className="container py-16 animate-fade-in">
       <h1 className="text-4xl font-bold mb-8 text-gradient-primary">

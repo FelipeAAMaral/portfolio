@@ -1,111 +1,135 @@
-
+// src/components/MediumPostsSection.tsx
+import React, { useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/context/LanguageContext";
 import FeatureCard from "@/components/FeatureCard";
+import { useMediumPosts, MediumPost } from "@/lib/useMediumPosts";
+import { useContentfulPosts, CFPost } from "@/lib/useContentfulPosts";
 
-const MediumPostsSection = () => {
+function getRandomItems<T>(arr: T[], count: number): T[] {
+  const copy = [...arr];
+  const picked: T[] = [];
+  while (picked.length < count && copy.length > 0) {
+    const idx = Math.floor(Math.random() * copy.length);
+    picked.push(copy.splice(idx, 1)[0]);
+  }
+  return picked;
+}
+
+type CardData = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: "Medium" | "Blog";
+  link: string;
+};
+
+const MediumPostsSection: React.FC = () => {
   const { t } = useLanguage();
 
-  const extractImageSources = (htmlString) => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlString, 'text/html');
-    const images = doc.querySelectorAll('img');
-    return Array.from(images).map(img => img.getAttribute('src'));
-  };
+  // Load from both sources
+  const { posts: mediumPosts, loading: loadingMD, error: errorMD } = useMediumPosts();
+  const { posts: cfPosts, loading: loadingCF, error: errorCF } = useContentfulPosts();
 
-  // Fetch Medium posts
-  const fetchMediumPosts = async () => {
-    try {
-      // Using RSS2JSON service to convert Medium feed to JSON
-      const response = await fetch(
-        `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@amaral.felipeaugusto`
-      );
-      const data = await response.json();
-      return data.items || [];
-    } catch (error) {
-      console.error("Error fetching Medium posts:", error);
-      return [];
+  // Pick 1 Contentful and 2 Medium at random
+  const cards: CardData[] = useMemo(() => {
+    if (loadingMD || loadingCF || errorMD || errorCF) return [];
+
+    const oneCF = getRandomItems(cfPosts, 1).map<CardData>(p => ({
+      id: p.slug,
+      title: p.title,
+      description: p.excerpt,
+      image: p.image,
+      category: "Blog",
+      link: p.url,
+    }));
+
+    const twoMD = getRandomItems(mediumPosts, 2).map<CardData>(p => {
+      const thumb = Array.isArray(p.image) && p.image.length > 0
+        ? p.image[0]
+        : "https://source.unsplash.com/qlcVpZqzcEc/800x400";
+
+      return {
+        id: p.guid,
+        title: p.title,
+        description: p.excerpt,
+        image: thumb,
+        category: "Medium",
+        link: p.link,
+      };
+    });
+
+    // Combine and shuffle
+    const combined = [...oneCF, ...twoMD];
+    for (let i = combined.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [combined[i], combined[j]] = [combined[j], combined[i]];
     }
-  };
+    return combined;
+  }, [cfPosts, mediumPosts, loadingCF, loadingMD, errorCF, errorMD]);
 
-  const { data: mediumPosts = [], isLoading, error } = useQuery({
-    queryKey: ['medium-posts'],
-    queryFn: fetchMediumPosts,
-  });
+  // Loading state
+  if (loadingCF || loadingMD) {
+    return (
+      <section className="py-16 bg-background">
+        <div className="container text-center">
+          <p className="animate-pulse text-lg">{t("medium.loading")}</p>
+        </div>
+      </section>
+    );
+  }
 
-  // Function to strip HTML tags from text
-  const stripHtml = (html) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || "";
-  };
-
-  // Process medium posts for display
-  const processedPosts = mediumPosts.slice(0, 3).map(post => ({
-    id: post.guid,
-    title: post.title,
-    description: stripHtml(post.description).substring(0, 120) + '...',
-    image: extractImageSources(post.content),
-    category: "Medium",
-    link: post.link
-  }));
+  // Error state
+  if (errorCF || errorMD) {
+    return (
+      <section className="py-16 bg-background">
+        <div className="container text-center">
+          <p>{t("medium.error")}</p>
+          <Button variant="outline" className="mt-4" asChild>
+            <a
+              href="https://medium.com/@amaral.felipeaugusto"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("medium.visitProfile")}
+            </a>
+          </Button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-background">
       <div className="container">
         <div className="flex justify-between items-end mb-10">
           <h2 className="text-2xl md:text-3xl font-bold">
-            {t('medium.latestPosts')}
+            {t("medium.latestPosts")}
           </h2>
-          <Button variant="ghost" asChild size="sm">
-            <a href="https://medium.com/@amaral.felipeaugusto" target="_blank" rel="noopener noreferrer">
-              {t('work.viewAll')}
+          <Button variant="ghost" size="sm" asChild>
+            <a
+              href="https://medium.com/@amaral.felipeaugusto"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("work.viewAll")}
             </a>
           </Button>
         </div>
 
-        {isLoading ? (
-          <div className="text-center py-12">
-            <p>
-              {t('medium.loading')}
-            </p>
-          </div>
-        ) : error ? (
-          <div className="text-center py-12">
-            <p>
-              {t('medium.error')}
-            </p>
-            <Button className="mt-4" variant="outline" asChild>
-              <a href="https://medium.com/@amaral.felipeaugusto" target="_blank" rel="noopener noreferrer">
-                {t('medium.visitProfile')}
-              </a>
-            </Button>
-          </div>
-        ) : processedPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {processedPosts.map((post) => (
-              <FeatureCard 
-                key={post.id}
-                title={post.title}
-                description={post.description}
-                image={post.image}
-                category={post.category}
-                link={post.link}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p>
-              {t('medium.noPostsFound')}
-            </p>
-            <Button className="mt-4" variant="outline" asChild>
-              <a href="https://medium.com/@amaral.felipeaugusto" target="_blank" rel="noopener noreferrer">
-                {t('medium.visitProfile')}
-              </a>
-            </Button>
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {cards.map(c => (
+            <FeatureCard
+              key={`${c.category}-${c.id}`} // ensure unique keys
+              title={c.title}
+              description={c.description}
+              image={c.image}
+              category={c.category}
+              link={c.link}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

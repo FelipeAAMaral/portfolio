@@ -7,15 +7,10 @@ import { useLanguage } from "@/context/LanguageContext";
 const HeroSection = () => {
   const { t } = useLanguage();
   
-  console.log('HeroSection rendered with translation function:', t);
-  
-  // Test the translation function
   const greeting = t('hero.greeting');
   const intro = t('hero.intro');
   const contactTitle = t('contact.title');
   const aboutMe = t('nav.aboutMe');
-  
-  console.log('Translations in HeroSection:', { greeting, intro, contactTitle, aboutMe });
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-slate-800">
@@ -62,7 +57,7 @@ const HeroSection = () => {
             </div>
             <div className="mt-4 text-center">
               <Button variant="ghost" size="sm" className="flex items-center gap-2 text-white">
-                <span>Scroll for more</span>
+                <span>{t('hero.scrollMore')}</span>
                 <ArrowRight className="h-4 w-4 animate-bounce" />
               </Button>
             </div>

@@ -1,26 +1,23 @@
 
+
 import { translations } from '../i18n';
 import { useState, useEffect } from 'react';
 
 export type LanguageType = 'en' | 'pt';
 
-// Function to get nested object properties by dot notation
 const getNestedValue = (obj: any, path: string): string => {
   const keys = path.split('.');
   let result = keys.reduce((o, key) => (o && o[key] !== undefined ? o[key] : undefined), obj);
   
-  // If result is not a string (e.g., undefined, null, or an object), return empty string
   if (typeof result !== 'string') {
     console.warn(`Translation for "${path}" is not a string or is missing`);
-    return path; // Return key as fallback
+    return path;
   }
   
   return result;
 };
 
-// Create a translation function for React components
 export function useTranslations(initialLanguage: LanguageType = 'en') {
-  // Get language from localStorage if available, otherwise use passed language
   const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(initialLanguage);
   
   useEffect(() => {
@@ -30,24 +27,16 @@ export function useTranslations(initialLanguage: LanguageType = 'en') {
     }
   }, []);
   
-  // Define the translation function
   const translate = (key: string): string => {
-    console.log(`Translating key: ${key} in language: ${currentLanguage}`);
-    // First, check if the current language translations exist
     if (!translations[currentLanguage]) {
       console.error(`Translations for language "${currentLanguage}" not found`);
       return key;
     }
 
     try {
-      // Log the translations object for debugging
-      console.log(`Translation object:`, translations[currentLanguage]);
-      
       const translation = getNestedValue(translations[currentLanguage], key);
-      console.log(`Found translation for ${key}: ${translation}`);
       
       if (translation === key || !translation) {
-        // If translation is empty or not found, try to fallback to English
         if (currentLanguage !== 'en') {
           const enTranslation = getNestedValue(translations['en'], key);
           if (enTranslation && enTranslation !== key) {
@@ -55,7 +44,7 @@ export function useTranslations(initialLanguage: LanguageType = 'en') {
           }
         }
         console.warn(`Translation key "${key}" not found in ${currentLanguage}`);
-        return key; // Return key as fallback
+        return key;
       }
       return translation;
     } catch (error) {
@@ -64,7 +53,6 @@ export function useTranslations(initialLanguage: LanguageType = 'en') {
     }
   };
 
-  // Handle language change
   const handleLanguageChange = (newLang: LanguageType) => {
     localStorage.setItem('language', newLang);
     setCurrentLanguage(newLang);
@@ -77,7 +65,6 @@ export function useTranslations(initialLanguage: LanguageType = 'en') {
   };
 }
 
-// For client components that need direct access to translations
 export function getClientTranslations(language: LanguageType = 'en') {
   return (key: string): string => {
     const translation = getNestedValue(translations[language], key);
@@ -85,7 +72,7 @@ export function getClientTranslations(language: LanguageType = 'en') {
       if (process.env.NODE_ENV !== 'production') {
         console.warn(`Translation key "${key}" not found in ${language}`);
       }
-      return key; // Return key as fallback
+      return key;
     }
     return translation;
   };
