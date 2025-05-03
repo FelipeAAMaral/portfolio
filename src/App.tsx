@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import { useLanguage } from "./context/LanguageContext";
 import Index from "./pages/Index";
-import Blog from "./pages/Blog";
+import BlogLocal from "./pages/BlogLocal";
 import PostDetailLocal from "./pages/PostDetailLocal";
 import PostDetailContentful from "./pages/PostDetailContentful";
 import Speaking from "./pages/Speaking";
@@ -30,7 +30,7 @@ const App = () => {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
-              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog" element={<BlogLocal />} />
               <Route path="/blog/:slug" element={<PostDetailLocal />} />
               <Route path="/blog/cf/:slug" element={<PostDetailContentful />} />
               <Route path="/speaking" element={<Speaking />} />

@@ -1,151 +1,148 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLanguage } from "@/context/LanguageContext";
-import { client } from "@/lib/contentful";
+// src/pages/Blog.tsx
+import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/context/LanguageContext';
+import { useLocalPosts, LocalPost } from '@/lib/useLocalPosts';
+import { useContentfulPosts, CFPost } from '@/lib/useContentfulPosts';
+import { useMediumPosts, MediumPost } from '@/lib/useMediumPosts';
 
-// Define the blog post interface
-interface BlogPost {
-  id: number;
-  title: string;
-  excerpt: string;
-  date: string;
-  image?: string;
-  url: string;
-}
-
-// Static local posts
-const staticPosts: BlogPost[] = [
-  {
-    id: 1,
-    title: "Responsive Web Design Patterns",
-    excerpt:
-      "An exploration of modern responsive design techniques and best practices for web applications.",
-    date: "2025-04-15",
-    image: "https://source.unsplash.com/random/800x600/?webdesign",
-    url: "/blog/responsive-web-design",
-  },
-  {
-    id: 2,
-    title: "Building Accessible Web Applications",
-    excerpt:
-      "How to ensure your web applications are accessible to all users, including those with disabilities.",
-    date: "2025-04-01",
-    image: "https://source.unsplash.com/random/800x600/?accessibility",
-    url: "/blog/accessibility",
-  },
-  {
-    id: 3,
-    title: "The Future of Web Development",
-    excerpt:
-      "Exploring emerging trends and technologies that are shaping the future of web development.",
-    date: "2025-03-20",
-    image: "https://source.unsplash.com/random/800x600/?future",
-    url: "/blog/future-web-development",
-  },
-  {
-    id: 4,
-    title: "Optimizing Performance in React Applications",
-    excerpt:
-      "Techniques and best practices for improving the performance of your React applications.",
-    date: "2025-03-05",
-    image: "https://source.unsplash.com/random/800x600/?performance",
-    url: "/blog/react-performance",
-  },
-];
+type BlogPost =
+  | (LocalPost & { source: 'local' })
+  | (CFPost & { source: 'contentful' })
+  | (MediumPost & { source: 'medium' });
 
 const Blog: React.FC = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(staticPosts);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Fetch Contentful posts and merge with local
-    client
-      .getEntries<any>({ content_type: "post", order: "-fields.publishDate" })
-      .then((response) => {
-        const cfPosts: BlogPost[] = response.items.map((item, idx) => ({
-          id: staticPosts.length + idx + 1,
-          title: item.fields.title,
-          excerpt:
-            item.fields.excerpt ||
-            (item.fields.body.content?.[0]?.content?.[0]?.value || "").slice(0, 200) +
-              "...",
-          date: item.fields.publishDate,
-          image: item.fields.image?.fields.file.url
-            ? `https:${item.fields.image.fields.file.url}`
-            : undefined,
-          url: `/blog/cf/${item.fields.slug}`,
-        }));
-        setBlogPosts([...staticPosts, ...cfPosts]);
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
+  const localPosts = useLocalPosts();
+  const { posts: contentfulPosts, loading: loadingContentful } = useContentfulPosts();
+  const { posts: mediumPosts, loading: loadingMedium } = useMediumPosts();
 
-  if (loading) {
-    return <p className="container py-16 text-center">Loading posts…</p>;
+  const posts: BlogPost[] = useMemo(() => {
+    const taggedPosts: BlogPost[] = [
+      ...localPosts.map(p => ({ ...p, source: 'local' as const })),
+      ...contentfulPosts.map(p => ({ ...p, source: 'contentful' as const })),
+      ...mediumPosts.map(p => ({ ...p, source: 'medium' as const })),
+    ];
+    return taggedPosts.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+  }, [localPosts, contentfulPosts, mediumPosts]);
+
+  if (loadingContentful || loadingMedium) {
+    return (
+      <div className="container mx-auto px-6 py-16 text-center">
+        <div className="inline-block animate-pulse text-lg">Loading posts…</div>
+      </div>
+    );
   }
 
   return (
-    <div className="container py-16 animate-fade-in">
-      <h1 className="text-4xl font-bold mb-8">Blog</h1>
-      <p className="text-lg mb-12">{t("blog.languageIntro")}</p>
+    <div className="container mx-auto px-6 py-16">
+      <h1 className="text-4xl font-bold mb-12">{t('blog.title') || 'Blog'}</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map(post => {
+          const isMedium = post.source === 'medium';
+          const badgeText = isMedium ? 'Medium' : 'Blog';
+          const badgeClasses = isMedium
+            ? 'bg-green-100 text-green-800'
+            : 'bg-blue-100 text-blue-800';
+          const thumbnail = post.image ||
+            `https://source.unsplash.com/featured/800x400?${encodeURIComponent(post.title)}`;
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {blogPosts.map((post) => (
-          <article
-            key={post.id}
-            className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-          >
-            <div className="aspect-[16/9] overflow-hidden">
-              <img
-                src={post.image ?? "https://source.unsplash.com/random/800x600/?blog"}
-                alt={post.title}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-sm text-muted-foreground mb-2">
-                {new Date(post.date).toLocaleDateString()}
-              </p>
-              <h2 className="text-xl font-semibold mb-3">{post.title}</h2>
-              <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-              <button
-                onClick={() => navigate(post.url)}
-                className="text-primary hover:underline inline-flex items-center"
+          return (
+            <article
+              key={`${post.source}-${post.slug}`}
+              className="relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+            >
+              {/* Thumbnail */}
+              <div className="h-48 w-full overflow-hidden">
+                <img
+                  src={thumbnail}
+                  alt={post.title}
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Badge */}
+              <div
+                className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold ${badgeClasses}`}
               >
-                {t("blog.readMore")}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 ml-1"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2-293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
-          </article>
-        ))}
-      </div>
+                {badgeText}
+              </div>
 
-      <div className="mt-12 text-center">
-        <p className="text-muted-foreground mb-8">{t("blog.moreArticles")}</p>
-        <div className="flex justify-center">
-          <a
-            href="https://medium.com/@amaral.felipeaugusto"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-secondary hover:bg-secondary/80 text-foreground px-6 py-3 rounded-lg transition"
-          >
-            {t("blog.checkMedium")}
-          </a>
-        </div>
+              {/* Content */}
+              <div className="p-6">
+                <h2
+                  className="text-xl font-semibold mb-2 line-clamp-2 cursor-pointer hover:text-blue-600"
+                  onClick={() => {
+                    if (isMedium) return;
+                    const path = post.source === 'contentful'
+                      ? `/blog/cf/${post.slug}`
+                      : `/blog/${post.slug}`;
+                    navigate(path);
+                  }}
+                >
+                  {post.title}
+                </h2>
+                <time className="block text-gray-500 text-sm mb-4">
+                  {new Date(post.date).toLocaleDateString(undefined, {
+                    year: 'numeric', month: 'long', day: 'numeric',
+                  })}
+                </time>
+                <p className="text-gray-700 mb-6 line-clamp-3">
+                  {post.excerpt}
+                </p>
+                {isMedium ? (
+                  <a
+                    href={post.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+                  >
+                    {t('blog.readMore')}
+                    <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M12.293 5.293a1 1 0 011.414 0l6 6a1
+                           1 0 010 1.414l-6 6a1 1 0
+                           01-1.414-1.414L14.586
+                           11H3a1 1 0 110-2h11.586l-4.293-4.293
+                           a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => {
+                      const path = post.source === 'contentful'
+                        ? `/blog/cf/${post.slug}`
+                        : `/blog/${post.slug}`;
+                      navigate(path);
+                    }}
+                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+                  >
+                    {t('blog.readMore')}
+                    <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M12.293 5.293a1 1 0 011.414 0l6 6a1
+                           1 0 010 1.414l-6 6a1 1 0
+                           01-1.414-1.414L14.586
+                           11H3a1 1 0 110-2h11.586l-4.293-4.293
+                           a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   );
