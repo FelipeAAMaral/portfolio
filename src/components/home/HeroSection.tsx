@@ -55,12 +55,12 @@ const HeroSection = () => {
                 />
               </div>
             </div>
-            <div className="mt-4 text-center">
+            {/* <div className="mt-4 text-center">
               <Button variant="ghost" size="sm" className="flex items-center gap-2 text-white">
                 <span>{t('hero.scrollMore')}</span>
                 <ArrowRight className="h-4 w-4 animate-bounce" />
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

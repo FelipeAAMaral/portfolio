@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import { useLanguage } from "./context/LanguageContext";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
-import PostDetailContentful from "./pages/PostDetailContentful";
+import PostDetailContentful from "./pages/Blog/PostDetailContentful";
 import Speaking from "./pages/Speaking";
 import Mentorship from "./pages/Mentorship";
 import Contact from "./pages/Contact";
