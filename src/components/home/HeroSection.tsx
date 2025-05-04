@@ -1,16 +1,28 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
+import { useEffect } from "react";
 
 const HeroSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
-  const greeting = t('hero.greeting');
-  const intro = t('hero.intro');
-  const contactTitle = t('contact.title');
-  const aboutMe = t('nav.aboutMe');
+  useEffect(() => {
+    console.log("[HeroSection] Current language:", language);
+    console.log("[HeroSection] Translation test:", { 
+      greeting: t('hero.greeting'),
+      intro: t('hero.intro'),
+      contactTitle: t('contact.title'),
+      aboutMe: t('nav.aboutMe')
+    });
+  }, [language, t]);
+  
+  // Fallback values in case translations fail
+  const greeting = t('hero.greeting') || "Hello, I'm";
+  const intro = t('hero.intro') || "Tech and product leader with 10+ years in software";
+  const contactTitle = t('contact.title') || "Get in Touch";
+  const aboutMe = t('nav.aboutMe') || "About me";
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-slate-800">
@@ -55,12 +67,6 @@ const HeroSection = () => {
                 />
               </div>
             </div>
-            {/* <div className="mt-4 text-center">
-              <Button variant="ghost" size="sm" className="flex items-center gap-2 text-white">
-                <span>{t('hero.scrollMore')}</span>
-                <ArrowRight className="h-4 w-4 animate-bounce" />
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>
