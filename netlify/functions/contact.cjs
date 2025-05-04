@@ -1,19 +1,22 @@
-// netlify/functions/contact.js
-import nodemailer from "nodemailer";
+// netlify/functions/contact.cjs
+const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_PASS },
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
 });
 
-exports.handler = async function (event) {
+exports.handler = async function(event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   const { name, email, message, lang } = JSON.parse(event.body);
 
-  // 1) Mail to you (same in both languages)
+  // 1) Notificação para você
   const adminMail = {
     from: process.env.FROM_EMAIL,
     to: process.env.CONTACT_TO,
@@ -25,27 +28,23 @@ exports.handler = async function (event) {
     `,
   };
 
-  // 2) Auto-reply texts
+  // 2) Resposta automática
   const messages = {
     pt: {
       subject: "Obrigado pelo seu contato!",
       greeting: `Olá ${name},`,
-      body:
-        "Recebemos sua mensagem e entraremos em contato em breve.",
+      body: "Recebemos sua mensagem e entraremos em contato em breve.",
       yourMessage: "Sua mensagem enviada:",
       signature: "— Felipe Amaral",
     },
     en: {
       subject: "Thanks for reaching out!",
       greeting: `Hi ${name},`,
-      body:
-        "Thanks for your message! We'll get back to you shortly.",
+      body: "Thanks for your message! We'll get back to you shortly.",
       yourMessage: "Your submitted message:",
       signature: "— Felipe Amaral",
     },
   };
-
-  // pick based on lang, default to en
   const txt = messages[lang === "pt" ? "pt" : "en"];
 
   const replyMail = {
@@ -63,12 +62,17 @@ exports.handler = async function (event) {
   };
 
   try {
-    // send both
     await transporter.sendMail(adminMail);
     await transporter.sendMail(replyMail);
-    return { statusCode: 200, body: JSON.stringify({ success: true }) };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ success: true }),
+    };
   } catch (err) {
     console.error("Mail error:", err);
-    return { statusCode: 500, body: JSON.stringify({ error: "Falha ao enviar e-mail" }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Falha ao enviar e-mail" }),
+    };
   }
 };
