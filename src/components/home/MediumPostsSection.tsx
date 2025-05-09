@@ -6,16 +6,6 @@ import FeatureCard from "@/components/FeatureCard";
 import { useMediumPosts, MediumPost } from "@/lib/useMediumPosts";
 import { useContentfulPosts, CFPost } from "@/lib/useContentfulPosts";
 
-function getRandomItems<T>(arr: T[], count: number): T[] {
-  const copy = [...arr];
-  const picked: T[] = [];
-  while (picked.length < count && copy.length > 0) {
-    const idx = Math.floor(Math.random() * copy.length);
-    picked.push(copy.splice(idx, 1)[0]);
-  }
-  return picked;
-}
-
 type CardData = {
   id: string;
   title: string;
@@ -32,41 +22,28 @@ const MediumPostsSection: React.FC = () => {
   const { posts: mediumPosts, loading: loadingMD, error: errorMD } = useMediumPosts();
   const { posts: cfPosts, loading: loadingCF, error: errorCF } = useContentfulPosts();
 
-  // Pick 1 Contentful and 2 Medium at random
+  // Get latest 3 Medium posts
   const cards: CardData[] = useMemo(() => {
     if (loadingMD || loadingCF || errorMD || errorCF) return [];
 
-    const oneCF = getRandomItems(cfPosts, 1).map<CardData>(p => ({
-      id: p.slug,
-      title: p.title,
-      description: p.excerpt,
-      image: p.image,
-      category: "Blog",
-      link: p.url,
-    }));
+    const latestMediumPosts = mediumPosts
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 3)
+      .map<CardData>(p => {
+        // Use the image directly from the Medium post
+        const thumb = p.image || "https://source.unsplash.com/qlcVpZqzcEc/800x400";
 
-    const twoMD = getRandomItems(mediumPosts, 2).map<CardData>(p => {
-      const thumb = Array.isArray(p.image) && p.image.length > 0
-        ? p.image[0]
-        : "https://source.unsplash.com/qlcVpZqzcEc/800x400";
+        return {
+          id: p.slug,
+          title: p.title,
+          description: p.excerpt,
+          image: thumb,
+          category: "Medium",
+          link: p.url,
+        };
+      });
 
-      return {
-        id: p.guid,
-        title: p.title,
-        description: p.excerpt,
-        image: thumb,
-        category: "Medium",
-        link: p.link,
-      };
-    });
-
-    // Combine and shuffle
-    const combined = [...oneCF, ...twoMD];
-    for (let i = combined.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [combined[i], combined[j]] = [combined[j], combined[i]];
-    }
-    return combined;
+    return latestMediumPosts;
   }, [cfPosts, mediumPosts, loadingCF, loadingMD, errorCF, errorMD]);
 
   // Loading state
@@ -121,7 +98,7 @@ const MediumPostsSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {cards.map(c => (
             <FeatureCard
-              key={`${c.category}-${c.id}`} // ensure unique keys
+              key={`${c.category}-${c.id}`}
               title={c.title}
               description={c.description}
               image={c.image}
