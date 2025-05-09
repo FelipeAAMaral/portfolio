@@ -1,3 +1,4 @@
+
 # netlify.toml
 
 [build]
@@ -6,9 +7,9 @@
   functions = "netlify/functions"
 
 [dev]
-  command    = "npm run dev"      # seu comando para iniciar o Vite
-  port       = 8888               # porta onde o Netlify UI roda
-  targetPort = 8081               # onde o Vite realmente está
+  command    = "npm run dev"
+  port       = 8888
+  targetPort = 8081
 
 [[redirects]]
   from   = "/*"

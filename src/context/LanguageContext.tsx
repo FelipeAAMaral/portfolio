@@ -35,25 +35,37 @@ const getNestedValue = (obj: any, path: string): string => {
 };
 
 export const LanguageProvider = ({ children, initialLanguage = 'en' }: LanguageProviderProps) => {
+  console.log("[LanguageProvider] Initializing with language:", initialLanguage);
   const [language, setLanguage] = useState<LanguageType>(initialLanguage);
   
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage && (storedLanguage === 'en' || storedLanguage === 'pt')) {
-      setLanguage(storedLanguage as LanguageType);
+    try {
+      const storedLanguage = localStorage.getItem('language');
+      console.log("[LanguageProvider] Stored language from localStorage:", storedLanguage);
+      if (storedLanguage && (storedLanguage === 'en' || storedLanguage === 'pt')) {
+        setLanguage(storedLanguage as LanguageType);
+        console.log("[LanguageProvider] Setting language from localStorage:", storedLanguage);
+      }
+    } catch (e) {
+      console.error("[LanguageProvider] Error accessing localStorage:", e);
     }
   }, []);
 
   const handleLanguageChange = (newLang: LanguageType) => {
-    localStorage.setItem('language', newLang);
-    setLanguage(newLang);
-    console.log(`Language changed to ${newLang}`);
+    try {
+      localStorage.setItem('language', newLang);
+      setLanguage(newLang);
+      console.log(`[LanguageProvider] Language changed to ${newLang}`);
+    } catch (e) {
+      console.error("[LanguageProvider] Error setting language in localStorage:", e);
+      setLanguage(newLang); // Still update state even if localStorage fails
+    }
   };
 
   // Define translation function directly in the context
   const translate = (key: string): string => {
     if (!translations[language]) {
-      console.error(`Translations for language "${language}" not found`);
+      console.error(`[LanguageProvider] Translations for language "${language}" not found`);
       return key;
     }
 
@@ -68,16 +80,17 @@ export const LanguageProvider = ({ children, initialLanguage = 'en' }: LanguageP
             return enTranslation;
           }
         }
-        console.warn(`Translation key "${key}" not found in ${language}`);
+        console.warn(`[LanguageProvider] Translation key "${key}" not found in ${language}`);
         return key;
       }
       return translation;
     } catch (error) {
-      console.error(`Error getting translation for key "${key}":`, error);
+      console.error(`[LanguageProvider] Error getting translation for key "${key}":`, error);
       return key;
     }
   };
 
+  console.log("[LanguageProvider] Current language:", language);
   return (
     <LanguageContext.Provider value={{ language, setLanguage: handleLanguageChange, t: translate }}>
       {children}
@@ -85,4 +98,11 @@ export const LanguageProvider = ({ children, initialLanguage = 'en' }: LanguageP
   );
 };
 
-export const useLanguage = () => useContext(LanguageContext);
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    console.error("[useLanguage] LanguageContext must be used within a LanguageProvider");
+    return { language: 'en', setLanguage: () => {}, t: (key: string) => key };
+  }
+  return context;
+};
