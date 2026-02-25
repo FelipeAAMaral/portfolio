@@ -1,98 +1,76 @@
 
-import { Instagram, Linkedin, Globe } from "lucide-react";
+import { Linkedin, Globe, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 
 const Footer = () => {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   return (
-    <footer className="bg-secondary py-12 mt-16">
-      <div className="container">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <h3 className="font-semibold text-xl mb-2">Felipe Amaral</h3>
-            <p className="text-muted-foreground">
-              {t('footer.tagline')}
-            </p>
-          </div>
-          
-          <div className="flex items-center space-x-6">
-            <a 
-              href="https://www.linkedin.com/in/felipeaamaral/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a 
-              href="https://medium.com/@amaral.felipeaugusto" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
-              aria-label="Medium"
-            >
-              <Globe size={20} />
-            </a>
+    <footer id="cta" className="border-t border-border">
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                  {language === 'en' ? (
-                    <img 
-                      src="https://flagcdn.com/w20/us.png" 
-                      width="20" 
-                      height="15" 
-                      alt="US Flag"
-                      className="rounded-sm"
-                    />
-                  ) : (
-                    <img 
-                      src="https://flagcdn.com/w20/br.png" 
-                      width="20" 
-                      height="15" 
-                      alt="Brazilian Flag"
-                      className="rounded-sm"
-                    />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setLanguage('en')} className="flex items-center gap-2">
-                  <img 
-                    src="https://flagcdn.com/w20/us.png" 
-                    width="20" 
-                    height="15" 
-                    alt="US Flag"
-                    className="rounded-sm"
-                  />
-                  <span>English</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage('pt')} className="flex items-center gap-2">
-                  <img 
-                    src="https://flagcdn.com/w20/br.png" 
-                    width="20" 
-                    height="15" 
-                    alt="Brazilian Flag"
-                    className="rounded-sm"
-                  />
-                  <span>Português</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+      {/* Big CTA */}
+      <div className="container py-24 md:py-32">
+        <div className="max-w-3xl">
+          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-6">
+            Vamos conversar
+          </p>
+          <h2 className="font-serif text-display-lg font-bold text-foreground leading-tight mb-6">
+            Vamos construir o próximo.
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl">
+            Pronto para desafios que exigem profundidade técnica e visão estratégica.
+          </p>
+
+          {/* Contact links */}
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="https://www.linkedin.com/in/felipeaamaral/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-accent"
+            >
+              <Linkedin size={16} />
+              LinkedIn
+            </a>
+            <a
+              href="mailto:amaral.felipeaugusto@gmail.com"
+              className="btn-ghost"
+            >
+              <Mail size={16} />
+              amaral.felipeaugusto@gmail.com
+            </a>
+            <a
+              href="https://hearken.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost"
+            >
+              <Globe size={16} />
+              Hearken.app
+            </a>
           </div>
         </div>
-        
-        <div className="mt-8 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-          <p>{t('footer.copyright')}</p>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-border">
+        <div className="container py-5 flex flex-wrap justify-between items-center gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center gap-6">
+            <span>© {new Date().getFullYear()} Felipe Amaral</span>
+            <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
+          </div>
+          <button
+            onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
+            className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+          >
+            <img
+              src={language === 'en' ? "https://flagcdn.com/w20/us.png" : "https://flagcdn.com/w20/br.png"}
+              width="16" height="12" alt=""
+              className="rounded-sm"
+            />
+            {language === 'en' ? 'EN' : 'PT'}
+          </button>
         </div>
       </div>
     </footer>

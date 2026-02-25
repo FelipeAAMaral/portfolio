@@ -1,23 +1,27 @@
 
 import HeroSection from "@/components/home/HeroSection";
-import IntroSection from "@/components/home/IntroSection";
-import FeaturedWorkSection from "@/components/home/FeaturedWorkSection";
-import MediumPostsSection from "@/components/home/MediumPostsSection";
+import CraftSection from "@/components/home/CraftSection";
+import CasesSection from "@/components/home/CasesSection";
+import FoundationSection from "@/components/home/FoundationSection";
+import OffScreenSection from "@/components/home/OffScreenSection";
 
 const Index = () => {
   return (
-    <div className="animate-fade-in">
-      {/* Hero Section */}
+    <div>
+      {/* 1. Hero — Elegant statement of purpose */}
       <HeroSection />
 
-      {/* Brief Introduction */}
-      <IntroSection />
+      {/* 2. The Craft — Philosophy / The Apple filter */}
+      <CraftSection />
 
-      {/* Featured Work Section */}
-      <FeaturedWorkSection />
+      {/* 3. Selected Work — Proof of craft */}
+      <CasesSection />
 
-      {/* Medium Blog Posts */}
-      <MediumPostsSection />
+      {/* 4. Foundation — Academic rigor */}
+      <FoundationSection />
+
+      {/* 5. Off-Screen — The human element */}
+      <OffScreenSection />
     </div>
   );
 };

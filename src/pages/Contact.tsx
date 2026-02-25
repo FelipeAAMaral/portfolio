@@ -1,67 +1,70 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import ContactForm from "@/components/ContactForm";
-import { Instagram, Linkedin, Globe } from "lucide-react";
+import { Linkedin, Globe } from "lucide-react";
 
 const Contact = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+
+  const tagline = language === 'en' ? "Got an idea?" : "Tem uma ideia?";
+  const headline = language === 'en' ? "Let's talk." : "Vamos conversar.";
+  const body = language === 'en'
+    ? "Whether it's a product challenge, a mentorship conversation, or just a chat — I'm always happy to connect."
+    : "Seja um desafio de produto, uma conversa de mentoria ou apenas um papo — fico feliz em conectar.";
+  const responseNote = language === 'en'
+    ? "I typically respond within 48 hours."
+    : "Costumo responder em até 48 horas.";
 
   return (
-    <div className="container py-16 animate-fade-in">
-      <h1 className="text-4xl font-bold mb-12">
-        {t('contact.title')}
-      </h1>
-      
-      <div className="flex flex-col md:flex-row gap-12 md:gap-20">
-        <div className="md:w-1/3">
-          <h2 className="text-xl font-semibold mb-4">
-            {t('contact.letsConnect')}
-          </h2>
-          
-          <p className="mb-6">
-            {t('contact.interested')}
+    <div className="container py-20 animate-fade-in">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
+
+        {/* Left — copy */}
+        <div className="md:sticky md:top-28">
+          <p className="text-sm text-primary font-medium tracking-widest uppercase mb-4">
+            {tagline}
           </p>
-          
-          <div className="space-y-4 mb-8">
-            <div className="flex items-center">
-              <div className="bg-muted/50 h-10 w-10 rounded-full flex items-center justify-center mr-3">
-                <Linkedin size={18} />
-              </div>
-              <a 
-                href="https://linkedin.com/in/felipeaamaral" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-              >
-                linkedin.com/in/felipeaamaral
-              </a>
-            </div>
-            
-            <div className="flex items-center">
-              <div className="bg-muted/50 h-10 w-10 rounded-full flex items-center justify-center mr-3">
-                <Globe size={18} />
-              </div>
-              <a 
-                href="https://medium.com/@amaral.felipeaugusto" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-              >
-                medium.com/@amaral.felipeaugusto
-              </a>
-            </div>
-          </div>
-          
-          <p className="text-sm text-muted-foreground">
-            {t('contact.response')}
+          <h1 className="font-serif text-display-xl font-bold text-foreground mb-6 leading-tight">
+            {headline}
+          </h1>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-sm">
+            {body}
           </p>
-        </div>
-        
-        <div className="md:w-2/3">
-          <div className="bg-card shadow-sm border rounded-xl p-8">
-            <ContactForm />
+
+          {/* Social links */}
+          <div className="space-y-4">
+            <a
+              href="https://www.linkedin.com/in/felipeaamaral/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-foreground/70 hover:text-primary transition-colors group"
+            >
+              <div className="w-9 h-9 border border-border rounded-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                <Linkedin size={16} />
+              </div>
+              <span className="text-sm">linkedin.com/in/felipeaamaral</span>
+            </a>
+            <a
+              href="https://medium.com/@amaral.felipeaugusto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-foreground/70 hover:text-primary transition-colors group"
+            >
+              <div className="w-9 h-9 border border-border rounded-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                <Globe size={16} />
+              </div>
+              <span className="text-sm">medium.com/@amaral.felipeaugusto</span>
+            </a>
           </div>
+
+          <p className="text-xs text-muted-foreground mt-8">{responseNote}</p>
         </div>
+
+        {/* Right — form */}
+        <div>
+          <ContactForm />
+        </div>
+
       </div>
     </div>
   );
