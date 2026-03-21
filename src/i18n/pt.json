@@ -1,5 +1,24 @@
 {
   "hero": {
+    "eyebrow": "Produto · Tecnologia · Execução",
+    "headline": "Construindo organizações de produto que entregam em escala.",
+    "headlineHighlight": "que entregam em escala.",
+    "description": "Sou Felipe Amaral. Na Pontotel desde 2015 — comecei como engenheiro de software, depois criei e liderei a área de produto do zero. Hoje lidero um time de 17 pessoas e construo o Hearken, uma ferramenta de product analytics, em público.",
+    "proofPoints": [
+      "10 anos na Pontotel",
+      "Área de produto: 0 → 17 pessoas",
+      "10x throughput de entregas",
+      "NPS 30 → 50+"
+    ],
+    "ctaPrimary": "Ver trajetória",
+    "ctaSecondary": "Como eu trabalho",
+    "nowLabel": "Hoje",
+    "nowItems": [
+      "Head de Produto na Pontotel",
+      "Construindo o Hearken em público",
+      "Aberto a oportunidades internacionais"
+    ],
+    "nowFootnote": "O Hearken é uma ferramenta de product analytics — construída de forma aberta, a partir das dores que vivi como PM.",
     "greeting": "Olá, eu sou",
     "intro": "Líder de tecnologia e produto com mais de 10 anos em software"
   },

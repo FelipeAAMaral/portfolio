@@ -56,13 +56,23 @@ export const LanguageProvider = ({
   }, []);
 
   const handleLanguageChange = (newLanguage: LanguageType) => {
-    try {
-      localStorage.setItem("language", newLanguage);
-    } catch {
-      // Ignore storage failures and still update in-memory state.
-    }
+    if (newLanguage === language) return;
 
-    setLanguage(newLanguage);
+    const apply = () => {
+      try {
+        localStorage.setItem("language", newLanguage);
+      } catch {
+        // Ignore storage failures.
+      }
+      setLanguage(newLanguage);
+    };
+
+    if ("startViewTransition" in document) {
+      (document as Document & { startViewTransition: (cb: () => void) => void })
+        .startViewTransition(apply);
+    } else {
+      apply();
+    }
   };
 
   const translate = (key: string): string => {
