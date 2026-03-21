@@ -1,5 +1,24 @@
 {
   "hero": {
+    "eyebrow": "Product · Technology · Execution",
+    "headline": "Building product organizations that ship at scale.",
+    "headlineHighlight": "that ship at scale.",
+    "description": "I'm Felipe Amaral. At Pontotel since 2015 — starting as a software engineer, then founding and leading the product function from scratch. Today I lead a 17-person product org and I'm building Hearken, a product analytics tool, in public.",
+    "proofPoints": [
+      "10 years at Pontotel",
+      "Built product org: 0 → 17 people",
+      "10x delivery throughput",
+      "NPS 30 → 50+"
+    ],
+    "ctaPrimary": "See my work",
+    "ctaSecondary": "How I work",
+    "nowLabel": "Now",
+    "nowItems": [
+      "Head of Product at Pontotel",
+      "Building Hearken in public",
+      "Open to international opportunities"
+    ],
+    "nowFootnote": "Hearken is a product analytics tool — built openly, from the exact pain points I lived as a PM.",
     "greeting": "Hello, I'm",
     "intro": "Tech and product leader with 10+ years in software"
   },

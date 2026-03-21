@@ -1,143 +1,129 @@
-
-import { useLanguage } from "@/context/LanguageContext";
 import ContactForm from "@/components/ContactForm";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Mentorship = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
 
-  const careerPath = [
-    {
-      id: 1,
-      year: "2015-2017",
-      position: language === 'en' ? "Junior Web Developer" : "Desenvolvedor Web Júnior",
-      company: "TechStart Inc.",
-      description: language === 'en'
-        ? "Started my career building responsive websites and learning the fundamentals of front-end development."
-        : "Iniciei minha carreira construindo sites responsivos e aprendendo os fundamentos do desenvolvimento front-end."
-    },
-    {
-      id: 2,
-      year: "2017-2019",
-      position: language === 'en' ? "Web Developer" : "Desenvolvedor Web",
-      company: "Digital Solutions Ltd.",
-      description: language === 'en'
-        ? "Focused on creating interactive web applications using modern JavaScript frameworks like React."
-        : "Focado na criação de aplicações web interativas usando frameworks JavaScript modernos como React."
-    },
-    {
-      id: 3,
-      year: "2019-2022",
-      position: language === 'en' ? "Senior Front-End Developer" : "Desenvolvedor Front-End Sênior",
-      company: "WebCraft Agency",
-      description: language === 'en'
-        ? "Led development of complex web applications, mentored junior developers, and implemented best practices."
-        : "Liderou o desenvolvimento de aplicações web complexas, orientou desenvolvedores juniores e implementou melhores práticas."
-    },
-    {
-      id: 4,
-      year: "2022-Present",
-      position: language === 'en' ? "Lead Developer & Mentor" : "Desenvolvedor Líder & Mentor",
-      company: "InnoTech Solutions",
-      description: language === 'en'
-        ? "Currently leading development teams and providing mentorship both internally and to the wider tech community."
-        : "Atualmente liderando equipes de desenvolvimento e fornecendo mentoria tanto internamente quanto para a comunidade tech mais ampla."
-    }
-  ];
+  const title = language === "en" ? "Mentorship" : "Mentoria";
+  const intro =
+    language === "en"
+      ? "I offer mentorship for people navigating product, technology, and career growth with more clarity."
+      : "Ofereço mentoria para quem quer navegar produto, tecnologia e carreira com mais clareza.";
+
+  const topics =
+    language === "en"
+      ? [
+          "Transitioning from engineering to product roles",
+          "Building product judgment in real operating contexts",
+          "Career growth in startups across different stages",
+          "Using AI more thoughtfully in product work",
+        ]
+      : [
+          "Transição de engenharia para produto",
+          "Construção de repertório prático em produto",
+          "Crescimento de carreira em startups em fases diferentes",
+          "Uso mais criterioso de IA no trabalho de produto",
+        ];
+
+  const formatTitle = language === "en" ? "How I usually help" : "Como eu costumo ajudar";
+  const audienceTitle = language === "en" ? "Who this is useful for" : "Para quem isso costuma ser útil";
+  const ctaTitle = language === "en" ? "Interested?" : "Faz sentido para você?";
+
+  const formats =
+    language === "en"
+      ? [
+          "One-off sessions for specific decisions or career questions",
+          "Short follow-up cycles for transitions, prioritization, and growth",
+          "Conversations grounded in real operating experience, not generic advice",
+        ]
+      : [
+          "Sessões pontuais para decisões específicas ou dúvidas de carreira",
+          "Acompanhamentos curtos para transição, priorização e crescimento",
+          "Conversas baseadas em experiência prática, e não em conselho genérico",
+        ];
+
+  const audience =
+    language === "en"
+      ? [
+          "People moving from technical roles toward product",
+          "PMs and early product leaders who want more structure",
+          "Professionals trying to make AI useful in their day-to-day work",
+        ]
+      : [
+          "Pessoas saindo de um papel técnico em direção a produto",
+          "PMs e líderes de produto em início de trajetória",
+          "Profissionais tentando usar IA de forma mais útil no dia a dia",
+        ];
 
   return (
-    <div className="container py-16 animate-fade-in">
-      <section className="mb-16">
-        <h1 className="text-4xl font-bold mb-6">
-          {t('mentorship.title')}
-        </h1>
-        
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16 mb-12">
-          <div className="md:w-1/2">
-            <p className="text-lg mb-6">
-              {t('mentorship.passion')}
-            </p>
-            <p className="mb-6">
-              {t('mentorship.experience')}
-            </p>
-            <p>
-              {t('mentorship.approach')}
-            </p>
-          </div>
-          <div className="md:w-1/2">
-            <div className="aspect-[4/3] rounded-xl overflow-hidden">
-              <img 
-                src="https://source.unsplash.com/random/800x600/?mentorship" 
-                alt={language === 'en' ? "Mentorship session" : "Sessão de mentoria"} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8 inline-block border-b-2 border-primary pb-2">
-          {t('mentorship.journey')}
-        </h2>
-        
-        <div className="space-y-12">
-          {careerPath.map((step) => (
-            <div key={step.id} className="relative pl-8 md:pl-0">
-              {/* Timeline dot and line for desktop */}
-              <div className="hidden md:block absolute left-[200px] top-2 w-3 h-3 rounded-full bg-primary"></div>
-              <div className="hidden md:block absolute left-[201.5px] top-5 bottom-0 w-0 border-l-2 border-dashed border-muted"></div>
-              
-              {/* Timeline dot for mobile */}
-              <div className="md:hidden absolute left-0 top-2 w-3 h-3 rounded-full bg-primary"></div>
-              <div className="md:hidden absolute left-1.5 top-5 bottom-0 w-0 border-l-2 border-dashed border-muted"></div>
-              
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-[200px] font-mono text-muted-foreground mb-2 md:mb-0">
-                  {step.year}
-                </div>
-                <div className="md:pl-10">
-                  <h3 className="text-xl font-semibold">{step.position}</h3>
-                  <p className="text-primary mb-3">{step.company}</p>
-                  <p>{step.description}</p>
-                </div>
+    <div className="container py-20 animate-fade-in">
+      <div className="max-w-3xl mb-14">
+        <span className="eyebrow mb-6">{title}</span>
+        <h1 className="font-serif text-display-lg text-foreground mb-6">{title}</h1>
+        <p className="text-lg text-muted-foreground leading-relaxed">{intro}</p>
+      </div>
+
+      <div className="grid gap-5 lg:grid-cols-2 mb-16">
+        <section className="panel p-6 md:p-8">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+            {formatTitle}
+          </p>
+          <div className="space-y-3">
+            {formats.map((item) => (
+              <div
+                key={item}
+                className="rounded-[1.1rem] border border-border/80 bg-background/70 p-4 text-sm leading-relaxed text-muted-foreground"
+              >
+                {item}
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="panel p-6 md:p-8">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+            {audienceTitle}
+          </p>
+          <div className="space-y-3">
+            {audience.map((item) => (
+              <div
+                key={item}
+                className="rounded-[1.1rem] border border-border/80 bg-background/70 p-4 text-sm leading-relaxed text-muted-foreground"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <section className="panel p-6 md:p-8 mb-16">
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+          {language === "en" ? "Topics" : "Temas que costumo cobrir"}
+        </p>
+        <div className="grid gap-3 md:grid-cols-2">
+          {topics.map((item) => (
+            <div
+              key={item}
+              className="rounded-[1.1rem] border border-border/80 bg-background/70 p-4 text-sm leading-relaxed text-muted-foreground"
+            >
+              {item}
             </div>
           ))}
         </div>
       </section>
-      
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">
-          {t('mentorship.growing')}
-        </h2>
-        
-        <div className="bg-muted/30 rounded-xl p-8 mb-10">
-          <p className="mb-6">
-            {t('mentorship.advice1')}
-          </p>
-          <p>
-            {t('mentorship.advice2')}
+
+      <section className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] items-start">
+        <div>
+          <h2 className="font-serif text-3xl text-foreground mb-4">{ctaTitle}</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            {language === "en"
+              ? "If you think a conversation could help, send context through the form and I can understand whether mentorship makes sense."
+              : "Se você acha que uma conversa pode ajudar, me mande contexto pelo formulário e eu entendo se a mentoria faz sentido."}
           </p>
         </div>
-      </section>
-      
-      <section>
-        <h2 className="text-2xl font-bold mb-8">
-          {t('mentorship.interested')}
-        </h2>
-        
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16">
-          <div className="md:w-1/3">
-            <p className="mb-4">
-              {t('mentorship.offer')}
-            </p>
-            <p className="text-muted-foreground">
-              {t('mentorship.fillForm')}
-            </p>
-          </div>
-          <div className="md:w-2/3">
-            <ContactForm />
-          </div>
+        <div>
+          <ContactForm />
         </div>
       </section>
     </div>

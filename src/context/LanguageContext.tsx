@@ -1,8 +1,7 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { translations } from "../i18n";
 
-import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
-import { translations } from '../i18n';
-
-export type LanguageType = 'en' | 'pt';
+export type LanguageType = "en" | "pt";
 
 interface LanguageContextType {
   language: LanguageType;
@@ -10,99 +9,93 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType>({
-  language: 'en',
-  setLanguage: () => {},
-  t: (key: string) => key,
-});
+interface TranslationTree {
+  [key: string]: string | TranslationTree;
+}
 
 interface LanguageProviderProps {
   children: ReactNode;
   initialLanguage?: LanguageType;
 }
 
-// Function to get nested object properties by dot notation
-const getNestedValue = (obj: any, path: string): string => {
-  const keys = path.split('.');
-  let result = keys.reduce((o, key) => (o && o[key] !== undefined ? o[key] : undefined), obj);
-  
-  if (typeof result !== 'string') {
-    console.warn(`Translation for "${path}" is not a string or is missing`);
-    return path;
-  }
-  
-  return result;
+const LanguageContext = createContext<LanguageContextType>({
+  language: "pt",
+  setLanguage: () => {},
+  t: (key) => key,
+});
+
+const getNestedValue = (obj: TranslationTree, path: string): string => {
+  const result = path
+    .split(".")
+    .reduce<string | TranslationTree | undefined>((current, key) => {
+      if (!current || typeof current === "string") {
+        return undefined;
+      }
+
+      return current[key];
+    }, obj);
+
+  return typeof result === "string" ? result : path;
 };
 
-export const LanguageProvider = ({ children, initialLanguage = 'en' }: LanguageProviderProps) => {
-  console.log("[LanguageProvider] Initializing with language:", initialLanguage);
+export const LanguageProvider = ({
+  children,
+  initialLanguage = "pt",
+}: LanguageProviderProps) => {
   const [language, setLanguage] = useState<LanguageType>(initialLanguage);
-  
+
   useEffect(() => {
     try {
-      const storedLanguage = localStorage.getItem('language');
-      console.log("[LanguageProvider] Stored language from localStorage:", storedLanguage);
-      if (storedLanguage && (storedLanguage === 'en' || storedLanguage === 'pt')) {
-        setLanguage(storedLanguage as LanguageType);
-        console.log("[LanguageProvider] Setting language from localStorage:", storedLanguage);
+      const storedLanguage = localStorage.getItem("language");
+      if (storedLanguage === "en" || storedLanguage === "pt") {
+        setLanguage(storedLanguage);
       }
-    } catch (e) {
-      console.error("[LanguageProvider] Error accessing localStorage:", e);
+    } catch {
+      // Ignore storage failures and keep the default language.
     }
   }, []);
 
-  const handleLanguageChange = (newLang: LanguageType) => {
-    try {
-      localStorage.setItem('language', newLang);
-      setLanguage(newLang);
-      console.log(`[LanguageProvider] Language changed to ${newLang}`);
-    } catch (e) {
-      console.error("[LanguageProvider] Error setting language in localStorage:", e);
-      setLanguage(newLang); // Still update state even if localStorage fails
-    }
-  };
+  const handleLanguageChange = (newLanguage: LanguageType) => {
+    if (newLanguage === language) return;
 
-  // Define translation function directly in the context
-  const translate = (key: string): string => {
-    if (!translations[language]) {
-      console.error(`[LanguageProvider] Translations for language "${language}" not found`);
-      return key;
-    }
-
-    try {
-      const translation = getNestedValue(translations[language], key);
-      
-      if (translation === key || !translation) {
-        // Fallback to English
-        if (language !== 'en') {
-          const enTranslation = getNestedValue(translations['en'], key);
-          if (enTranslation && enTranslation !== key) {
-            return enTranslation;
-          }
-        }
-        console.warn(`[LanguageProvider] Translation key "${key}" not found in ${language}`);
-        return key;
+    const apply = () => {
+      try {
+        localStorage.setItem("language", newLanguage);
+      } catch {
+        // Ignore storage failures.
       }
-      return translation;
-    } catch (error) {
-      console.error(`[LanguageProvider] Error getting translation for key "${key}":`, error);
-      return key;
+      setLanguage(newLanguage);
+    };
+
+    if ("startViewTransition" in document) {
+      (document as Document & { startViewTransition: (cb: () => void) => void })
+        .startViewTransition(apply);
+    } else {
+      apply();
     }
   };
 
-  console.log("[LanguageProvider] Current language:", language);
+  const translate = (key: string): string => {
+    const selectedLanguage = translations[language] as TranslationTree | undefined;
+    if (!selectedLanguage) {
+      return key;
+    }
+
+    const value = getNestedValue(selectedLanguage, key);
+    if (value !== key || language === "en") {
+      return value;
+    }
+
+    return getNestedValue(translations.en as TranslationTree, key);
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage: handleLanguageChange, t: translate }}>
+    <LanguageContext.Provider
+      value={{ language, setLanguage: handleLanguageChange, t: translate }}
+    >
       {children}
     </LanguageContext.Provider>
   );
 };
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    console.error("[useLanguage] LanguageContext must be used within a LanguageProvider");
-    return { language: 'en', setLanguage: () => {}, t: (key: string) => key };
-  }
-  return context;
-};
+export const useLanguage = () => useContext(LanguageContext);

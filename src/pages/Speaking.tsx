@@ -1,109 +1,98 @@
-
-import { useLanguage } from "@/context/LanguageContext";
 import ContactForm from "@/components/ContactForm";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Speaking = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
 
-  const speakingEvents = [
-    {
-      id: 1,
-      title: language === 'en' ? "Web Accessibility in 2025" : "Acessibilidade Web em 2025",
-      event: "TechConf 2025",
-      date: "2025-06-15",
-      location: language === 'en' ? "San Francisco, CA" : "São Francisco, CA",
-      description: language === 'en' 
-        ? "A comprehensive talk on making web applications accessible to all users, including practical techniques and tools."
-        : "Uma palestra abrangente sobre como tornar aplicações web acessíveis a todos os usuários, incluindo técnicas e ferramentas práticas."
-    },
-    {
-      id: 2,
-      title: language === 'en' ? "The Future of React Development" : "O Futuro do Desenvolvimento com React",
-      event: "ReactWorld 2025",
-      date: "2025-04-20",
-      location: language === 'en' ? "Berlin, Germany" : "Berlim, Alemanha",
-      description: language === 'en'
-        ? "Exploring upcoming features, best practices, and performance optimizations in React development."
-        : "Explorando recursos futuros, melhores práticas e otimizações de desempenho no desenvolvimento com React."
-    },
-    {
-      id: 3,
-      title: language === 'en' ? "Career Paths in Modern Web Development" : "Caminhos de Carreira no Desenvolvimento Web Moderno",
-      event: language === 'en' ? "Career Tech Summit" : "Cúpula de Carreiras em Tecnologia",
-      date: "2024-11-10",
-      location: language === 'en' ? "Tokyo, Japan" : "Tóquio, Japão",
-      description: language === 'en'
-        ? "Discussing various career paths and growth opportunities in the rapidly evolving field of web development."
-        : "Discutindo vários caminhos de carreira e oportunidades de crescimento no campo em rápida evolução do desenvolvimento web."
-    }
-  ];
+  const title = language === "en" ? "Speaking" : "Palestras";
+  const intro =
+    language === "en"
+      ? "I'm available for talks and conversations about product, technology, career development, and AI applied in real operating contexts."
+      : "Estou disponível para palestras e conversas sobre produto, tecnologia, desenvolvimento de carreira e IA aplicada em contextos reais de trabalho.";
+
+  const themes =
+    language === "en"
+      ? [
+          "From engineering to product leadership",
+          "How product evolves across startup stages",
+          "Using AI in product work without losing judgment",
+          "What changes when product, tech, and business work better together",
+        ]
+      : [
+          "Da engenharia à liderança de produto",
+          "Como produto muda ao longo das fases de uma startup",
+          "Como usar IA no trabalho de produto sem perder senso crítico",
+          "O que muda quando produto, tecnologia e negócio trabalham melhor juntos",
+        ];
+
+  const formats =
+    language === "en"
+      ? [
+          "Talks for internal teams or communities",
+          "Panels, meetups, webinars, and recorded conversations",
+          "Formats that work better with practical examples than with hype",
+        ]
+      : [
+          "Palestras para times internos ou comunidades",
+          "Painéis, meetups, webinars e conversas gravadas",
+          "Formatos que funcionam melhor com exemplos práticos do que com hype",
+        ];
 
   return (
-    <div className="container py-16 animate-fade-in">
-      <section className="mb-16">
-        <h1 className="text-4xl font-bold mb-6">{t('speaking.title')}</h1>
-        <p className="text-lg mb-8 max-w-3xl">
-          {t('speaking.intro')}
-        </p>
-        
-        <div className="aspect-[21/9] overflow-hidden rounded-xl mb-12">
-          <img 
-            src="https://source.unsplash.com/random/1200x600/?conference" 
-            alt="Speaking at conference" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
-        <div className="prose max-w-none">
-          <p>
-            {language === 'en' 
-              ? "I'm passionate about sharing knowledge and experiences with the tech community through speaking engagements at conferences, meetups, and webinars. My talks focus on web development, design patterns, accessibility, and career growth in the tech industry."
-              : "Sou apaixonado por compartilhar conhecimento e experiências com a comunidade tech através de palestras em conferências, meetups e webinars. Minhas palestras focam em desenvolvimento web, padrões de design, acessibilidade e crescimento de carreira na indústria tech."}
+    <div className="container py-20 animate-fade-in">
+      <div className="max-w-3xl mb-14">
+        <span className="eyebrow mb-6">{title}</span>
+        <h1 className="font-serif text-display-lg text-foreground mb-6">{title}</h1>
+        <p className="text-lg text-muted-foreground leading-relaxed">{intro}</p>
+      </div>
+
+      <div className="grid gap-5 lg:grid-cols-2 mb-16">
+        <section className="panel p-6 md:p-8">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+            {language === "en" ? "Themes" : "Temas"}
           </p>
-          <p>
-            {language === 'en'
-              ? "With years of experience in the field, I bring practical insights and real-world examples to my presentations, making complex topics accessible and engaging for audiences of all levels."
-              : "Com anos de experiência na área, trago insights práticos e exemplos do mundo real para minhas apresentações, tornando tópicos complexos acessíveis e envolventes para audiências de todos os níveis."}
+          <div className="space-y-3">
+            {themes.map((item) => (
+              <div
+                key={item}
+                className="rounded-[1.1rem] border border-border/80 bg-background/70 p-4 text-sm leading-relaxed text-muted-foreground"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="panel p-6 md:p-8">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+            {language === "en" ? "Formats" : "Formatos"}
+          </p>
+          <div className="space-y-3">
+            {formats.map((item) => (
+              <div
+                key={item}
+                className="rounded-[1.1rem] border border-border/80 bg-background/70 p-4 text-sm leading-relaxed text-muted-foreground"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <section className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] items-start">
+        <div>
+          <h2 className="font-serif text-3xl text-foreground mb-4">
+            {language === "en" ? "Interested in inviting me?" : "Quer me convidar?"}
+          </h2>
+          <p className="text-muted-foreground leading-relaxed">
+            {language === "en"
+              ? "Send the event context, audience, and preferred format through the form and I can understand whether there's a good fit."
+              : "Me envie pelo formulário o contexto do evento, o público e o formato desejado, e eu consigo entender se faz sentido."}
           </p>
         </div>
-      </section>
-      
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8 border-b pb-4">
-          {t('speaking.events')}
-        </h2>
-        
-        <div className="space-y-10">
-          {speakingEvents.map((event) => (
-            <div key={event.id} className="flex flex-col md:flex-row gap-6 border-b pb-10">
-              <div className="md:w-1/4 font-mono">
-                <p className="text-primary font-medium">{new Date(event.date).toLocaleDateString()}</p>
-                <p className="text-muted-foreground">{event.location}</p>
-              </div>
-              <div className="md:w-3/4">
-                <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                <p className="text-muted-foreground mb-4">{event.event}</p>
-                <p>{event.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      
-      <section>
-        <h2 className="text-2xl font-bold mb-8">
-          {t('speaking.interested')}
-        </h2>
-        
-        <div className="flex flex-col md:flex-row gap-10">
-          <div className="md:w-1/3">
-            <p className="text-muted-foreground mb-6">
-              {t('speaking.available')}
-            </p>
-          </div>
-          <div className="md:w-2/3">
-            <ContactForm />
-          </div>
+        <div>
+          <ContactForm />
         </div>
       </section>
     </div>

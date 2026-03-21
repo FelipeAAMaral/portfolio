@@ -8,6 +8,8 @@ import Blog from "./pages/Blog";
 import PostDetailContentful from "./pages/Blog/PostDetailContentful";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import Mentorship from "./pages/Mentorship";
+import Speaking from "./pages/Speaking";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 
@@ -26,6 +28,8 @@ const App = () => {
             <Route path="/blog/cf/:slug" element={<PostDetailContentful />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/mentoria" element={<Mentorship />} />
+            <Route path="/palestras" element={<Speaking />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

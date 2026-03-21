@@ -1,65 +1,44 @@
-/* Fonts are loaded in index.html via <link rel="preconnect"> for optimal LCP performance */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* === Design System Tokens === */
+    --background: 34 33% 96%;
+    --surface: 36 28% 91%;
+    --card: 34 33% 97%;
+    --popover: 34 33% 97%;
 
-    /* Backgrounds */
-    --background: 42 30% 95%;
-    /* cream: #F5F3EE */
-    --surface: 40 20% 90%;
-    /* surface slightly darker */
-    --card: 42 30% 95%;
-    --popover: 42 30% 95%;
+    --foreground: 12 14% 10%;
+    --card-foreground: 12 14% 10%;
+    --popover-foreground: 12 14% 10%;
+    --muted-foreground: 18 9% 36%;
 
-    /* Ink (text) */
-    --foreground: 0 0% 8%;
-    /* #141414 */
-    --card-foreground: 0 0% 8%;
-    --popover-foreground: 0 0% 8%;
-    --muted-foreground: 0 0% 42%;
-    /* #6B6B6B */
-
-    /* Accent: vermelho-tijolo ousado */
-    --primary: 14 79% 55%;
-    /* #E8532A */
+    --primary: 15 83% 50%;
     --primary-foreground: 0 0% 100%;
-
-    /* Secondary: verde escuro */
-    --secondary: 157 62% 27%;
-    /* #1A7A5E */
+    --secondary: 164 59% 24%;
     --secondary-foreground: 0 0% 100%;
 
-    /* UI Tokens */
-    --muted: 40 15% 88%;
-    --accent: 14 79% 55%;
+    --muted: 36 20% 88%;
+    --accent: 15 83% 50%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 40 12% 83%;
-    /* sutil, editorial */
-    --input: 40 12% 83%;
-    --ring: 14 79% 55%;
-    --radius: 0.25rem;
-    /* quase sem arredondamento — look editorial */
+    --border: 22 16% 79%;
+    --input: 22 16% 79%;
+    --ring: 15 83% 50%;
+    --radius: 0.8rem;
 
-    /* Sidebar (manter compatibilidade shadcn) */
-    --sidebar-background: 42 30% 95%;
-    --sidebar-foreground: 0 0% 8%;
-    --sidebar-primary: 14 79% 55%;
+    --sidebar-background: 34 33% 96%;
+    --sidebar-foreground: 12 14% 10%;
+    --sidebar-primary: 15 83% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 20% 90%;
-    --sidebar-accent-foreground: 0 0% 8%;
-    --sidebar-border: 40 12% 83%;
-    --sidebar-ring: 14 79% 55%;
+    --sidebar-accent: 36 28% 91%;
+    --sidebar-accent-foreground: 12 14% 10%;
+    --sidebar-border: 22 16% 79%;
+    --sidebar-ring: 15 83% 50%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -70,119 +49,133 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
+    font-family: "IBM Plex Sans", sans-serif;
     font-size: 16px;
     line-height: 1.6;
+    background-image:
+      radial-gradient(circle at top left, rgba(214, 94, 55, 0.16), transparent 32%),
+      radial-gradient(circle at 88% 14%, rgba(20, 108, 89, 0.12), transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.18);
+    color: hsl(var(--foreground));
   }
 
   h1,
   h2,
   h3 {
-    font-family: 'Playfair Display', serif;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-family: "Instrument Serif", serif;
+    line-height: 0.96;
+    letter-spacing: -0.035em;
   }
 
   h4,
   h5,
   h6 {
-    font-family: 'Inter', sans-serif;
+    font-family: "IBM Plex Sans", sans-serif;
     font-weight: 600;
   }
 
+  a {
+    color: inherit;
+  }
+
   .container {
-    @apply px-6 md:px-10 max-w-6xl mx-auto;
+    @apply mx-auto max-w-7xl px-6 md:px-10;
   }
 }
 
-/* ================================
-   Utility Classes
-================================ */
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[0.68rem] uppercase tracking-[0.28em] text-primary;
+    font-family: "IBM Plex Mono", monospace;
+  }
 
-/* Animated underline link */
-.animated-link {
-  @apply relative inline-block text-foreground/70 hover:text-foreground transition-colors duration-200;
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-8 bg-primary/60;
+  }
+
+  .panel {
+    @apply rounded-[1.6rem] border shadow-[0_18px_60px_rgba(30,22,15,0.08)] backdrop-blur-sm;
+    border-color: hsl(var(--border) / 0.8);
+    background-color: hsl(var(--card) / 0.88);
+  }
+
+  .soft-grid {
+    background-image:
+      linear-gradient(rgba(57, 46, 37, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57, 46, 37, 0.06) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .proof-pill {
+    @apply rounded-full border px-4 py-2 text-sm text-muted-foreground;
+    border-color: hsl(var(--border));
+    background-color: hsl(var(--card) / 0.85);
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full border px-3 py-1 text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground;
+    font-family: "IBM Plex Mono", monospace;
+    border-color: hsl(var(--border));
+    background-color: hsl(var(--card) / 0.85);
+  }
+
+  .tag-accent {
+    @apply tag border-transparent bg-primary text-primary-foreground;
+  }
+
+  .tag-green {
+    @apply tag border-transparent bg-secondary text-secondary-foreground;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-200;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(15 83% 44%));
+    box-shadow: 0 14px 40px rgba(214, 94, 55, 0.22);
+  }
+
+  .btn-accent:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 46px rgba(214, 94, 55, 0.28);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-sm font-medium text-foreground transition-colors duration-200;
+    border-color: hsl(var(--border));
+    background-color: hsl(var(--card) / 0.78);
+  }
+
+  .btn-ghost:hover {
+    @apply bg-surface;
+  }
+
+  .section-divider {
+    @apply border-t border-border/90;
+  }
+
+  .text-display {
+    font-family: "Instrument Serif", serif;
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(15 78% 58%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
-.animated-link::after {
-  content: '';
-  @apply absolute w-0 h-px bottom-0 left-0 bg-primary transition-all duration-300;
-}
-
-.animated-link:hover::after {
-  @apply w-full;
-}
-
-/* Serif display text helper */
-.text-display {
-  font-family: 'Playfair Display', serif;
-}
-
-/* Accent tag pill */
-.tag {
-  @apply inline-block text-xs font-medium tracking-widest uppercase px-3 py-1;
-  background: hsl(var(--surface));
-  color: hsl(var(--muted-foreground));
-  border: 1px solid hsl(var(--border));
-  border-radius: 2px;
-}
-
-.tag-accent {
-  @apply tag;
-  background: hsl(var(--primary));
-  color: white;
-  border-color: transparent;
-}
-
-.tag-green {
-  @apply tag;
-  background: hsl(var(--secondary));
-  color: white;
-  border-color: transparent;
-}
-
-/* Section horizontal rule */
-.section-divider {
-  @apply border-t border-border my-1;
-}
-
-/* Accent CTA button */
-.btn-accent {
-  @apply inline-flex items-center gap-2 px-6 py-3 font-medium text-white transition-all duration-200;
-  background: hsl(var(--primary));
-  border-radius: var(--radius);
-}
-
-.btn-accent:hover {
-  background: hsl(14 79% 48%);
-  transform: translateY(-1px);
-}
-
-/* Ghost button */
-.btn-ghost {
-  @apply inline-flex items-center gap-2 px-6 py-3 font-medium transition-all duration-200;
-  background: transparent;
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  color: hsl(var(--foreground));
-}
-
-.btn-ghost:hover {
-  background: hsl(var(--surface));
-}
-
-/* Card hover lift */
-.card-hover {
-  @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
-}
-
-/* Fade-in animation */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
 
   to {
@@ -192,17 +185,16 @@
 }
 
 .animate-fade-up {
-  animation: fade-up 0.5s ease-out both;
+  animation: fade-up 0.55s ease-out both;
 }
 
-/* Legacy compat */
 .animate-fade-in {
   animation: fade-up 0.4s ease-out both;
 }
 
-.text-gradient-primary {
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(14 79% 70%));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Language switch — View Transitions API */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 120ms;
+  animation-timing-function: ease;
 }
