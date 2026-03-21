@@ -1,125 +1,156 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useLanguage } from "@/context/LanguageContext";
 
 const Header = () => {
-  const { language, setLanguage } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
   const closeMenu = () => setIsMenuOpen(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
 
-  // On home page, use anchor links for sections
   const mainLinks = isHome
     ? [
-      { href: "#craft", label: "O Ofício", anchor: true },
-      { href: "#work", label: "Trabalho", anchor: true },
-      { href: "#foundation", label: "Formação", anchor: true },
-      { href: "#offscreen", label: "Fora da Tela", anchor: true },
-    ]
+        { href: "#work", label: "Trajetória", anchor: true },
+        { href: "#system", label: "Processo", anchor: true },
+        { href: "#signals", label: "Contexto", anchor: true },
+        { href: "#fit", label: "Perfil", anchor: true },
+      ]
     : [
-      { href: "/", label: "Home", anchor: false },
-      { href: "/blog", label: "Blog", anchor: false },
-      { href: "/contact", label: "Contato", anchor: false },
-    ];
+        { href: "/", label: "Home", anchor: false },
+        { href: "/about", label: "Sobre", anchor: false },
+        { href: "/mentoria", label: "Mentoria", anchor: false },
+        { href: "/palestras", label: "Palestras", anchor: false },
+        { href: "/contact", label: "Contato", anchor: false },
+      ];
 
-  const ctaLink = { href: isHome ? "#cta" : "/contact", label: "Fале comigo", anchor: isHome };
+  const ctaLink = { href: isHome ? "#cta" : "/contact", label: "Conversar", anchor: isHome };
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  const handleAnchorClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) {
       closeMenu();
+      return;
     }
+
+    event.preventDefault();
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    closeMenu();
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="container flex justify-between items-center h-16">
-
-        {/* Logo */}
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/88 backdrop-blur-md">
+      <div className="container flex h-16 items-center justify-between gap-6">
         <Link
           to="/"
-          className="font-serif text-xl font-bold text-foreground tracking-tight hover:text-primary transition-colors"
+          className="text-lg font-medium tracking-tight text-foreground transition-colors hover:text-primary"
           onClick={closeMenu}
         >
           Felipe Amaral
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {mainLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={link.anchor ? (e) => handleAnchorClick(e, link.href) : undefined}
-              className="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Right: CTA + Lang */}
-        <div className="hidden md:flex items-center gap-5">
-          <a
-            href={ctaLink.href}
-            onClick={ctaLink.anchor ? (e) => handleAnchorClick(e as React.MouseEvent<HTMLAnchorElement>, ctaLink.href) : undefined}
-            className="btn-accent !py-2 !px-4 text-sm"
-          >
-            Fale comigo
-          </a>
-          <button
-            onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
-            className="flex items-center gap-1.5 text-sm text-foreground/40 hover:text-foreground transition-colors"
-          >
-            <img
-              src={language === 'en' ? "https://flagcdn.com/w20/us.png" : "https://flagcdn.com/w20/br.png"}
-              width="18"
-              height="13"
-              alt={language === 'en' ? "EN" : "PT"}
-              className="rounded-sm"
-            />
-            <span className="font-mono text-xs">{language.toUpperCase()}</span>
-          </button>
-        </div>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 origin-center ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 origin-center ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border z-50 animate-fade-in">
-          <nav className="container py-6 flex flex-col gap-4">
-            {mainLinks.map((link) => (
+        <nav className="hidden items-center gap-6 md:flex">
+          {mainLinks.map((link) =>
+            link.anchor ? (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={link.anchor ? (e) => handleAnchorClick(e, link.href) : closeMenu}
-                className="text-base font-medium py-1 text-foreground/60 hover:text-foreground transition-colors"
+                onClick={(event) => handleAnchorClick(event, link.href)}
+                className="text-sm text-foreground/68 transition-colors duration-200 hover:text-foreground"
               >
                 {link.label}
               </a>
-            ))}
+            ) : (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-sm text-foreground/68 transition-colors duration-200 hover:text-foreground"
+                onClick={closeMenu}
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
+        </nav>
+
+        <div className="hidden md:block">
+          {ctaLink.anchor ? (
             <a
               href={ctaLink.href}
-              onClick={ctaLink.anchor ? (e) => handleAnchorClick(e as React.MouseEvent<HTMLAnchorElement>, ctaLink.href) : closeMenu}
-              className="btn-accent w-fit !py-2 !px-4 text-sm mt-2"
+              onClick={(event) => handleAnchorClick(event, ctaLink.href)}
+              className="btn-accent !px-5 !py-2.5"
             >
-              Fale comigo
+              {ctaLink.label}
             </a>
+          ) : (
+            <Link to={ctaLink.href} className="btn-accent !px-5 !py-2.5">
+              {ctaLink.label}
+            </Link>
+          )}
+        </div>
+
+        <button
+          type="button"
+          className="flex flex-col gap-1.5 p-1 md:hidden"
+          onClick={toggleMenu}
+          aria-label="Abrir menu"
+          aria-expanded={isMenuOpen}
+        >
+          <span
+            className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+              isMenuOpen ? "translate-y-2 rotate-45" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+              isMenuOpen ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+              isMenuOpen ? "-translate-y-2 -rotate-45" : ""
+            }`}
+          />
+        </button>
+      </div>
+
+      {isMenuOpen && (
+        <div className="border-t border-border/80 bg-background/95 md:hidden">
+          <nav className="container flex flex-col gap-3 py-5">
+            {mainLinks.map((link) =>
+              link.anchor ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(event) => handleAnchorClick(event, link.href)}
+                  className="rounded-full border border-border/70 px-4 py-3 text-sm text-foreground/75"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="rounded-full border border-border/70 px-4 py-3 text-sm text-foreground/75"
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
+
+            {ctaLink.anchor ? (
+              <a
+                href={ctaLink.href}
+                onClick={(event) => handleAnchorClick(event, ctaLink.href)}
+                className="btn-accent mt-2"
+              >
+                {ctaLink.label}
+              </a>
+            ) : (
+              <Link to={ctaLink.href} className="btn-accent mt-2" onClick={closeMenu}>
+                {ctaLink.label}
+              </Link>
+            )}
           </nav>
         </div>
       )}

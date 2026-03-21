@@ -1,28 +1,20 @@
-
-import { Linkedin, Globe, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Mic, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "@/context/LanguageContext";
 
 const Footer = () => {
-  const { language, setLanguage } = useLanguage();
-
   return (
     <footer id="cta" className="border-t border-border">
-
-      {/* Big CTA */}
-      <div className="container py-24 md:py-32">
-        <div className="max-w-3xl">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-6">
-            Vamos conversar
-          </p>
-          <h2 className="font-serif text-display-lg font-bold text-foreground leading-tight mb-6">
-            Vamos construir o próximo.
+      <div className="container py-24 md:py-28">
+        <div className="max-w-4xl">
+          <span className="eyebrow mb-6">Contato</span>
+          <h2 className="mb-6 font-serif text-display-lg text-foreground">
+            Se você está construindo produto em um contexto mais exigente, vamos conversar.
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl">
-            Pronto para desafios que exigem profundidade técnica e visão estratégica.
+          <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            Especialmente em desafios que pedem alinhamento entre estratégia, tecnologia e
+            execução. Também estou disponível para mentorias e palestras.
           </p>
 
-          {/* Contact links */}
           <div className="flex flex-wrap gap-4">
             <a
               href="https://www.linkedin.com/in/felipeaamaral/"
@@ -33,44 +25,55 @@ const Footer = () => {
               <Linkedin size={16} />
               LinkedIn
             </a>
-            <a
-              href="mailto:amaral.felipeaugusto@gmail.com"
-              className="btn-ghost"
-            >
+            <a href="mailto:amaral.felipeaugusto@gmail.com" className="btn-ghost">
               <Mail size={16} />
-              amaral.felipeaugusto@gmail.com
+              E-mail
             </a>
             <a
-              href="https://hearken.app"
+              href="https://github.com/FelipeAAMaral"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-ghost"
             >
-              <Globe size={16} />
-              Hearken.app
+              <Github size={16} />
+              GitHub
             </a>
+            <Link to="/mentoria" className="btn-ghost">
+              <Users size={16} />
+              Mentoria
+            </Link>
+            <Link to="/palestras" className="btn-ghost">
+              <Mic size={16} />
+              Palestras
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-border">
-        <div className="container py-5 flex flex-wrap justify-between items-center gap-4 text-xs text-muted-foreground">
-          <div className="flex items-center gap-6">
+      <div className="border-t border-border/80">
+        <div className="container flex flex-wrap items-center justify-between gap-4 py-5 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-5">
             <span>© {new Date().getFullYear()} Felipe Amaral</span>
-            <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
+            <Link to="/about" className="transition-colors hover:text-foreground">
+              Sobre
+            </Link>
+            <Link to="/blog" className="transition-colors hover:text-foreground">
+              Blog
+            </Link>
+            <Link to="/contact" className="transition-colors hover:text-foreground">
+              Contato
+            </Link>
+            <Link to="/mentoria" className="transition-colors hover:text-foreground">
+              Mentoria
+            </Link>
+            <Link to="/palestras" className="transition-colors hover:text-foreground">
+              Palestras
+            </Link>
           </div>
-          <button
-            onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
-            className="flex items-center gap-1.5 hover:text-foreground transition-colors"
-          >
-            <img
-              src={language === 'en' ? "https://flagcdn.com/w20/us.png" : "https://flagcdn.com/w20/br.png"}
-              width="16" height="12" alt=""
-              className="rounded-sm"
-            />
-            {language === 'en' ? 'EN' : 'PT'}
-          </button>
+
+          <span className="font-mono uppercase tracking-[0.18em]">
+            Produto · tecnologia · execução
+          </span>
         </div>
       </div>
     </footer>

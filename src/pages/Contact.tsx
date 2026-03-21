@@ -2,6 +2,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import ContactForm from "@/components/ContactForm";
 import { Linkedin, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const { language } = useLanguage();
@@ -9,8 +10,8 @@ const Contact = () => {
   const tagline = language === 'en' ? "Got an idea?" : "Tem uma ideia?";
   const headline = language === 'en' ? "Let's talk." : "Vamos conversar.";
   const body = language === 'en'
-    ? "Whether it's a product challenge, a mentorship conversation, or just a chat — I'm always happy to connect."
-    : "Seja um desafio de produto, uma conversa de mentoria ou apenas um papo — fico feliz em conectar.";
+    ? "Whether it's a product challenge, mentorship, a speaking invitation, or just a good conversation, I'm happy to connect."
+    : "Seja um desafio de produto, uma mentoria, um convite para palestra ou uma boa conversa, fico feliz em conectar.";
   const responseNote = language === 'en'
     ? "I typically respond within 48 hours."
     : "Costumo responder em até 48 horas.";
@@ -31,6 +32,15 @@ const Contact = () => {
             {body}
           </p>
 
+          <div className="flex flex-wrap gap-3 mb-10">
+            <Link to="/mentoria" className="btn-ghost !px-4 !py-2">
+              Mentoria
+            </Link>
+            <Link to="/palestras" className="btn-ghost !px-4 !py-2">
+              Palestras
+            </Link>
+          </div>
+
           {/* Social links */}
           <div className="space-y-4">
             <a
@@ -44,17 +54,12 @@ const Contact = () => {
               </div>
               <span className="text-sm">linkedin.com/in/felipeaamaral</span>
             </a>
-            <a
-              href="https://medium.com/@amaral.felipeaugusto"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-foreground/70 hover:text-primary transition-colors group"
-            >
-              <div className="w-9 h-9 border border-border rounded-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+            <div className="flex items-center gap-3 text-foreground/70">
+              <div className="w-9 h-9 border border-border rounded-sm flex items-center justify-center transition-colors">
                 <Globe size={16} />
               </div>
-              <span className="text-sm">medium.com/@amaral.felipeaugusto</span>
-            </a>
+              <span className="text-sm">Substack em breve</span>
+            </div>
           </div>
 
           <p className="text-xs text-muted-foreground mt-8">{responseNote}</p>

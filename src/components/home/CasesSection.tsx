@@ -1,183 +1,177 @@
-import { ArrowUpRight } from "lucide-react";
+const pontotelReceipts = [
+  { value: "2015 -> hoje", label: "uma trajetória longa dentro da mesma empresa" },
+  { value: "Dev -> Produto", label: "visão construída dos dois lados da entrega" },
+  { value: "Start -> Growth", label: "experiência nas diferentes fases da startup" },
+];
 
-/**
- * CasesSection — Proof of Impact.
- * Uses <article> semantic HTML for each case study.
- * GEO-Optimized: Entity-rich sentences connecting Felipe Amaral to
- * Pontotel (Head of Product, B2B SaaS, HRTech, ARR scaling) and
- * Hearken (Generative AI SaaS, full-cycle, Go-to-Market, London/global).
- */
+const pontotelJourney = [
+  {
+    phase: "2015 · Desenvolvimento",
+    body: "Entrei na Pontotel em uma fase inicial e participei, junto com o time, da construção da base técnica do produto.",
+  },
+  {
+    phase: "Start e PMF",
+    body: "Vivi o período em que a prioridade era construir, aprender rápido com o mercado e ajustar a direção do produto com a empresa ainda encontrando seu encaixe.",
+  },
+  {
+    phase: "Growth",
+    body: "Com a operação ganhando escala, ficou mais claro o peso de temas como priorização, consistência da experiência e conexão entre entrega e valor de negócio.",
+  },
+  {
+    phase: "Criação da área de produto",
+    body: "A necessidade de uma frente de produto mais estruturada apareceu nesse contexto. Participei dessa construção e depois assumi a liderança da área.",
+  },
+  {
+    phase: "Hoje",
+    body: "Como Head of Product, carrego a perspectiva de quem acompanhou a empresa em diferentes fases e entende como produto, tecnologia e operação se cruzam no dia a dia.",
+  },
+];
+
+const currentFocus = [
+  { value: "Em construção", label: "Hearken como iniciativa, não como case fechado" },
+  { value: "Build in public", label: "escrita como parte do processo de aprendizado" },
+  { value: "Foco atual", label: "aprofundar IA aplicada a produto com prática real" },
+];
+
 const CasesSection = () => {
-    return (
-        <section
-            id="work"
-            aria-label="Trabalho Selecionado — Proof of Craft"
-            className="py-24 md:py-32 border-b border-border"
-        >
-            <div className="container">
-                <p className="text-xs font-mono tracking-widest uppercase text-primary mb-4">
-                    Selected Work
+  return (
+    <section
+      id="work"
+      aria-label="Trajetória e foco atual"
+      className="border-b border-border py-24 md:py-32"
+    >
+      <div className="container">
+        <div className="mb-16 max-w-3xl">
+          <span className="eyebrow mb-6">Trajetória</span>
+          <h2 className="mb-5 font-serif text-display-lg text-foreground">
+            Uma carreira construída por fases.
+          </h2>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            O que melhor representa minha experiência é a combinação entre profundidade técnica,
+            evolução de produto e participação contínua em diferentes momentos de uma mesma empresa.
+          </p>
+        </div>
+
+        <div className="space-y-8">
+          <article className="panel overflow-hidden">
+            <div className="grid gap-0 lg:grid-cols-[0.95fr_1.45fr]">
+              <div className="soft-grid border-b border-border/80 p-8 lg:border-b-0 lg:border-r">
+                <div className="mb-6 flex flex-wrap gap-2">
+                  <span className="tag-accent">Pontotel</span>
+                  <span className="tag">HRTech</span>
+                  <span className="tag">B2B SaaS</span>
+                </div>
+
+                <h3 className="mb-4 font-serif text-4xl text-foreground">Pontotel, de 2015 até hoje</h3>
+                <p className="mb-8 text-base leading-relaxed text-muted-foreground">
+                  A minha história na Pontotel não é sobre um único cargo. É sobre ter acompanhado,
+                  ao lado do time, a evolução da empresa desde a base técnica até a liderança de produto.
                 </p>
-                <h2 className="font-serif text-display-lg font-bold text-foreground leading-tight mb-16 max-w-2xl">
-                    O ofício em ação.
-                </h2>
 
-                {/* ── Case A: Pontotel ── */}
-                <article
-                    aria-label="Estudo de Caso: Pontotel — Head of Product, B2B SaaS, HRTech"
-                    className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 md:gap-20 py-16 border-t border-border"
-                >
-                    <div>
-                        <div className="flex flex-wrap gap-2 mb-6">
-                            <span className="tag-accent">Liderança</span>
-                            <span className="tag">B2B SaaS</span>
-                            <span className="tag">Operações Complexas</span>
-                        </div>
-                        <dl className="space-y-4 mt-8">
-                            <div>
-                                <dt className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Empresa</dt>
-                                <dd className="font-medium text-foreground">Pontotel</dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Papel</dt>
-                                <dd className="font-medium text-foreground">Head of Product</dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Período</dt>
-                                <dd className="font-medium text-foreground">2021 – Presente</dd>
-                            </div>
-                        </dl>
+                <div className="space-y-3">
+                  {pontotelReceipts.map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-[1.2rem] border border-border/80 bg-background/70 p-4"
+                    >
+                      <p className="font-mono text-sm uppercase tracking-[0.18em] text-primary">
+                        {item.value}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {item.label}
+                      </p>
                     </div>
+                  ))}
+                </div>
+              </div>
 
-                    <div>
-                        <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
-                            Head of Product @ Pontotel: Escalando a máquina de HR Tech.
-                        </h3>
-
-                        <div className="space-y-8">
-                            <div>
-                                <h4 className="text-xs font-mono tracking-widest uppercase text-primary mb-2">Contexto</h4>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Liderou a estratégia de Produto B2B como Head na Pontotel — plataforma SaaS líder em
-                                    gestão de ponto e conformidade trabalhista para o mercado enterprise brasileiro.
-                                    Responsável pela visão, execução e crescimento de métricas de ARR em ambiente de
-                                    alta complexidade regulatória e operacional.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h4 className="text-xs font-mono tracking-widest uppercase text-primary mb-2">O Desafio</h4>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Refatorar um produto legado crítico sem comprometer operações de clientes enterprise,
-                                    enquanto escalava a organização de produto de 5 para 17 pessoas e expandia o portfólio
-                                    para novos segmentos de mercado — aplicando data-driven product management em
-                                    decisões de Go-to-Market e priorização.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h4 className="text-xs font-mono tracking-widest uppercase text-primary mb-2">A Solução</h4>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Implementação de metodologias de produto orientadas a dados com OKRs vinculados a P&amp;L,
-                                    redesenho da arquitetura de Go-to-Market para segmentos enterprise, e construção de
-                                    um processo de discovery semanal integrando dados quantitativos e qualitativos.
-                                    Cross-functional leadership alinhando engenharia, design, vendas e operações.
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4 pt-4">
-                                {[
-                                    { value: "↑ Retenção", desc: "de clientes enterprise no primeiro ano" },
-                                    { value: "↓ Onboarding", desc: "redução no tempo de ativação de novos clientes" },
-                                ].map((o, i) => (
-                                    <div key={i} className="p-5 border border-border rounded-sm bg-surface">
-                                        <p className="font-serif text-xl font-bold text-primary mb-1">{o.value}</p>
-                                        <p className="text-xs text-muted-foreground leading-snug">{o.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+              <div className="p-8 md:p-10">
+                <div className="space-y-6">
+                  {pontotelJourney.map((item) => (
+                    <div key={item.phase} className="grid gap-2 border-b border-border/70 pb-5 last:border-b-0 last:pb-0">
+                      <p className="font-mono text-xs uppercase tracking-[0.22em] text-primary">
+                        {item.phase}
+                      </p>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
                     </div>
-                </article>
-
-                {/* ── Case B: Hearken ── */}
-                <article
-                    aria-label="Estudo de Caso: Hearken — Generative AI SaaS, full-cycle, Go-to-Market"
-                    className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 md:gap-20 py-16 border-t border-border"
-                >
-                    <div>
-                        <div className="flex flex-wrap gap-2 mb-6">
-                            <span className="tag-green">Inteligência Artificial</span>
-                            <span className="tag">SaaS</span>
-                            <span className="tag">Full-Cycle</span>
-                        </div>
-                        <dl className="space-y-4 mt-8">
-                            <div>
-                                <dt className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Projeto</dt>
-                                <dd className="font-medium text-foreground">Hearken</dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Papel</dt>
-                                <dd className="font-medium text-foreground">Founder & AI Architect</dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Stack</dt>
-                                <dd className="font-medium text-foreground">Generative AI · Full-Stack SaaS</dd>
-                            </div>
-                        </dl>
-
-                        <a
-                            href="https://hearken.app"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Visitar o Hearken (abre em nova aba)"
-                            className="inline-flex items-center gap-2 mt-8 text-sm text-primary font-medium hover:gap-3 transition-all duration-200"
-                        >
-                            Ver o produto
-                            <ArrowUpRight size={14} />
-                        </a>
-                    </div>
-
-                    <div>
-                        <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
-                            Hearken: Construindo um SaaS de IA de ponta a ponta.
-                        </h3>
-
-                        <div className="space-y-8">
-                            <div>
-                                <h4 className="text-xs font-mono tracking-widest uppercase text-primary mb-2">Contexto</h4>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Identificação de uma dor de mercado real e desenvolvimento solitário de uma solução
-                                    baseada em Inteligência Artificial Generativa. Fundador e arquiteto do Hearken,
-                                    um SaaS proprietário construído do zero à primeira contratação paga — skin in the
-                                    game do início ao fim.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h4 className="text-xs font-mono tracking-widest uppercase text-primary mb-2">A Engenharia</h4>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    A formação em Ciência da Computação pelo ICMC-USP permitiu construir não apenas a
-                                    interface, mas a arquitetura completa: pipelines de processamento, prompts sistêmicos
-                                    de IA, integração de APIs de Generative AI e os trade-offs reais de latência versus
-                                    custo computacional — sem terceirizar decisões técnicas estratégicas.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h4 className="text-xs font-mono tracking-widest uppercase text-primary mb-2">O Go-to-Market</h4>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Aprendizados reais sobre distribuição orgânica para mercados globais (incluindo
-                                    Europa e Londres), estratégia de precificação por valor e aquisição de usuários em
-                                    early-stage — sem budget de marketing, com apenas código e distribuição de conteúdo.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                  ))}
+                </div>
+              </div>
             </div>
-        </section>
-    );
+          </article>
+
+          <article className="panel overflow-hidden">
+            <div className="grid gap-0 lg:grid-cols-[0.95fr_1.45fr]">
+              <div className="soft-grid border-b border-border/80 p-8 lg:border-b-0 lg:border-r">
+                <div className="mb-6 flex flex-wrap gap-2">
+                  <span className="tag-green">Foco atual</span>
+                  <span className="tag">IA aplicada</span>
+                  <span className="tag">Build in public</span>
+                </div>
+
+                <h3 className="mb-4 font-serif text-4xl text-foreground">Hearken e meu caminho em IA</h3>
+                <p className="mb-8 text-base leading-relaxed text-muted-foreground">
+                  O Hearken hoje é uma iniciativa em construção. Mais do que apresentar isso como um
+                  produto pronto, prefiro tratá-lo como um espaço para estudar, construir e publicar
+                  aprendizados de forma honesta.
+                </p>
+
+                <div className="space-y-3">
+                  {currentFocus.map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-[1.2rem] border border-border/80 bg-background/70 p-4"
+                    >
+                      <p className="font-mono text-sm uppercase tracking-[0.18em] text-secondary">
+                        {item.value}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {item.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-8 md:p-10">
+                <div className="grid gap-8 md:grid-cols-3">
+                  <div>
+                    <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+                      O ponto de partida
+                    </p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      Meu interesse por IA é real, mas ainda em fase de aprofundamento. Quero que
+                      essa parte da minha trajetória seja construída com prática e não só com discurso.
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+                      Como eu quero fazer
+                    </p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      Usando o Hearken como iniciativa de build in public e levando parte desse
+                      processo para escrita pública, com o Substack como próximo passo natural.
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+                      O objetivo
+                    </p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      Sair do interesse genérico por IA e construir repertório próprio em produto,
+                      operação e uso prático da tecnologia ao longo do tempo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default CasesSection;

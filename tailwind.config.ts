@@ -1,5 +1,6 @@
 
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -71,8 +72,9 @@ export default {
 				forest: '#1A7A5E', // secondary green
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				serif: ['Playfair Display', 'Georgia', 'serif'],
+				sans: ['"IBM Plex Sans"', 'sans-serif'],
+				serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+				mono: ['"IBM Plex Mono"', 'monospace'],
 			},
 			fontSize: {
 				'display-xl': ['clamp(3rem, 7vw, 6rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
@@ -112,5 +114,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate],
 } satisfies Config;
